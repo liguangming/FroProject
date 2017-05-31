@@ -5,6 +5,8 @@ import java.io.Serializable;
 import fro.org.froproject.mvp.model.api.Api;
 
 /**
+ * 如果你服务器返回的数据固定为这种方式(字段名可根据服务器更改)
+ * 替换范型即可重用BaseJson
  * Created by Lgm on 2017/5/31 0031.
  */
 
