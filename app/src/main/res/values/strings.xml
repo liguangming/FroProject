@@ -5,4 +5,6 @@
     <string name="password">密码</string>
     <string name="forget_password">忘记密码</string>
     <string name="register">注册新用户</string>
+    <string name="phone_num_tips">请输入正确手机号</string>
+    <string name="not_null">不能为空</string>
 </resources>

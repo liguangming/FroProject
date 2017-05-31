@@ -3,11 +3,17 @@ package fro.org.froproject.mvp.ui.activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.widget.EditText;
+import android.widget.TextView;
 
 import com.jess.arms.base.BaseActivity;
 import com.jess.arms.di.component.AppComponent;
 import com.jess.arms.utils.UiUtils;
 
+import javax.inject.Inject;
+
+import butterknife.BindView;
+import butterknife.OnClick;
 import fro.org.froproject.R;
 import fro.org.froproject.di.component.DaggerLoginComponent;
 import fro.org.froproject.mvp.presenter.LoginPresenter;
@@ -30,7 +36,12 @@ import static com.jess.arms.utils.Preconditions.checkNotNull;
  */
 
 public class LoginActivity extends BaseActivity<LoginPresenter> implements LoginContract.View {
-
+    @BindView(R.id.phone_edit)
+    EditText phone_edit;
+    @BindView(R.id.password_edit)
+    EditText password_edit;
+    @BindView(R.id.forget_passwrod)
+    TextView forgetPassword;
 
     @Override
     public void setupActivityComponent(AppComponent appComponent) {
@@ -51,6 +62,12 @@ public class LoginActivity extends BaseActivity<LoginPresenter> implements Login
 
     }
 
+    @OnClick(R.id.login)
+    public void click() {
+        String phoneNum = phone_edit.getText().toString();
+        String passWord = password_edit.getText().toString();
+        mPresenter.login(phoneNum, passWord);
+    }
 
     @Override
     public void showLoading() {

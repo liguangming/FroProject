@@ -1,14 +1,27 @@
 package fro.org.froproject.mvp.presenter;
 
 import android.app.Application;
+import android.util.Log;
 
 import com.jess.arms.integration.AppManager;
 import com.jess.arms.di.scope.ActivityScope;
 import com.jess.arms.mvp.BasePresenter;
 import com.jess.arms.widget.imageloader.ImageLoader;
 
+import java.util.List;
+
+import fro.org.froproject.app.utils.CheckUtils;
+import fro.org.froproject.app.utils.RxUtils;
 import fro.org.froproject.mvp.contract.LoginContract;
+import fro.org.froproject.mvp.model.entity.BaseJson;
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.annotations.NonNull;
+import io.reactivex.disposables.Disposable;
+import io.reactivex.functions.Consumer;
+import io.reactivex.schedulers.Schedulers;
 import me.jessyan.rxerrorhandler.core.RxErrorHandler;
+import me.jessyan.rxerrorhandler.handler.ErrorHandleSubscriber;
+import me.jessyan.rxerrorhandler.handler.RetryWithDelay;
 
 import javax.inject.Inject;
 
@@ -54,4 +67,21 @@ public class LoginPresenter extends BasePresenter<LoginContract.Model, LoginCont
         this.mApplication = null;
     }
 
+    public void login(String PhoneNum, String password) {
+        if (!CheckUtils.passwordValible(mApplication, password))
+            return;
+        if (!CheckUtils.isMobileNO(mApplication, PhoneNum))
+            return;
+        mModel.login(PhoneNum, password)
+                .subscribeOn(Schedulers.io())
+                .doOnSubscribe(disposable -> {
+
+                }).subscribeOn(AndroidSchedulers.mainThread())
+                .observeOn(AndroidSchedulers.mainThread())
+                .doAfterTerminate(() -> {
+
+                })
+                .compose(RxUtils.<List<BaseJson>>bindToLifecycle(mRootView))//使用RXlifecycle,使subscription和activity一起销毁
+        ;
+    }
 }
