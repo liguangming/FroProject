@@ -8,6 +8,7 @@ import com.jess.arms.base.BaseActivity;
 import com.jess.arms.di.component.AppComponent;
 import com.jess.arms.utils.UiUtils;
 
+import fro.org.froproject.R;
 import fro.org.froproject.di.component.DaggerLoginComponent;
 import fro.org.froproject.mvp.presenter.LoginPresenter;
 import fro.org.froproject.di.module.LoginModule;
@@ -42,7 +43,7 @@ public class LoginActivity extends BaseActivity<LoginPresenter> implements Login
 
     @Override
     public int initView(Bundle savedInstanceState) {
-        return 0;
+        return R.layout.activity_login;
     }
 
     @Override

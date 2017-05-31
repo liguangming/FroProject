@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!-- 通用颜色 -->
+    <color name="cd_transparent">#00000000</color>
+    <color name="cd_gray">#bbffffff</color>
+    <color name="cd_white">#ffffffff</color>
+    <color name="cd_white60">#99ffffff</color>
+    <color name="cd_white80">#ccffffff</color>
+    <color name="cd_disable">#ccaaaaaa</color>
+    <color name="cd_black">#000000</color>
+    <color name="white">#ffffff</color>
+    <!-- APP 常用颜色 -->
+    <color name="cd_app_green1">#00c879</color>
+    <color name="cd_app_light_blue">#343a48</color>
+    <color name="cd_app_red">#fc3d39</color>
+
+    <!-- 按下状态的颜色 -->
+    <color name="cd_app_light_blue_pressed">#18A0EB</color>
+
+    <!-- 默认背景色 -->
+    <color name="cd_bg">#F3F3F3</color>
+    <!-- Item背景色 -->
+    <color name="cd_item_bg_normal">@color/white</color>
+    <!-- Item选中时背景色 -->
+    <color name="cd_item_bg_selected">#f5f5f5</color>
+    <!-- List背景色 -->
+    <color name="cd_list_view_background">@color/white</color>
+
+    <!-- 线颜色 -->
+    <color name="cd_line">#cacaca</color>
+    <!-- 元素边框颜色 -->
+    <color name="cd_frame_line">@color/cd_line</color>
+    <!-- 列表分割线颜色 -->
+    <color name="cd_list_divider">@color/cd_line</color>
+    <!-- 对话框中使用的线的颜色 -->
+    <color name="cd_dialog_line">#979797</color>
+
+    <!-- text colors -->
+    <color name="cd_text_color3">#333333</color>
+    <color name="cd_text_color6">#666666</color>
+    <color name="cd_text_color9">#999999</color>
+    <color name="cd_text_color_cc">#cccccc</color>
+
+    <!-- popup dialog -->
+    <color name="cd_popup_background">#858585</color>
+    <color name="cd_popup_title_bg">#ffffff</color>
+    <color name="cd_popup_title_bg_pressed">#f6f6f6</color>
+    <color name="cd_popup_text_positive">@color/cd_app_light_blue</color>
+    <color name="cd_popup_text_negative">#000000</color>
+    <color name="cd_popup_text_warning">@color/cd_app_red</color>
+
+    <!-- popup menu -->
+    <color name="cd_popup_text_highlight">@color/cd_app_light_blue</color>
+    <color name="cd_popup_text_normal">#000000</color>
+
+    <!-- pwd level view -->
+    <color name="cd_pwd_level_1">#fe3a04</color>
+    <color name="cd_pwd_level_2">#ffa801</color>
+    <color name="cd_pwd_level_3">#77d209</color>
+    <color name="cd_pwd_default">#cccccc</color>
+
+    <!-- circle page indicator -->
+    <color name="cd_cpi_circle_fill_normal">#28000000</color>
+    <color name="cd_cpi_circle_fill_focused">#ffffff</color>
+    <color name="cd_cpi_circle_stroke">#aaaaaa</color>
+
+    <!-- head view -->
+    <color name="cd_headview_bg">@color/cd_app_light_blue</color>
+
+    <!--super card-->
+    <color name="cd_sa_line">#f5f5f5</color>
+
+    <!-- device icon background -->
+    <color name="cd_device_icon_bg_default">#ff30b5ff</color>
+    <color name="cd_device_icon_bg_black">#9B9B9B</color>
+    <color name="sr_progressbar_circle">#3cb33c</color>
+    <color name="default_progressbar_circle">@android:color/black</color>
+
+
+    <!--pickerview-->
+    <color name="pickerview_timebtn_nor">#057dff</color>
+    <color name="pickerview_timebtn_pre">#c2daf5</color>
+    <color name="pickerview_bg_topbar">#f5f5f5</color>
+
+    <color name="pickerview_topbar_title">#000000</color>
+    <color name="pickerview_wheelview_textcolor_out">#a8a8a8</color>
+    <color name="pickerview_wheelview_textcolor_center">#2a2a2a</color>
+    <color name="pickerview_wheelview_textcolor_divider">#d5d5d5</color>
+    <color name="pickerview_bgColor_overlay">#60000000</color>
+    <color name="pickerview_bgColor_default">#FFFFFFFF</color>
+
+
+</resources>

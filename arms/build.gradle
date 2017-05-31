@@ -115,6 +115,8 @@ dependencies {
     //test
     compile rootProject.ext.dependencies["timber"]
     testCompile rootProject.ext.dependencies["junit"]
+    //用于需要圆角矩形框背景的情况,减少直接使用引入的shape资源文件
+//    compile 'com.flyco.roundview:FlycoRoundView_Lib:1.1.4@aar'
 }
 
 

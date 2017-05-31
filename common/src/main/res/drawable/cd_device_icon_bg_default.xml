@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<shape xmlns:android="http://schemas.android.com/apk/res/android"
+    android:shape="rectangle">
+
+    <solid android:color="@color/cd_device_icon_bg_default" />
+
+    <corners android:radius="@dimen/cd_icon_corners" />
+
+</shape>

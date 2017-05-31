@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@android:color/transparent">
+
+    <LinearLayout
+        android:id="@+id/loadingLayout"
+        android:layout_width="wrap_content"
+        android:layout_height="80dp"
+        android:orientation="horizontal"
+        android:paddingLeft="@dimen/cd_padding"
+        android:paddingRight="@dimen/cd_padding"
+        android:gravity="center">
+        <!--android:background="@drawable/loading_popup_window_round_bg">-->
+
+        <ProgressBar
+            android:id="@+id/loadingIcon"
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            android:layout_centerInParent="true"
+            android:layout_centerVertical="true"
+            android:indeterminateDuration="500" />
+        <!--style="@style/FLCProgressCircle"-->
+        <TextView
+            android:id="@+id/loadingText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:layout_marginLeft="10dp"
+            android:layout_centerInParent="true"
+            android:layout_centerVertical="true"
+            android:text="@string/cd_opt_ongoing_tips"
+            android:textColor="@color/cd_white"
+            android:textIsSelectable="false"
+            android:textSize="16sp" />
+    </LinearLayout>
+</FrameLayout>
+
+
+

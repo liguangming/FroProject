@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="fill_parent"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:background="@color/cd_popup_background"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/title"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/cd_popup_title_height"
+            android:layout_gravity="center"
+            android:background="@color/cd_popup_title_bg"
+            android:gravity="center"
+            android:textColor="@color/cd_popup_text_negative"
+            android:textSize="@dimen/cd_text_size15"
+            android:visibility="gone" />
+
+        <View
+            android:id="@+id/titleDivider"
+            style="@style/CDItemFrameLine"
+            android:visibility="gone" />
+
+        <ListView
+            android:id="@+id/listView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:cacheColorHint="@null"
+            android:divider="@null"
+            android:listSelector="@null"  />
+
+        <View
+            android:id="@+id/cancelDivider"
+            android:layout_marginTop="@dimen/cd_popup_negative_margin"
+            style="@style/CDItemFrameLine" />
+
+        <TextView
+            android:id="@+id/cancel"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/cd_item_height"
+            android:gravity="center"
+            android:background="@drawable/cd_popup_item_bg"
+            android:textColor="@color/cd_popup_text_normal"
+            android:textSize="@dimen/cd_text_size15" />
+    </LinearLayout>
+
+</RelativeLayout>

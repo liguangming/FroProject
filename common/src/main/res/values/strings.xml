@@ -1,0 +1,54 @@
+<resources>
+    <string name="app_name">commoncd</string>
+
+    <string name="cd_cancel">取消</string>
+    <string name="cd_affirm">确定</string>
+
+    <!-- dialog middle view -->
+    <string name="cd_wifi_name">WiFi名称:</string>
+    <string name="cd_wifi_password">WiFi密码:</string>
+    <string name="sr_relogin_title">管理密码验证失败</string>
+
+    <!-- browser -->
+    <string name="cd_browser_url_wrong">无法打开无效的网址</string>
+
+    <string name="cd_week1">周一</string>
+    <string name="cd_week2">周二</string>
+    <string name="cd_week3">周三</string>
+    <string name="cd_week4">周四</string>
+    <string name="cd_week5">周五</string>
+    <string name="cd_week6">周六</string>
+    <string name="cd_week7">周日</string>
+    <string name="cd_week_every">每天</string>
+    <string name="cd_week_work">工作日</string>
+    <string name="cd_week_weekend">周末</string>
+
+    <!-- reload view提示 -->
+    <string name="cd_reload_hint">点击屏幕，重新加载</string>
+
+    <!-- Browser -->
+    <string name="cd_browser_default_title">网页</string>
+
+    <!-- Loading view -->
+    <string name="cd_opt_ongoing_tips">操作进行中, 请稍候&#8230;</string>
+
+    <!-- common error -->
+    <string name="cd_err_empty">%1$s不能为空</string>
+    <string name="cd_err_byte_len_limit">%1$s输入内容过长，请重新输入</string>
+    <string name="cd_err_len_range">%1$s长度需%2$d-%3$d位</string>
+    <string name="cd_err_len_limit">%1$s长度不能超过%2$d位</string>
+    <string name="cd_err_invalid_char">%1$s不可以包含非法字符\'\"\\&lt;&gt;</string>
+    <string name="cd_err_has_chinese">%1$s不可以包含中文</string>
+    <string name="cd_err_has_emoji">%1$s不可以包含表情</string>
+    <string name="cd_upload_success">升级已完成</string>
+
+    <!-- pickerview -->
+    <string name="pickerview_cancel">取消</string>
+    <string name="pickerview_submit">完成</string>
+    <string name="pickerview_year">年</string>
+    <string name="pickerview_month">月</string>
+    <string name="pickerview_day">日</string>
+    <string name="pickerview_hours">时</string>
+    <string name="pickerview_minutes">分</string>
+    <string name="pickerview_seconds">秒</string>
+</resources>

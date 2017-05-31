@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- base -->
+    <dimen name="margin_03">3dp</dimen>
+    <dimen name="cd_padding">8dp</dimen>
+    <dimen name="cd_drawable_padding">10dp</dimen>
+    <dimen name="cd_margin">12dp</dimen>
+    <dimen name="cd_dp_10">10dp</dimen>
+    <dimen name="cd_dp_20">20dp</dimen>
+    <dimen name="cd_padding_edit">12dp</dimen>
+    <!-- height -->
+    <!--普通的Item，绝大多数是这个,一行 -->
+    <dimen name="cd_item_height">45dp</dimen>
+    <!--带个副标题是，两行的Item -->
+    <dimen name="cd_item_medium_height">50dp</dimen>
+    <!--大的Item，里面有图标。 -->
+    <dimen name="cd_item_large_height">65dp</dimen>
+    <dimen name="cd_head_height">120px</dimen>
+    <dimen name="cd_circ_button_height">45dp</dimen>
+
+    <!-- 间距 -->
+    <!-- ***************************************************** -->
+    <!--             15                    20                  -->
+    <!--            文字                  配置项               -->
+    <!--             5                     10                  -->
+    <!--           配置项                 配置项               -->
+    <!--             5                     10                  -->
+    <!--            文字                  配置项               -->
+    <!--             15                    10                  -->
+    <!--           配置项                                      -->
+    <!--             5                                         -->
+    <!--            文字                                       -->
+    <!--             15                                        -->
+    <!-- 配置类界面第一个元素（除开头图）不为文字时和顶部（头图）的间距 -->
+    <dimen name="cd_margin_item_top">20dp</dimen>
+    <!-- 配置类界面第一个元素（除开头图）为文字时和顶部（头图）的间距 -->
+    <dimen name="cd_margin_text_top">15dp</dimen>
+    <!-- 配置类界面元素为文字时与本配置项的间距 -->
+    <dimen name="cd_margin_item_text_v">3dp</dimen>
+    <!-- 配置类界面元素为文字时与下个配置项的间距 -->
+    <dimen name="cd_margin_text_v">15dp</dimen>
+    <!-- 配置类界面元素为配置项与下个配置项之间垂直方向的间距 -->
+    <dimen name="cd_margin_item_v">10dp</dimen>
+    <!-- 配置类界面最后一个元素不为文字时和底部的间距 -->
+    <dimen name="cd_margin_item_bottom">10dp</dimen>
+    <!-- 配置类界面最后一个元素为文字时和底部的间距 -->
+    <dimen name="cd_margin_text_bottom">15dp</dimen>
+    <!-- 配置类界面最后一个元素为列表时和底部的间距 -->
+    <dimen name="cd_margin_list_bottom">0dp</dimen>
+    <!-- 元素标题文字和元素之间的间距 -->
+    <dimen name="cd_margin_title_item_v">6dp</dimen>
+    <!-- 说明类文字行间距 -->
+    <dimen name="cd_text_line_space">4dp</dimen>
+
+    <dimen name="cd_init_text_title">17sp</dimen>
+    <dimen name="cd_init_text_subtitle">17sp</dimen>
+    <dimen name="cd_init_text_desc">15sp</dimen>
+
+    <dimen name="cd_title_margin_content">15dp</dimen>
+
+    <!-- text size -->
+    <dimen name="cd_text_size10">10sp</dimen>
+    <dimen name="cd_text_size12">12sp</dimen>
+    <dimen name="cd_text_size14">14sp</dimen>
+    <dimen name="cd_text_size15">15sp</dimen>
+    <dimen name="cd_text_size16">16sp</dimen>
+    <dimen name="cd_text_size17">17sp</dimen>
+    <dimen name="cd_text_size18">18sp</dimen>
+    <dimen name="cd_text_size19">19sp</dimen>
+    <dimen name="cd_text_size30">30sp</dimen>
+    <dimen name="cd_pref_item_title_text_size">15sp</dimen>
+    <dimen name="cd_pref_item_desc_text_size">12sp</dimen>
+    <!-- Item右边灰色文字大小 -->
+    <dimen name="cd_item_right_text_size">13sp</dimen>
+
+    <!-- bottom popup dialog -->
+    <dimen name="cd_popup_title_height">45dp</dimen>
+    <dimen name="cd_popup_negative_margin">10dp</dimen>
+
+    <!-- week day grid view -->
+    <dimen name="cd_week_day_item_height">30dp</dimen>
+    <dimen name="cd_week_day_vertical_spacing">15dp</dimen>
+
+    <!-- password editor -->
+    <dimen name="cd_edit_drawable_padding">25dp</dimen>
+
+    <!-- password level view -->
+    <dimen name="cd_pwd_level_height">2dp</dimen>
+    <dimen name="cd_pwd_level_width">40dp</dimen>
+    <dimen name="cd_pwd_level_space">3dp</dimen>
+
+    <!-- advertisement banner -->
+    <dimen name="cd_ad_banner_indicator_margin_bottom">6dp</dimen>
+
+    <!-- circle page indicator -->
+    <dimen name="cd_cpi_circle_width">5dp</dimen>
+    <dimen name="cd_cpi_circle_padding_h">4dp</dimen>
+    <dimen name="cd_cpi_circle_stroke_width">1px</dimen>
+
+    <!--super_card-->
+    <dimen name="cd_sa_card_line">0.5dp</dimen>
+    <dimen name="cd_sa_top">10dp</dimen>
+    <dimen name="cd_sa_drawtop">10dp</dimen>
+    <dimen name="cd_sa_content">14sp</dimen>
+
+    <!--公用图标圆角-->
+    <dimen name="cd_icon_corners">14dp</dimen>
+
+    <!-- 按钮顶部与上一个元素之间的间距 -->
+    <dimen name="cd_button_margin_top">50dp</dimen>
+    <!-- 按钮底部与屏幕底部的间距 -->
+    <dimen name="cd_button_margin_bottom">100dp</dimen>
+
+    <!-- 列表分割线距屏幕左边界间距 -->
+    <dimen name="cd_divider_margin_left">62dp</dimen>
+
+    <dimen name="cd_index_container_line_height">2dp</dimen>
+    <dimen name="cd_index_container_line_width">70dp</dimen>
+
+
+
+    <!-- 顶部按钮栏高度 -->
+    <dimen name="pickerview_topbar_height">44dp</dimen>
+
+    <!-- 顶部按钮padding -->
+    <dimen name="pickerview_topbar_padding">20dp</dimen>
+
+    <!-- 顶部按钮文字大小 -->
+    <dimen name="pickerview_topbar_btn_textsize">17sp</dimen>
+    <dimen name="pickerview_topbar_title_textsize">18sp</dimen>
+    <!-- 选项文字大小 -->
+    <dimen name="pickerview_textsize">20sp</dimen>
+</resources>

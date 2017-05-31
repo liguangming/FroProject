@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <TextView
+        android:id="@+id/content"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/cd_item_height"
+        android:gravity="center"
+        android:background="@drawable/cd_popup_item_bg"
+        android:textColor="@color/cd_popup_text_normal"
+        android:textSize="@dimen/cd_text_size15"  />
+
+    <View
+        android:id="@+id/divider"
+        style="@style/CDListDivider" />
+
+</LinearLayout>

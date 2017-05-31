@@ -1,0 +1,137 @@
+<resources>
+
+    <!-- Dialog -->
+    <style name="CDDialog" parent="@android:style/Theme.Dialog">
+        <item name="android:windowIsTranslucent">true</item>
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:windowBackground">@android:color/transparent</item>
+        <item name="android:backgroundDimEnabled">false</item>
+    </style>
+
+    <!-- 全屏Dialog -->
+    <style name="CDFullscreenDialog" parent="@android:style/Theme.Dialog">
+        <item name="android:windowIsTranslucent">true</item>
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:windowBackground">@android:color/transparent</item>
+        <item name="android:windowFullscreen">true</item>
+    </style>
+
+    <!-- 线 -->
+    <style name="CDLine">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">1px</item>
+        <item name="android:background">@color/cd_line</item>
+        <item name="android:clickable">false</item>
+        <item name="android:enabled">false</item>
+    </style>
+
+    <!-- 对话框中使用的横线 -->
+    <style name="CDDialogLine" parent="CDLine">
+        <item name="android:background">@color/cd_dialog_line</item>
+    </style>
+    <!-- 对话框中使用的竖线 -->
+    <style name="CDDialogLine.Vertical">
+        <item name="android:layout_width">1px</item>
+        <item name="android:layout_height">match_parent</item>
+    </style>
+
+    <!-- 元素边框线，目前常用于各元素的上边界线和下边界线 -->
+    <style name="CDItemFrameLine" parent="CDLine">
+        <item name="android:background">@color/cd_frame_line</item>
+    </style>
+
+    <!-- 列表分割线 -->
+    <style name="CDListDivider" parent="CDLine">
+        <item name="android:background">@color/cd_list_divider</item>
+    </style>
+
+    <!-- 列表分割线 -->
+    <style name="CDListDivider.MarginLeft">
+        <item name="android:layout_marginLeft">@dimen/cd_padding</item>
+    </style>
+
+    <!-- Editor -->
+    <style name="CDEditor">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">@dimen/cd_item_height</item>
+        <item name="android:background">@android:color/transparent</item>
+        <item name="android:padding">@dimen/cd_padding</item>
+        <item name="android:textSize">@dimen/cd_text_size15</item>
+        <item name="android:textColor">@color/cd_text_color3</item>
+        <item name="android:textColorHint">@color/cd_text_color_cc</item>
+        <item name="android:drawablePadding">@dimen/cd_edit_drawable_padding</item>
+        <item name="android:singleLine">true</item>
+    </style>
+
+    <!-- ToggleButton -->
+    <style name="CDToggleButton">
+        <item name="android:layout_width">60dp</item>
+        <item name="android:layout_height">27dp</item>
+        <item name="android:background">@null</item>
+        <item name="android:textOff">""</item>
+        <item name="android:textOn">""</item>
+        <item name="android:button">@drawable/cd_switch</item>
+    </style>
+
+    <!--super_card_icon-->
+    <style name="CDSuperCardIcon">
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_weight">1.0</item>
+        <item name="android:drawablePadding">@dimen/cd_sa_drawtop</item>
+        <item name="android:gravity">center</item>
+        <item name="android:padding">@dimen/cd_dp_20</item>
+        <item name="android:textColor">@color/cd_text_color3</item>
+        <item name="android:textSize">@dimen/cd_text_size16</item>
+    </style>
+
+    <style name="CDButtonCirc">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">@dimen/cd_circ_button_height</item>
+        <item name="android:gravity">center</item>
+        <item name="android:textColor">@color/cd_white</item>
+        <item name="android:textSize">@dimen/cd_text_size15</item>
+    </style>
+
+    <style name="CDButtonCirc.Green">
+        <item name="android:background">@drawable/cd_selector_green_radius</item>
+    </style>
+
+    <style name="CDConfigTitle">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_marginRight">@dimen/margin_03</item>
+        <item name="android:textSize">@dimen/cd_text_size15</item>
+        <item name="android:textColor">@color/cd_text_color3</item>
+        <item name="android:paddingLeft">@dimen/cd_padding</item>
+    </style>
+
+    <style name="CommonLineStyle">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">1px</item>
+        <item name="android:background">#dbdbdb</item>
+    </style>
+
+    <style name="custom_dialog2" parent="@android:style/Theme.Dialog">
+        <item name="android:windowFrame">@null</item>
+        <!-- Dialog的windowFrame框为无 -->
+        <item name="android:windowIsFloating">true</item>
+        <!-- 是否漂现在activity上 -->
+        <item name="android:windowIsTranslucent">true</item>
+        <!-- 是否半透明 -->
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:background">@null</item>
+        <item name="android:windowBackground">@android:color/transparent</item>
+        <item name="android:windowContentOverlay">@null</item>
+        <!-- 去除黑色边框的关键设置项 -->
+        <item name="android:backgroundDimEnabled">true</item>
+        <!-- 屏幕背景是否变暗 -->
+        <item name="android:backgroundDimAmount">0.3</item>
+    </style>
+
+    <style name="pickerview_dialogAnim" mce_bogus="1" parent="android:Animation">
+        <item name="android:windowEnterAnimation">@anim/pickerview_dialog_scale_in</item>
+        <item name="android:windowExitAnimation">@anim/pickerview_dialog_scale_out</item>
+    </style>
+
+</resources>

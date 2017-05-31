@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <View
+        android:id="@+id/topLine"
+        style="@style/CDItemFrameLine" />
+
+    <LinearLayout
+        android:id="@+id/titleLayout"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/cd_item_height"
+        android:paddingLeft="@dimen/cd_padding"
+        android:paddingRight="@dimen/cd_padding"
+        android:background="@color/cd_item_bg_normal"
+        android:gravity="center_vertical"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@id/title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:textColor="@color/cd_text_color3"
+            android:textSize="@dimen/cd_text_size15"
+            android:singleLine="true" />
+
+        <!--<com.ifenglian.commonlib.widgets.togglebutton.zcw.togglebutton.FlcToggleButton-->
+            <!--android:id="@+id/toggle"-->
+            <!--android:layout_width="@dimen/common_toggle_width"-->
+            <!--android:layout_height="@dimen/common_toggle_height"-->
+            <!--android:visibility="gone" />-->
+
+        <ImageView
+            android:id="@+id/arrow"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@null"
+            android:src="@drawable/cd_arrow"
+            android:layout_marginLeft="10dp"
+            android:visibility="gone" />
+
+    </LinearLayout>
+
+    <View style="@style/CDItemFrameLine" />
+
+    <TextView
+        android:id="@+id/summary"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:lineSpacingExtra="@dimen/cd_text_line_space"
+        android:paddingLeft="@dimen/cd_padding"
+        android:paddingRight="16dp"
+        android:textColor="@color/cd_text_color9"
+        android:textSize="@dimen/cd_text_size12"
+        android:layout_marginTop="@dimen/cd_margin_item_text_v"/>
+
+</LinearLayout>

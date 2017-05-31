@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <View
+        android:id="@+id/topLine"
+        style="@style/CDItemFrameLine"
+        android:visibility="gone" />
+
+    <RelativeLayout
+        android:id="@+id/content"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/cd_item_height"
+        android:background="@drawable/cd_item_bg"
+        android:paddingLeft="@dimen/cd_padding"
+        android:paddingRight="@dimen/cd_padding">
+
+        <LinearLayout
+            android:id="@+id/leftLayout"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/leftText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:includeFontPadding="false"
+                android:maxLines="1"
+                android:textColor="#333333"
+                android:textSize="16sp" />
+
+
+            <TextView
+                android:id="@+id/leftHint"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:includeFontPadding="false"
+                android:maxLines="1"
+                android:textColor="#999999"
+                android:textSize="12sp"
+                android:visibility="gone" />
+
+
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_toRightOf="@id/leftLayout"
+            android:gravity="right|center_vertical"
+            android:orientation="horizontal">
+
+            <EditText
+                android:id="@+id/editor"
+                android:layout_width="100dp"
+                android:layout_height="match_parent"
+                android:layout_marginRight="2dp"
+                android:background="#00000000"
+                android:gravity="right|center_vertical"
+                android:includeFontPadding="false"
+                android:textColor="#a9a9a9"
+                android:textColorHint="#a9a9a9"
+                android:textSize="14sp"
+                android:visibility="gone" />
+
+            <ImageView
+                android:id="@+id/rightIcon"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+            <TextView
+                android:id="@+id/rightText"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:gravity="center_vertical"
+                android:includeFontPadding="false"
+                android:maxLines="1"
+                android:textColor="#999999"
+                android:textSize="14sp" />
+
+            <ToggleButton
+                android:id="@+id/toggle"
+                style="@style/CDToggleButton"
+                android:layout_marginLeft="10dp"
+                android:visibility="gone" />
+
+
+            <ImageView
+                android:id="@+id/arrow"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:src="@drawable/cd_arrow"
+                android:visibility="gone" />
+
+
+        </LinearLayout>
+
+    </RelativeLayout>
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <View
+            android:id="@+id/bottomLine"
+            style="@style/CDItemFrameLine"
+            android:visibility="gone" />
+
+        <View
+            android:id="@+id/divider"
+            style="@style/CDListDivider"
+            android:layout_marginLeft="@dimen/cd_padding"
+            android:visibility="gone" />
+    </RelativeLayout>
+
+</LinearLayout>

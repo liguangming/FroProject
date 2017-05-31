@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="commoncd">
+        <attr name="cdShowEye" format="boolean" />
+        <attr name="cdShowLevel" format="boolean" />
+        <attr name="cdHint" format="string" />
+        <attr name="cdLength" format="integer" />
+        <attr name="cdTitle" format="string" />
+        <attr name="cdSubtitle" format="string" />
+        <attr name="cdTitleColor" format="reference" />
+        <attr name="cdSubtitleColor" format="reference" />
+        <attr name="cdDrawableLeft" format="reference" />
+        <attr name="cdDrawableRight" format="reference" />
+        <attr name="cdTextLeft" format="string" />
+        <attr name="cdTextRight" format="string" />
+        <attr name="cdIcon" format="reference" />
+        <attr name="cdShowToggle" format="boolean" />
+        <attr name="cdShowArrow" format="boolean" />
+        <attr name="cdShowTopLine" format="boolean" />
+        <attr name="cdShowBottomLine" format="boolean" />
+        <attr name="cdShowBottomShortLine" format="boolean" />
+        <attr name="cdShowEditor" format="boolean" />
+        <attr name="cdAction" format="string" />
+        <attr name="cdSummary" format="string" />
+        <attr name="cdAutoToggle" format="boolean" />
+    </declare-styleable>
+
+    <!--密码输入框 自定义属性-->
+    <declare-styleable name="CDPwdEditor">
+        <!--小眼睛-->
+        <attr name="cdShowEye" />
+        <!--等级-->
+        <attr name="cdShowLevel" />
+        <!--提示-->
+        <attr name="cdHint" />
+        <!--提示-->
+        <attr name="cdLength" />
+    </declare-styleable>
+
+    <!--HeadView 自定义属性-->
+    <declare-styleable name="CDHeadView">
+        <!--title-->
+        <attr name="cdTitle" />
+        <!--subtitle-->
+        <attr name="cdSubtitle" />
+        <!--title color-->
+        <attr name="cdTitleColor" />
+        <!--subtitle color-->
+        <attr name="cdSubtitleColor" />
+        <!--image left-->
+        <attr name="cdDrawableLeft" />
+        <!--image right-->
+        <attr name="cdDrawableRight" />
+        <!--text left-->
+        <attr name="cdTextLeft" />
+        <!--text right-->
+        <attr name="cdTextRight" />
+    </declare-styleable>
+
+    <!--ItemView 自定义属性-->
+    <declare-styleable name="CDItemView">
+        <!--左边标题-->
+        <attr name="cdTextLeft" />
+        <!--左边标题下的子标题-->
+        <attr name="cdHint" />
+        <!--右边文字内容-->
+        <attr name="cdTextRight" />
+        <!--右边图标-->
+        <attr name="cdIcon" />
+        <!--是否显示开关按钮-->
+        <attr name="cdShowToggle" />
+        <!--是否显示箭头-->
+        <attr name="cdShowArrow" />
+        <!--是否显示顶部线-->
+        <attr name="cdShowTopLine" />
+        <!--是否显示底部线-->
+        <attr name="cdShowBottomLine" />
+        <!--是否显示底部短线-->
+        <attr name="cdShowBottomShortLine" />
+        <!--显示EditView-->
+        <attr name="cdShowEditor" />
+    </declare-styleable>
+
+    <!--PrefItemView 自定义属性-->
+    <declare-styleable name="CDPrefItemView">
+        <!--文字内容-->
+        <attr name="cdTitle" />
+        <!--右边图标类型: toggle/navigate/none, default: none-->
+        <attr name="cdAction" />
+        <!--底部文字-->
+        <attr name="cdSummary" />
+        <!--是否显示顶部线: true/false, default: true-->
+        <attr name="cdShowTopLine" />
+        <!--Toggle状态自动设置: true/false, default: false, 不自动设置的意思是用户操作不会自动toggle，需要外部通过函数设置-->
+        <attr name="cdAutoToggle" />
+    </declare-styleable>
+
+    <!-- 自定义圆圈属性-->
+    <declare-styleable name="RoundProgressBar">
+        <attr name="roundColor" format="color" />
+        <attr name="roundProgressColor" format="color" />
+        <attr name="defaultRoundProgressColor" format="color" />
+        <attr name="roundWidth" format="dimension"></attr>
+        <attr name="textColor" format="color" />
+        <attr name="textSize" format="dimension" />
+        <attr name="max" format="integer"></attr>
+        <attr name="textIsDisplayable" format="boolean"></attr>
+        <attr name="style">
+            <enum name="STROKE" value="0"></enum>
+            <enum name="FILL" value="1"></enum>
+        </attr>
+    </declare-styleable>
+
+    <declare-styleable name="pickerview">
+        <attr name="pickerview_gravity">
+            <enum name="center" value="17"/>
+            <enum name="left" value="3"/>
+            <enum name="right" value="5"/>
+        </attr>
+        <attr name="pickerview_textSize" format="dimension"/>
+        <attr name="pickerview_textColorOut" format="color"/>
+        <attr name="pickerview_textColorCenter" format="color"/>
+        <attr name="pickerview_dividerColor" format="color"/>
+        <attr name="pickerview_lineSpacingMultiplier" format="float"/>
+    </declare-styleable>
+</resources>

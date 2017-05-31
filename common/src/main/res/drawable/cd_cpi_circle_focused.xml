@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<shape xmlns:android="http://schemas.android.com/apk/res/android"
+    android:shape="oval">
+
+    <solid android:color="@color/cd_cpi_circle_fill_focused" />
+
+    <stroke android:width="@dimen/cd_cpi_circle_stroke_width" android:color="@color/cd_cpi_circle_stroke" />
+
+    <size android:width="@dimen/cd_cpi_circle_width" android:height="@dimen/cd_cpi_circle_width" />
+
+</shape>
