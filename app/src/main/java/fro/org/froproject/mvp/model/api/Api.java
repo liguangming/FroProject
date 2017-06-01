@@ -5,6 +5,8 @@ package fro.org.froproject.mvp.model.api;
  */
 
 public interface Api {
-    String APP_URL = "https://api.github.com";
+    String APP_URL = "http://118.190.173.83:8080/fro-api/";
     int RequestSuccess = 0;
+
+
 }

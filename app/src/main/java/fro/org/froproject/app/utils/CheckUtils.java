@@ -13,16 +13,6 @@ import fro.org.froproject.R;
  */
 
 public class CheckUtils {
-    /**
-     * 密码校验
-     */
-    public static boolean passwordValible(Context context, String password) {
-        if (password.length() < 6 || password.length() > 16) {
-            ToastUtils.show(context, "请输入6-16位密码");
-            return false;
-        }
-        return true;
-    }
 
     /**
      * 验证码校验
@@ -46,12 +36,17 @@ public class CheckUtils {
      * @param password
      * @return
      */
-    public static boolean passwordRight(String password) {
+    public static boolean passwordRight(Context context,String password) {
         if (TextUtils.isEmpty(password))
             return false;
         Pattern p = Pattern.compile(REGEX_PASSWORD);
         Matcher m = p.matcher(password);
-        return m.matches();
+        if (m.matches()) {
+            return true;
+        } else {
+            ToastUtils.show(context, "请输入6-16位密码");
+            return false;
+        }
     }
 
     /**

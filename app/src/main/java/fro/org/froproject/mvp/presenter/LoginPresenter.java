@@ -8,12 +8,18 @@ import com.jess.arms.di.scope.ActivityScope;
 import com.jess.arms.mvp.BasePresenter;
 import com.jess.arms.widget.imageloader.ImageLoader;
 
+import org.fro.common.widgets.LoadingView;
+
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import fro.org.froproject.app.utils.CheckUtils;
 import fro.org.froproject.app.utils.RxUtils;
+import fro.org.froproject.app.utils.ToastUtils;
 import fro.org.froproject.mvp.contract.LoginContract;
 import fro.org.froproject.mvp.model.entity.BaseJson;
+import fro.org.froproject.mvp.model.entity.UserInfoBean;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.annotations.NonNull;
 import io.reactivex.disposables.Disposable;
@@ -68,20 +74,24 @@ public class LoginPresenter extends BasePresenter<LoginContract.Model, LoginCont
     }
 
     public void login(String PhoneNum, String password) {
-        if (!CheckUtils.passwordValible(mApplication, password))
-            return;
-        if (!CheckUtils.isMobileNO(mApplication, PhoneNum))
-            return;
         mModel.login(PhoneNum, password)
                 .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
                 .doOnSubscribe(disposable -> {
-
+                    LoadingView.showLoading(mAppManager.getCurrentActivity());
                 }).subscribeOn(AndroidSchedulers.mainThread())
                 .observeOn(AndroidSchedulers.mainThread())
                 .doAfterTerminate(() -> {
-
+                    LoadingView.dismissLoading();
                 })
-                .compose(RxUtils.<List<BaseJson>>bindToLifecycle(mRootView))//使用RXlifecycle,使subscription和activity一起销毁
-        ;
+                .compose(RxUtils.<BaseJson>bindToLifecycle(mRootView))//使用RXlifecycle,使subscription和activity一起销毁
+                .subscribe(new ErrorHandleSubscriber<BaseJson>(mErrorHandler) {
+                    @Override
+                    public void onNext(@NonNull BaseJson baseJson) {
+                        if (baseJson.isSuccess()) {//登录成功
+                            UserInfoBean  userInfoBean = (UserInfoBean) baseJson.getD();
+                        }
+                    }
+                });
     }
 }

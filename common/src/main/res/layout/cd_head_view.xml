@@ -73,7 +73,6 @@
             android:layout_gravity="center_horizontal"
             android:gravity="center"
             android:maxLines="1"
-            android:text="xxxxxxxxx"
             android:textColor="@color/cd_white"
             android:textSize="50px" />
 

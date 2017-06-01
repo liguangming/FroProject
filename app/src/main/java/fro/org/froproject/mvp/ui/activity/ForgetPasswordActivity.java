@@ -3,24 +3,20 @@ package fro.org.froproject.mvp.ui.activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
-import android.widget.EditText;
-import android.widget.TextView;
+import android.support.annotation.Nullable;
+import android.view.LayoutInflater;
+import android.view.View;
 
 import com.jess.arms.base.BaseActivity;
 import com.jess.arms.di.component.AppComponent;
 import com.jess.arms.utils.UiUtils;
 
-import javax.inject.Inject;
 
-import butterknife.BindView;
-import butterknife.OnClick;
 import fro.org.froproject.R;
-import fro.org.froproject.app.utils.CheckUtils;
-import fro.org.froproject.app.utils.Utils;
-import fro.org.froproject.di.component.DaggerLoginComponent;
-import fro.org.froproject.mvp.presenter.LoginPresenter;
-import fro.org.froproject.di.module.LoginModule;
-import fro.org.froproject.mvp.contract.LoginContract;
+import fro.org.froproject.di.component.DaggerForgetPasswordComponent;
+import fro.org.froproject.di.module.ForgetPasswordModule;
+import fro.org.froproject.mvp.contract.ForgetPasswordContract;
+import fro.org.froproject.mvp.presenter.ForgetPasswordPresenter;
 
 import static com.jess.arms.utils.Preconditions.checkNotNull;
 
@@ -34,53 +30,30 @@ import static com.jess.arms.utils.Preconditions.checkNotNull;
  */
 
 /**
- * Created by Lgm on 2017/5/31 0031.
+ * Created by Lgm on 2017/6/1 0001.
  */
 
-public class LoginActivity extends BaseActivity<LoginPresenter> implements LoginContract.View {
-    @BindView(R.id.phone_edit)
-    EditText phone_edit;
-    @BindView(R.id.password_edit)
-    EditText password_edit;
+public class ForgetPasswordActivity extends BaseActivity<ForgetPasswordPresenter> implements ForgetPasswordContract.View {
+
 
     @Override
     public void setupActivityComponent(AppComponent appComponent) {
-        DaggerLoginComponent.builder()
+        DaggerForgetPasswordComponent
+                .builder()
                 .appComponent(appComponent)
-                .loginModule(new LoginModule(this)) //请将LoginModule()第一个首字母改为小写
+                .forgetPasswordModule(new ForgetPasswordModule(this)) //请将ForgetPasswordModule()第一个首字母改为小写
                 .build()
                 .inject(this);
     }
 
     @Override
     public int initView(Bundle savedInstanceState) {
-        return R.layout.activity_login;
+        return R.layout.forget_password_activity;
     }
 
     @Override
     public void initData(Bundle savedInstanceState) {
 
-    }
-
-    @OnClick(R.id.login)
-    public void login() {
-        String phoneNum = phone_edit.getText().toString();
-        String passWord = password_edit.getText().toString();
-        if (!CheckUtils.isMobileNO(this, phoneNum))
-            return;
-        if (!CheckUtils.passwordRight(this, passWord))
-            return;
-        mPresenter.login(phoneNum, Utils.encodePassword(passWord));
-    }
-
-    @OnClick(R.id.forget_passwrod)
-    public void gotoForgetPassWordActivity() {
-        UiUtils.startActivity(this, ForgetPasswordActivity.class);
-    }
-
-    @OnClick(R.id.register)
-    public void gotoRegisterPassWord() {
-        UiUtils.startActivity(this, RegisterActivity.class);
     }
 
 
@@ -111,8 +84,5 @@ public class LoginActivity extends BaseActivity<LoginPresenter> implements Login
         finish();
     }
 
-    public void gotoMainActivity() {
-
-    }
 
 }

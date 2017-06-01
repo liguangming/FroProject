@@ -3,23 +3,16 @@ package fro.org.froproject.mvp.model;
 import android.app.Application;
 
 import com.google.gson.Gson;
-import com.jess.arms.di.scope.ActivityScope;
 import com.jess.arms.integration.IRepositoryManager;
 import com.jess.arms.mvp.BaseModel;
 
+import static com.jess.arms.utils.Preconditions.checkNotNull;
 
-import java.util.HashMap;
-import java.util.Map;
+import com.jess.arms.di.scope.ActivityScope;
 
 import javax.inject.Inject;
 
-import fro.org.froproject.mvp.contract.LoginContract;
-import fro.org.froproject.mvp.model.api.service.CommonService;
-import fro.org.froproject.mvp.model.entity.BaseJson;
-import fro.org.froproject.mvp.model.entity.UserInfoBean;
-import io.reactivex.Observable;
-import okhttp3.MediaType;
-import okhttp3.RequestBody;
+import fro.org.froproject.mvp.contract.ForgetPasswordContract;
 
 /**
  * 通过Template生成对应页面的MVP和Dagger代码,请注意输入框中输入的名字必须相同
@@ -31,16 +24,16 @@ import okhttp3.RequestBody;
  */
 
 /**
- * Created by Lgm on 2017/5/31 0031.
+ * Created by Lgm on 2017/6/1 0001.
  */
 
 @ActivityScope
-public class LoginModel extends BaseModel implements LoginContract.Model {
+public class ForgetPasswordModel extends BaseModel implements ForgetPasswordContract.Model {
     private Gson mGson;
     private Application mApplication;
 
     @Inject
-    public LoginModel(IRepositoryManager repositoryManager, Gson gson, Application application) {
+    public ForgetPasswordModel(IRepositoryManager repositoryManager, Gson gson, Application application) {
         super(repositoryManager);
         this.mGson = gson;
         this.mApplication = application;
@@ -53,13 +46,4 @@ public class LoginModel extends BaseModel implements LoginContract.Model {
         this.mApplication = null;
     }
 
-    @Override
-    public Observable<BaseJson<UserInfoBean>> login(String phoneNum, String password) {
-        Map<String,String> map=new HashMap<>();
-        map.put("phoneNumber",phoneNum);
-        map.put("password",password);
-        RequestBody body = RequestBody.create(MediaType.parse("application/json; charset=utf-8"), mGson.toJson(map));
-        Observable<BaseJson<UserInfoBean>> userInfo = mRepositoryManager.obtainRetrofitService(CommonService.class).login(body);
-        return userInfo;
-    }
 }

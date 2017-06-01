@@ -15,6 +15,6 @@
 
     <View
         android:id="@+id/divider"
-        style="@style/CDListDivider" />
+        style="@style/ListDivider" />
 
 </LinearLayout>

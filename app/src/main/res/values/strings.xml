@@ -7,4 +7,17 @@
     <string name="register">注册新用户</string>
     <string name="phone_num_tips">请输入正确手机号</string>
     <string name="not_null">不能为空</string>
+
+    <string name="phone_hint1">请输入手机号</string>
+    <string name="phone_hint2">请输入新手机号</string>
+    <string name="auth_code_hint">请输入验证码</string>
+    <string name="auth_code">验    证    码</string>
+    <string name="auth_code_phone">手    机    号</string>
+    <string name="auth_code_get">获取验证码</string>
+    <string name="password_set">设置密码</string>
+    <string name="password_set_hint">请设置密码</string>
+    <string name="affirm_password">确认密码</string>
+    <string name="affirm_password1">请确认密码</string>
+    <string name="next_step">下一步</string>
+
 </resources>
