@@ -13,16 +13,20 @@ import fro.org.froproject.R;
  */
 
 public class CheckUtils {
+    /**
+     * 验证码
+     */
+    public static final String REGEX_AUTH_CODE = "^[0-9]{4,8}$";
 
     /**
      * 验证码校验
      */
-    public static boolean authCodeValible(Context context, String authCode) {
-        if (authCode.length() < 4) {
-            ToastUtils.show(context, "请输入正确验证码");
+    public static boolean authCodeValible(String authCode) {
+        if (TextUtils.isEmpty(authCode))
             return false;
-        }
-        return true;
+        Pattern p = Pattern.compile(REGEX_PASSWORD);
+        Matcher m = p.matcher(authCode);
+        return m.matches();
     }
 
     /**
@@ -36,17 +40,12 @@ public class CheckUtils {
      * @param password
      * @return
      */
-    public static boolean passwordRight(Context context,String password) {
+    public static boolean passwordRight(String password) {
         if (TextUtils.isEmpty(password))
             return false;
         Pattern p = Pattern.compile(REGEX_PASSWORD);
         Matcher m = p.matcher(password);
-        if (m.matches()) {
-            return true;
-        } else {
-            ToastUtils.show(context, "请输入6-16位密码");
-            return false;
-        }
+        return m.matches();
     }
 
     /**
@@ -55,16 +54,11 @@ public class CheckUtils {
      * @param mobiles
      * @return
      */
-    public static boolean isMobileNO(Context context, String mobiles) {
+    public static boolean isMobileNO(String mobiles) {
         if (TextUtils.isEmpty(mobiles))
             return false;
         Pattern p = Pattern.compile("^(13[0-9]|15[012356789]|17[0-9]|18[0-9]|14[57])[0-9]{8}$");
         Matcher m = p.matcher(mobiles);
-        if (m.matches()) {
-            return true;
-        } else {
-            ToastUtils.show(context, R.string.phone_num_tips);
-            return false;
-        }
+        return m.matches();
     }
 }

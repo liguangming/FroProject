@@ -3,38 +3,51 @@ package fro.org.froproject.mvp.ui.activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
-import android.view.LayoutInflater;
-import android.view.View;
+import android.text.TextUtils;
+import android.widget.EditText;
+import android.widget.TextView;
 
 import com.jess.arms.base.BaseActivity;
 import com.jess.arms.di.component.AppComponent;
 import com.jess.arms.utils.UiUtils;
 
+import org.fro.common.widgets.LoadingView;
 
+import butterknife.BindView;
+import butterknife.OnClick;
 import fro.org.froproject.R;
+import fro.org.froproject.app.Constants;
+import fro.org.froproject.app.utils.CheckUtils;
 import fro.org.froproject.di.component.DaggerForgetPasswordComponent;
 import fro.org.froproject.di.module.ForgetPasswordModule;
 import fro.org.froproject.mvp.contract.ForgetPasswordContract;
 import fro.org.froproject.mvp.presenter.ForgetPasswordPresenter;
+import fro.org.froproject.mvp.ui.view.CountView;
+import fro.org.froproject.mvp.ui.view.HeadView;
 
 import static com.jess.arms.utils.Preconditions.checkNotNull;
 
-/**
- * 通过Template生成对应页面的MVP和Dagger代码,请注意输入框中输入的名字必须相同
- * 由于每个项目包结构都不一定相同,所以每生成一个文件需要自己导入import包名,可以在设置中设置自动导入包名
- * 请在对应包下按以下顺序生成对应代码,Contract->Model->Presenter->Activity->Module->Component
- * 因为生成Activity时,Module和Component还没生成,但是Activity中有它们的引用,所以会报错,但是不用理会
- * 继续将Module和Component生成完后,编译一下项目再回到Activity,按提示修改一个方法名即可
- * 如果想生成Fragment的相关文件,则将上面构建顺序中的Activity换为Fragment,并将Component中inject方法的参数改为此Fragment
- */
 
 /**
  * Created by Lgm on 2017/6/1 0001.
  */
 
 public class ForgetPasswordActivity extends BaseActivity<ForgetPasswordPresenter> implements ForgetPasswordContract.View {
-
+    @BindView(R.id.text_button)
+    TextView button;
+    @BindView(R.id.headView)
+    HeadView headView;
+    @BindView(R.id.phone_edit)
+    EditText phoneEdit;
+    @BindView(R.id.password_set_edit)
+    EditText passwordSet;
+    @BindView(R.id.affirm_password_edit)
+    EditText affirmPassword;
+    @BindView(R.id.auth_code)
+    EditText authCode;
+    @BindView(R.id.get_code_text)
+    TextView getCodeText;
+    private CountView mCountView;
 
     @Override
     public void setupActivityComponent(AppComponent appComponent) {
@@ -48,23 +61,31 @@ public class ForgetPasswordActivity extends BaseActivity<ForgetPasswordPresenter
 
     @Override
     public int initView(Bundle savedInstanceState) {
-        return R.layout.forget_password_activity;
+        return R.layout.activity_forget_password;
     }
 
     @Override
     public void initData(Bundle savedInstanceState) {
-
+        headView.setTitleStr(R.string.forget_password);
+        button.setText(R.string.complete);
     }
 
 
     @Override
     public void showLoading() {
-
+        LoadingView.showLoading(this);
     }
 
     @Override
     public void hideLoading() {
+        LoadingView.dismissLoading();
+    }
 
+    @Override
+    public void showCountView() {
+        if (mCountView != null)
+            mCountView = new CountView(Constants.AUTH_CODE_TIME, 1 * 1000, getCodeText);
+        mCountView.start();
     }
 
     @Override
@@ -79,10 +100,48 @@ public class ForgetPasswordActivity extends BaseActivity<ForgetPasswordPresenter
         UiUtils.startActivity(intent);
     }
 
+
+    @OnClick(R.id.complete)
+    public void submit() {
+        mPresenter.submit(phoneEdit.getText().toString(), authCode.getText().toString(), passwordSet.getText().toString());
+    }
+
+    @OnClick(R.id.get_code_text)
+    public void getAuthCode() {
+        String phone = phoneEdit.getText().toString();
+        if (!CheckUtils.isMobileNO(phone)) {
+            showMessage(getString(R.string.input_right_phone_number));
+            return;
+        }
+        mPresenter.getAuthCode(phone);
+    }
+
     @Override
     public void killMyself() {
         finish();
     }
 
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        if (mCountView != null)
+            mCountView.cancel();
+    }
 
+    @Override
+    public boolean check() {
+        if (!CheckUtils.isMobileNO(phoneEdit.getText().toString())) {
+            showMessage(getString(R.string.input_right_phone_number));
+            return false;
+        }
+        if (!CheckUtils.authCodeValible(affirmPassword.getText().toString())) {
+            showMessage(getString(R.string.input_right_auth_code));
+            return false;
+        }
+        if (!TextUtils.isEmpty(passwordSet.getText().toString()) && !passwordSet.getText().toString().equals(affirmPassword.getText().toString())) {
+            showMessage(getString(R.string.password_not_match));
+            return false;
+        }
+        return true;
+    }
 }

@@ -1,8 +1,10 @@
 package fro.org.froproject.mvp.presenter;
 
 import android.app.Application;
+import android.content.Intent;
 import android.util.Log;
 
+import com.jess.arms.base.BaseApplication;
 import com.jess.arms.integration.AppManager;
 import com.jess.arms.di.scope.ActivityScope;
 import com.jess.arms.mvp.BasePresenter;
@@ -14,12 +16,16 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import fro.org.froproject.app.MyApplication;
 import fro.org.froproject.app.utils.CheckUtils;
 import fro.org.froproject.app.utils.RxUtils;
 import fro.org.froproject.app.utils.ToastUtils;
+import fro.org.froproject.app.utils.Utils;
 import fro.org.froproject.mvp.contract.LoginContract;
 import fro.org.froproject.mvp.model.entity.BaseJson;
 import fro.org.froproject.mvp.model.entity.UserInfoBean;
+import fro.org.froproject.mvp.ui.activity.ForgetPasswordActivity;
+import fro.org.froproject.mvp.ui.activity.RegisterActivity;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.annotations.NonNull;
 import io.reactivex.disposables.Disposable;
@@ -73,25 +79,38 @@ public class LoginPresenter extends BasePresenter<LoginContract.Model, LoginCont
         this.mApplication = null;
     }
 
-    public void login(String PhoneNum, String password) {
-        mModel.login(PhoneNum, password)
+    public void login(String phoneNum, String password) {
+        if (!mRootView.check())
+            return;
+
+        mModel.login(phoneNum, Utils.encodePassword(password))
                 .subscribeOn(Schedulers.io())
+                .doOnSubscribe(disposable -> mRootView.showLoading())
+                .subscribeOn(AndroidSchedulers.mainThread())
                 .observeOn(AndroidSchedulers.mainThread())
-                .doOnSubscribe(disposable -> {
-                    LoadingView.showLoading(mAppManager.getCurrentActivity());
-                }).subscribeOn(AndroidSchedulers.mainThread())
-                .observeOn(AndroidSchedulers.mainThread())
-                .doAfterTerminate(() -> {
-                    LoadingView.dismissLoading();
-                })
+                .doAfterTerminate(() -> mRootView.hideLoading())
                 .compose(RxUtils.<BaseJson>bindToLifecycle(mRootView))//使用RXlifecycle,使subscription和activity一起销毁
                 .subscribe(new ErrorHandleSubscriber<BaseJson>(mErrorHandler) {
                     @Override
                     public void onNext(@NonNull BaseJson baseJson) {
                         if (baseJson.isSuccess()) {//登录成功
-                            UserInfoBean  userInfoBean = (UserInfoBean) baseJson.getD();
+                            UserInfoBean userInfoBean = (UserInfoBean) baseJson.getD();
+                            Intent intent = new Intent(mApplication, ForgetPasswordActivity.class);
+                            MyApplication.getInstance().setUserInfoBean(userInfoBean);
+                            mRootView.launchActivity(intent);
+                            mRootView.killMyself();
                         }
                     }
                 });
+    }
+
+    public void gotoForgetPassWordActivity() {
+        Intent intent = new Intent(mApplication, ForgetPasswordActivity.class);
+        mRootView.launchActivity(intent);
+    }
+
+    public void gotoRegisterPassWord() {
+        Intent intent = new Intent(mApplication, RegisterActivity.class);
+        mRootView.launchActivity(intent);
     }
 }

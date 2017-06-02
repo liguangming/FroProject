@@ -4,34 +4,24 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.widget.EditText;
-import android.widget.TextView;
 
 import com.jess.arms.base.BaseActivity;
 import com.jess.arms.di.component.AppComponent;
 import com.jess.arms.utils.UiUtils;
 
-import javax.inject.Inject;
+import org.fro.common.widgets.LoadingView;
 
 import butterknife.BindView;
 import butterknife.OnClick;
 import fro.org.froproject.R;
 import fro.org.froproject.app.utils.CheckUtils;
-import fro.org.froproject.app.utils.Utils;
 import fro.org.froproject.di.component.DaggerLoginComponent;
-import fro.org.froproject.mvp.presenter.LoginPresenter;
 import fro.org.froproject.di.module.LoginModule;
 import fro.org.froproject.mvp.contract.LoginContract;
+import fro.org.froproject.mvp.presenter.LoginPresenter;
 
 import static com.jess.arms.utils.Preconditions.checkNotNull;
 
-/**
- * 通过Template生成对应页面的MVP和Dagger代码,请注意输入框中输入的名字必须相同
- * 由于每个项目包结构都不一定相同,所以每生成一个文件需要自己导入import包名,可以在设置中设置自动导入包名
- * 请在对应包下按以下顺序生成对应代码,Contract->Model->Presenter->Activity->Module->Component
- * 因为生成Activity时,Module和Component还没生成,但是Activity中有它们的引用,所以会报错,但是不用理会
- * 继续将Module和Component生成完后,编译一下项目再回到Activity,按提示修改一个方法名即可
- * 如果想生成Fragment的相关文件,则将上面构建顺序中的Activity换为Fragment,并将Component中inject方法的参数改为此Fragment
- */
 
 /**
  * Created by Lgm on 2017/5/31 0031.
@@ -64,34 +54,28 @@ public class LoginActivity extends BaseActivity<LoginPresenter> implements Login
 
     @OnClick(R.id.login)
     public void login() {
-        String phoneNum = phone_edit.getText().toString();
-        String passWord = password_edit.getText().toString();
-        if (!CheckUtils.isMobileNO(this, phoneNum))
-            return;
-        if (!CheckUtils.passwordRight(this, passWord))
-            return;
-        mPresenter.login(phoneNum, Utils.encodePassword(passWord));
+        mPresenter.login(phone_edit.getText().toString(), password_edit.getText().toString());
     }
 
     @OnClick(R.id.forget_passwrod)
     public void gotoForgetPassWordActivity() {
-        UiUtils.startActivity(this, ForgetPasswordActivity.class);
+        mPresenter.gotoForgetPassWordActivity();
     }
 
     @OnClick(R.id.register)
     public void gotoRegisterPassWord() {
-        UiUtils.startActivity(this, RegisterActivity.class);
+        mPresenter.gotoRegisterPassWord();
     }
 
 
     @Override
     public void showLoading() {
-
+        LoadingView.showLoading(this);
     }
 
     @Override
     public void hideLoading() {
-
+        LoadingView.dismissLoading();
     }
 
     @Override
@@ -110,9 +94,19 @@ public class LoginActivity extends BaseActivity<LoginPresenter> implements Login
     public void killMyself() {
         finish();
     }
-
-    public void gotoMainActivity() {
-
+    /**
+     * 输入检查
+     */
+    @Override
+    public boolean check() {
+        if (!CheckUtils.isMobileNO(phone_edit.getText().toString())) {
+            showMessage(getString(R.string.phone_num_tips));
+            return false;
+        }
+        if (!CheckUtils.passwordRight(password_edit.getText().toString())) {
+            showMessage(getString(R.string.input_right_password));
+            return false;
+        }
+        return true;
     }
-
 }

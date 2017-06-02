@@ -3,6 +3,9 @@ package fro.org.froproject.mvp.contract;
 import com.jess.arms.mvp.IView;
 import com.jess.arms.mvp.IModel;
 
+import fro.org.froproject.mvp.model.entity.BaseJson;
+import io.reactivex.Observable;
+
 /**
  * 通过Template生成对应页面的MVP和Dagger代码,请注意输入框中输入的名字必须相同
  * 由于每个项目包结构都不一定相同,所以每生成一个文件需要自己导入import包名,可以在设置中设置自动导入包名
@@ -19,11 +22,18 @@ import com.jess.arms.mvp.IModel;
 public interface ForgetPasswordContract {
     //对于经常使用的关于UI的方法可以定义到BaseView中,如显示隐藏进度条,和显示文字消息
     interface View extends IView {
+        @Override
+        void showLoading();
 
+        void showCountView();
+
+        boolean check();
     }
 
     //Model层定义接口,外部只需关心model返回的数据,无需关心内部细节,及是否使用缓存
     interface Model extends IModel {
+        Observable<BaseJson> getAuthCode(String phone);
 
+        Observable<BaseJson> submit(String phone, String verificationCode, String password);
     }
 }

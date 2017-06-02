@@ -1,0 +1,201 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/bg"
+    android:orientation="vertical">
+
+    <fro.org.froproject.mvp.ui.view.HeadView
+        android:id="@+id/headView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <View
+        style="@style/CommonLineStyle"
+        android:layout_marginTop="60px" />
+
+    <RelativeLayout
+        android:id="@+id/phone_layout"
+        android:layout_width="match_parent"
+        android:layout_height="143px"
+        android:background="@color/white">
+
+        <TextView
+            android:id="@+id/phone"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="43px"
+            android:text="手  机  号"
+            android:textColor="#333333"
+            android:textSize="43px" />
+
+        <EditText
+            android:id="@+id/phone_edit"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="105px"
+            android:layout_toRightOf="@id/phone"
+            android:background="@color/cd_transparent"
+            android:hint="@string/phone_hint1"
+            android:inputType="phone"
+            android:maxLength="11"
+            android:singleLine="true"
+            android:textColor="@android:color/black"
+            android:textColorHint="#bcbcbc"
+            android:textSize="43px" />
+    </RelativeLayout>
+
+    <View
+        style="@style/CommonLineStyle"
+        android:layout_marginLeft="43px" />
+
+    <RelativeLayout
+        android:id="@+id/auth_layout"
+        android:layout_width="match_parent"
+        android:layout_height="143px"
+        android:background="@color/white">
+
+        <TextView
+            android:id="@+id/auth"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="43px"
+            android:text="验  证  码"
+            android:textColor="#333333"
+            android:textSize="43px" />
+
+        <EditText
+            android:id="@+id/auth_code"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="105px"
+            android:layout_toRightOf="@id/auth"
+            android:background="@color/cd_transparent"
+            android:hint="@string/auth_code_hint"
+            android:inputType="number"
+            android:maxLength="4"
+            android:singleLine="true"
+            android:textColor="#333333"
+            android:textColorHint="#bcbcbc"
+            android:textSize="43px" />
+
+        <TextView
+            android:id="@+id/get_code_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="38px"
+            android:text="@string/auth_code_get"
+            android:textColor="@color/round_button_blue" />
+    </RelativeLayout>
+
+    <View style="@style/CommonLineStyle" />
+
+    <View
+        style="@style/CommonLineStyle"
+        android:layout_marginTop="49px" />
+
+    <RelativeLayout
+        android:id="@+id/password_set_layout"
+        android:layout_width="match_parent"
+        android:layout_height="143px"
+        android:background="@color/white">
+
+        <TextView
+            android:id="@+id/password_set_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="43px"
+            android:text="@string/password_set"
+            android:textColor="#333333"
+            android:textSize="43px" />
+
+        <EditText
+            android:id="@+id/password_set_edit"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="105px"
+            android:layout_toRightOf="@id/password_set_title"
+            android:background="@color/cd_transparent"
+            android:hint="@string/password_set_hint"
+            android:maxLength="16"
+            android:password="true"
+            android:singleLine="true"
+            android:textColor="#333333"
+            android:textColorHint="#bcbcbc"
+            android:textSize="43px" />
+    </RelativeLayout>
+
+    <View
+        style="@style/CommonLineStyle"
+        android:layout_marginLeft="43px" />
+
+    <RelativeLayout
+        android:id="@+id/affirm_layout"
+        android:layout_width="match_parent"
+        android:layout_height="143px"
+        android:background="@color/white">
+
+        <TextView
+            android:id="@+id/affirm"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="43px"
+            android:text="@string/affirm_password"
+            android:textColor="#333333"
+            android:textSize="43px" />
+
+        <EditText
+            android:id="@+id/affirm_password_edit"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="105px"
+            android:layout_toRightOf="@id/affirm"
+            android:background="@color/cd_transparent"
+            android:hint="@string/affirm_password1"
+            android:maxLength="16"
+            android:password="true"
+            android:singleLine="true"
+            android:textColor="#333333"
+            android:textColorHint="#bcbcbc"
+            android:textSize="43px" />
+
+    </RelativeLayout>
+
+    <View style="@style/CommonLineStyle" />
+
+
+    <org.fro.common.widgets.tab.roundtextview.RoundRelativeLayout
+        android:id="@+id/complete"
+        android:layout_width="864px"
+        android:layout_height="121px"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="70px"
+        android:gravity="center"
+        android:textSize="40px"
+        app:rv_backgroundColor="@color/round_button_blue"
+        app:rv_cornerRadius="60px">
+
+        <TextView
+            android:id="@+id/button_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/white"
+            android:textSize="46px" />
+    </org.fro.common.widgets.tab.roundtextview.RoundRelativeLayout>
+
+
+</LinearLayout>

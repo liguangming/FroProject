@@ -10,9 +10,18 @@ import static com.jess.arms.utils.Preconditions.checkNotNull;
 
 import com.jess.arms.di.scope.ActivityScope;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import javax.inject.Inject;
 
+import fro.org.froproject.app.utils.Utils;
 import fro.org.froproject.mvp.contract.RegisterContract;
+import fro.org.froproject.mvp.model.api.service.CommonService;
+import fro.org.froproject.mvp.model.entity.BaseJson;
+import io.reactivex.Observable;
+import okhttp3.MediaType;
+import okhttp3.RequestBody;
 
 
 /**
@@ -38,4 +47,23 @@ public class RegisterModel extends BaseModel implements RegisterContract.Model {
         this.mApplication = null;
     }
 
+    @Override
+    public Observable<BaseJson> getAuthCode(String phone) {
+        Map<String, String> map = new HashMap<>();
+        map.put("phoneNumber", phone);
+        RequestBody body = RequestBody.create(MediaType.parse("application/json; charset=utf-8"), mGson.toJson(map));
+        Observable<BaseJson> response = mRepositoryManager.obtainRetrofitService(CommonService.class).getAuthCode(body);
+        return response;
+    }
+
+    @Override
+    public Observable<BaseJson> submit(String phoneNumber, String verificationCode, String password) {
+        Map<String, String> map = new HashMap<>();
+        map.put("phoneNumber", phoneNumber);
+        map.put("verificationCode", verificationCode);
+        map.put("password", Utils.encodePassword(password));
+        RequestBody body = RequestBody.create(MediaType.parse("application/json; charset=utf-8"), mGson.toJson(map));
+        Observable<BaseJson> response = mRepositoryManager.obtainRetrofitService(CommonService.class).register(body);
+        return response;
+    }
 }

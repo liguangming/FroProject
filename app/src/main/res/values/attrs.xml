@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!--自定义个人itemView-->
+    <declare-styleable name="PersonalItemView">
+        <!--图标-->
+        <attr name="ImageSrc" format="reference"/>
+        <!--输入类型-->
+        <attr name="inputType" format="reference"/>
+        <!--输入框输入最大限制-->
+        <attr name="maxLength" format="integer"/>
+        <!--提示语-->
+        <attr name="hint" format="string"/>
+        <!--输入类型-->
+        <attr name="TypeContent" format="string"/>
+        <!--是否显示必填图标-->
+        <attr name="ImageIco" format="boolean"/>
+        <!--是否显示上面的横线-->
+        <attr name="TopLine" format="boolean"/>
+        <!--中间的距离左边的横线-->
+        <attr name="middleLine" format="boolean"/>
+        <!--是否显示下面的横线-->
+        <attr name="BottomLine"  format="boolean"/>
+        <!--右边箭头是否显示-->
+        <attr name="rightArrow" format="boolean"/>
+        <!--右边文字-->
+        <attr name="rightText" format="string"/>
+        <!--右边输入框文字-->
+        <attr name="rightEditText" format="string"/>
+        <!--左边图片-->
+        <attr name="leftImageVisible" format="boolean"/>
+        <!--右边文字-->
+        <attr name="textViewVisible" format="boolean"/>
+        <!--右边输入框文字-->
+        <attr name="EditTextVisible" format="boolean"/>
+    </declare-styleable>
+</resources>

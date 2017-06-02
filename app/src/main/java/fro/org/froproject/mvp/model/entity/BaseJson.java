@@ -12,7 +12,7 @@ import fro.org.froproject.mvp.model.api.Api;
 
 public class BaseJson<T> implements Serializable {
     private T d;
-    private int c;
+    private int c = -999;
     private String m;
 
     public T getD() {

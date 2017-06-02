@@ -19,5 +19,39 @@
     <string name="affirm_password">确认密码</string>
     <string name="affirm_password1">请确认密码</string>
     <string name="next_step">下一步</string>
+    <string name="complete">完    成</string>
+    <string name="password_not_match">密码与确认密码不相符</string>
+    <string name="input_right_phone_number">请输入正确的手机号</string>
+    <string name="input_right_auth_code">请输入正确的验证码</string>
+    <string name="input_right_password">请输入正确的6-16位密码</string>
 
+
+    <string name="nick_name">昵称</string>
+    <string name="really_name">真实姓名</string>
+    <string name="really_name_not_modify">真实姓名(不可修改)</string>
+    <string name="sex">性别</string>
+    <string name="sex_not_modify">未设置(不可修改)</string>
+    <string name="age">年龄</string>
+    <string name="email">电子邮箱</string>
+    <string name="credentials">证件</string>
+    <string name="credentials_number">证件号码</string>
+    <string name="work_unit">工作单位</string>
+    <string name="work_unit_hint">您所在机构准确信息</string>
+    <string name="work_org">工作机构</string>
+    <string name="job_position">职位</string>
+    <string name="complete1">完成</string>
+    <string name="man">男</string>
+    <string name="woman">女</string>
+    <string name="not_setting">未设置</string>
+    <string name="work_life">工作年限</string>
+    <string name="birthday">出生日期</string>
+    <string name="location">所在地</string>
+    <string name="org_nature">机构性质</string>
+    <string name="org_type">机构类别</string>
+    <string name="org_detail">具体机构</string>
+    <string name="org_branch">机构分支</string>
+    <string name="org_detail_tips">请在分支机构中填写准确信息</string>
+    <string name="personal_center">个人中心</string>
+    <string name="check_org_nature">请选择机构性质</string>
+    <string name="check_org_nature_and_type">请选择机构性质和机构类别</string>
 </resources>

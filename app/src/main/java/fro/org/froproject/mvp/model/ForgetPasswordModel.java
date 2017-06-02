@@ -10,9 +10,18 @@ import static com.jess.arms.utils.Preconditions.checkNotNull;
 
 import com.jess.arms.di.scope.ActivityScope;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import javax.inject.Inject;
 
+import fro.org.froproject.app.utils.Utils;
 import fro.org.froproject.mvp.contract.ForgetPasswordContract;
+import fro.org.froproject.mvp.model.api.service.CommonService;
+import fro.org.froproject.mvp.model.entity.BaseJson;
+import io.reactivex.Observable;
+import okhttp3.MediaType;
+import okhttp3.RequestBody;
 
 /**
  * 通过Template生成对应页面的MVP和Dagger代码,请注意输入框中输入的名字必须相同
@@ -45,5 +54,26 @@ public class ForgetPasswordModel extends BaseModel implements ForgetPasswordCont
         this.mGson = null;
         this.mApplication = null;
     }
+
+    @Override
+    public Observable<BaseJson> getAuthCode(String phone) {
+        Map<String, String> map = new HashMap<>();
+        map.put("phoneNumber", phone);
+        RequestBody body = RequestBody.create(MediaType.parse("application/json; charset=utf-8"), mGson.toJson(map));
+        Observable<BaseJson> response = mRepositoryManager.obtainRetrofitService(CommonService.class).getAuthCode(body);
+        return response;
+    }
+
+    @Override
+    public Observable<BaseJson> submit(String phone, String verificationCode, String password) {
+        Map<String, String> map = new HashMap<>();
+        map.put("password", Utils.encodePassword(password));
+        map.put("phoneNumber",phone);
+        map.put("verificationCode", verificationCode);
+        RequestBody body = RequestBody.create(MediaType.parse("application/json; charset=utf-8"), mGson.toJson(map));
+        Observable<BaseJson> response = mRepositoryManager.obtainRetrofitService(CommonService.class).submit(body);
+        return response;
+    }
+
 
 }
