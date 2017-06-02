@@ -6,9 +6,11 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
+import android.view.View;
 import android.widget.ListView;
 
 import com.jess.arms.base.BaseActivity;
+import com.jess.arms.base.DefaultAdapter;
 import com.jess.arms.di.component.AppComponent;
 import com.jess.arms.utils.UiUtils;
 
@@ -28,6 +30,8 @@ import fro.org.froproject.mvp.model.entity.OrgBean;
 import fro.org.froproject.mvp.presenter.CommonOrgPresenter;
 import fro.org.froproject.mvp.ui.adapter.CommonActivityAdapter;
 import fro.org.froproject.mvp.ui.view.HeadView;
+import io.reactivex.Observable;
+import io.reactivex.functions.Consumer;
 
 import static com.jess.arms.utils.Preconditions.checkNotNull;
 
@@ -43,6 +47,7 @@ public class CommonActivity extends BaseActivity<CommonOrgPresenter> implements 
     HeadView headView;
     @BindView(R.id.list)
     RecyclerView mRecyclerView;
+
     @Override
     public void setupActivityComponent(AppComponent appComponent) {
         DaggerCommonOrgComponent
@@ -61,16 +66,16 @@ public class CommonActivity extends BaseActivity<CommonOrgPresenter> implements 
     @Override
     public void initData(Bundle savedInstanceState) {
         headView.setRightText("完成");
-        Intent intent=getIntent();
-        if(intent.getStringExtra(Constants.REQUEST).equals(Constants.ORG_NATURE)){ //机构性质
+        Intent intent = getIntent();
+        if (intent.getStringExtra(Constants.REQUEST).equals(Constants.ORG_NATURE)) { //机构性质
             headView.setTitleStr(R.string.org_nature);
             mPresenter.getNatureList();
-        }else if(intent.getStringExtra(Constants.REQUEST).equals(Constants.ORG_TYPE)){//机构类别
+        } else if (intent.getStringExtra(Constants.REQUEST).equals(Constants.ORG_TYPE)) {//机构类别
             int orgNatureId = intent.getIntExtra(Constants.ORG_NATURE, -999);
-            MyApplication.getInstance().setUrl("traininggorganization/category/list/"+orgNatureId);
-        }else if(intent.getStringExtra(Constants.REQUEST).equals(Constants.ORG_DETAIL)){//机构详情
+            MyApplication.getInstance().setUrl("traininggorganization/category/list/" + orgNatureId);
+        } else if (intent.getStringExtra(Constants.REQUEST).equals(Constants.ORG_DETAIL)) {//机构详情
             int orgTypeId = intent.getIntExtra(Constants.ORG_TYPE, -999);
-            MyApplication.getInstance().setUrl("traininggorganization/category/list/"+orgTypeId);
+            MyApplication.getInstance().setUrl("traininggorganization/category/list/" + orgTypeId);
         }
     }
 
@@ -104,8 +109,12 @@ public class CommonActivity extends BaseActivity<CommonOrgPresenter> implements 
 
 
     @Override
-    public void setAdapter(List<OrgBean> nature) {
-        CommonActivityAdapter adapter=new CommonActivityAdapter(nature);
+    public void setAdapter(List<OrgBean> natureList) {
+        CommonActivityAdapter adapter = new CommonActivityAdapter(natureList);
         mRecyclerView.setAdapter(adapter);
+        adapter.setOnItemClickListener((view, viewType, data, position) -> {
+            natureList.forEach(orgBean -> orgBean.setSelect(false));
+            natureList.get(position).setSelect(true);
+        });
     }
 }
