@@ -1,12 +1,9 @@
 package fro.org.froproject.app.utils;
 
-import android.content.Context;
 import android.text.TextUtils;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-
-import fro.org.froproject.R;
 
 /**
  * Created by Administrator on 2017/5/31.
@@ -24,7 +21,7 @@ public class CheckUtils {
     public static boolean authCodeValible(String authCode) {
         if (TextUtils.isEmpty(authCode))
             return false;
-        Pattern p = Pattern.compile(REGEX_PASSWORD);
+        Pattern p = Pattern.compile(REGEX_AUTH_CODE);
         Matcher m = p.matcher(authCode);
         return m.matches();
     }

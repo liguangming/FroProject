@@ -10,9 +10,16 @@ import static com.jess.arms.utils.Preconditions.checkNotNull;
 
 import com.jess.arms.di.scope.ActivityScope;
 
+import java.util.List;
+
 import javax.inject.Inject;
 
+import fro.org.froproject.app.MyApplication;
 import fro.org.froproject.mvp.contract.PersonalInforContract;
+import fro.org.froproject.mvp.model.api.service.CommonService;
+import fro.org.froproject.mvp.model.entity.BaseJson;
+import fro.org.froproject.mvp.model.entity.OrgBean;
+import io.reactivex.Observable;
 
 
 /**
@@ -38,4 +45,9 @@ public class PersonalInforModel extends BaseModel implements PersonalInforContra
         this.mApplication = null;
     }
 
+    @Override
+    public Observable<BaseJson<List<OrgBean>>> getOrgDetailList(int orgTypeId) {
+        Observable<BaseJson<List<OrgBean>>> response = mRepositoryManager.obtainRetrofitService(CommonService.class).getOrgDetailList(orgTypeId);
+        return response;
+    }
 }

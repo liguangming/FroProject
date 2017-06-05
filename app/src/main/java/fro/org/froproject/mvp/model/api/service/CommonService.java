@@ -1,13 +1,19 @@
 package fro.org.froproject.mvp.model.api.service;
 
-import java.util.IdentityHashMap;
+import android.support.annotation.Nullable;
 
+import java.util.List;
+
+import fro.org.froproject.app.MyApplication;
 import fro.org.froproject.mvp.model.entity.BaseJson;
+import fro.org.froproject.mvp.model.entity.OrgBean;
+import fro.org.froproject.mvp.model.entity.Token;
 import fro.org.froproject.mvp.model.entity.UserInfoBean;
 import io.reactivex.Observable;
 import okhttp3.RequestBody;
 import retrofit2.http.Body;
 import retrofit2.http.GET;
+import retrofit2.http.Header;
 import retrofit2.http.Headers;
 import retrofit2.http.POST;
 import retrofit2.http.Path;
@@ -20,6 +26,7 @@ import retrofit2.http.Path;
 public interface CommonService {
     String HEADER_API_VERSION = "Accept: application/json";
     String HEADER_API_VERSION1 = "Content-Type: application/json";
+    String HEADER_API_TOKEN = "Session-Token";
 
     /**
      * 登录
@@ -44,7 +51,7 @@ public interface CommonService {
 
     @Headers({HEADER_API_VERSION, HEADER_API_VERSION1})
     @POST("user/forgetpassword")
-    Observable<BaseJson> submit(RequestBody body);
+    Observable<BaseJson> submit(@Body RequestBody body);
 
     /**
      * 注册
@@ -54,13 +61,44 @@ public interface CommonService {
      */
     @Headers({HEADER_API_VERSION, HEADER_API_VERSION1})
     @POST("user/register")
-    Observable<BaseJson> register(RequestBody body);
+    Observable<BaseJson<Token>> register(@Body RequestBody body);
 
     /**
      * 获取组织机构性质
      */
+
     @Headers({HEADER_API_VERSION, HEADER_API_VERSION1})
     @GET("traininggorganization/nature/list")
-    Observable<BaseJson> getNatureList();
+    Observable<BaseJson<List<OrgBean>>> getNatureList();
+
+    /**
+     * 获取组织机构类别
+     */
+    @Headers({HEADER_API_VERSION, HEADER_API_VERSION1})
+    @GET("traininggorganization/category/list/{id}")
+    Observable<BaseJson<List<OrgBean>>> getOrgTypeList(@Path("id") int id);
+
+    /**
+     * 获取具体机构
+     */
+    @Headers({HEADER_API_VERSION, HEADER_API_VERSION1})
+    @GET("traininggorganization/list/{id}")
+    Observable<BaseJson<List<OrgBean>>> getOrgDetailList(@Path("id")int orgTypeId);
+
+    /**
+     * 获取工作年限
+     */
+    @Headers({HEADER_API_VERSION, HEADER_API_VERSION1})
+    @GET("workYear/list")
+    Observable<BaseJson<List<OrgBean>>> getWorkYearList();
+
+    /**
+     * 获取证件
+     */
+    @Headers({HEADER_API_VERSION, HEADER_API_VERSION1})
+    @GET("idtype/list")
+    Observable<BaseJson<List<OrgBean>>> getCredentials(@Header(HEADER_API_TOKEN) String token);
+
+
 
 }

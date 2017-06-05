@@ -1,5 +1,9 @@
 package fro.org.froproject.mvp.model.entity;
 
+import org.fro.common.widgets.locationview.entity.CityData;
+import org.fro.common.widgets.locationview.entity.CountryData;
+import org.fro.common.widgets.locationview.entity.ProvinceData;
+
 /**
  * Created by Lgm on 2017/6/1 0001.
  */

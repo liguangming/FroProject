@@ -20,6 +20,8 @@ public abstract class DefaultAdapter<T> extends RecyclerView.Adapter<BaseHolder<
         this.mInfos = infos;
     }
 
+
+
     /**
      * 创建Hodler
      *
@@ -65,6 +67,10 @@ public abstract class DefaultAdapter<T> extends RecyclerView.Adapter<BaseHolder<
     }
 
 
+    public void setmInfos(List<T> mInfos) {
+        this.mInfos = mInfos;
+        notifyDataSetChanged();
+    }
     public List<T> getInfos() {
         return mInfos;
     }

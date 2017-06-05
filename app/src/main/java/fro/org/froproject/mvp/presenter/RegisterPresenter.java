@@ -15,6 +15,7 @@ import fro.org.froproject.app.utils.RxUtils;
 import fro.org.froproject.app.utils.Utils;
 import fro.org.froproject.mvp.contract.RegisterContract;
 import fro.org.froproject.mvp.model.entity.BaseJson;
+import fro.org.froproject.mvp.model.entity.Token;
 import fro.org.froproject.mvp.ui.activity.PersonalInforActivity;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.annotations.NonNull;
@@ -54,6 +55,7 @@ public class RegisterPresenter extends BasePresenter<RegisterContract.Model, Reg
         this.mImageLoader = null;
         this.mApplication = null;
     }
+
     /**
      * 获取验证码
      *
@@ -79,10 +81,13 @@ public class RegisterPresenter extends BasePresenter<RegisterContract.Model, Reg
                 });
     }
 
+    /**
+     * 注册提交
+     */
+
+
     public void submit(String phoneNumber, String verificationCode, String password) {
-        if(mRootView.check())
-            return;
-        mModel.submit(phoneNumber,verificationCode,password)
+        mModel.submit(phoneNumber, verificationCode, password)
                 .subscribeOn(Schedulers.io())
                 .doOnSubscribe(dispose -> mRootView.showLoading())
                 .observeOn(AndroidSchedulers.mainThread())

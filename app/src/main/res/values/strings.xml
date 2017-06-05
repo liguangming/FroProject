@@ -54,4 +54,6 @@
     <string name="personal_center">个人中心</string>
     <string name="check_org_nature">请选择机构性质</string>
     <string name="check_org_nature_and_type">请选择机构性质和机构类别</string>
+    <string name="password_not_null">密码不能为空</string>
+    <string name="personal_center_tips">\'*\' 号项必填，提交后姓名、性别、证件号码不可修改</string>
 </resources>

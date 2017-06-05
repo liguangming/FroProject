@@ -12,6 +12,7 @@ import com.jess.arms.di.component.AppComponent;
 import com.jess.arms.utils.UiUtils;
 
 import org.fro.common.widgets.LoadingView;
+import org.w3c.dom.Text;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -76,6 +77,9 @@ public class RegisterActivity extends BaseActivity<RegisterPresenter> implements
 
     @OnClick(R.id.complete)
     public void submit() {
+        if (!check())
+            return;
+        Utils.hideKeyboard(this, phoneEdit);
         mPresenter.submit(phoneEdit.getText().toString(), authCode.getText().toString(), passwordSet.getText().toString());
     }
 
@@ -86,6 +90,7 @@ public class RegisterActivity extends BaseActivity<RegisterPresenter> implements
             showMessage(getString(R.string.input_right_phone_number));
             return;
         }
+        Utils.hideKeyboard(this, phoneEdit);
         mPresenter.getAuthCode(phone);
     }
 
@@ -121,12 +126,11 @@ public class RegisterActivity extends BaseActivity<RegisterPresenter> implements
 
     @Override
     public void showCountView() {
-        if (mCountView != null)
+        if (mCountView == null)
             mCountView = new CountView(Constants.AUTH_CODE_TIME, 1 * 1000, getCodeText);
         mCountView.start();
     }
 
-    @Override
     public boolean check() {
         if (!CheckUtils.isMobileNO(phoneEdit.getText().toString())) {
             showMessage(getString(R.string.input_right_phone_number));
@@ -134,6 +138,10 @@ public class RegisterActivity extends BaseActivity<RegisterPresenter> implements
         }
         if (!CheckUtils.authCodeValible(authCode.getText().toString())) {
             showMessage(getString(R.string.input_right_auth_code));
+            return false;
+        }
+        if (TextUtils.isEmpty(passwordSet.getText().toString()) || TextUtils.isEmpty(affirmPasswordSet.getText().toString())) {
+            showMessage(getString(R.string.password_not_null));
             return false;
         }
         if (!TextUtils.isEmpty(passwordSet.getText().toString()) && !passwordSet.getText().toString().equals(affirmPasswordSet.getText().toString())) {

@@ -8,6 +8,7 @@ import com.jess.arms.base.DefaultAdapter;
 import java.util.List;
 
 import fro.org.froproject.R;
+import fro.org.froproject.mvp.model.entity.OrgBean;
 import fro.org.froproject.mvp.ui.holder.CommonActivityHolder;
 
 
@@ -15,14 +16,14 @@ import fro.org.froproject.mvp.ui.holder.CommonActivityHolder;
  * Created by Lgm on 2017/6/2 0002.
  */
 
-public class CommonActivityAdapter<T> extends DefaultAdapter {
+public class CommonActivityAdapter extends DefaultAdapter<OrgBean> {
 
-    public CommonActivityAdapter(List<T> infos) {
+    public CommonActivityAdapter(List<OrgBean> infos) {
         super(infos);
     }
 
     @Override
-    public BaseHolder<T> getHolder(View v, int viewType) {
+    public BaseHolder<OrgBean> getHolder(View v, int viewType) {
         return new CommonActivityHolder(v);
     }
 

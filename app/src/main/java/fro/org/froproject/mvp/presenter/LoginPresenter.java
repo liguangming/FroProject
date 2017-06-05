@@ -25,6 +25,7 @@ import fro.org.froproject.mvp.contract.LoginContract;
 import fro.org.froproject.mvp.model.entity.BaseJson;
 import fro.org.froproject.mvp.model.entity.UserInfoBean;
 import fro.org.froproject.mvp.ui.activity.ForgetPasswordActivity;
+import fro.org.froproject.mvp.ui.activity.PersonalInforActivity;
 import fro.org.froproject.mvp.ui.activity.RegisterActivity;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.annotations.NonNull;
@@ -80,9 +81,6 @@ public class LoginPresenter extends BasePresenter<LoginContract.Model, LoginCont
     }
 
     public void login(String phoneNum, String password) {
-        if (!mRootView.check())
-            return;
-
         mModel.login(phoneNum, Utils.encodePassword(password))
                 .subscribeOn(Schedulers.io())
                 .doOnSubscribe(disposable -> mRootView.showLoading())
@@ -110,7 +108,7 @@ public class LoginPresenter extends BasePresenter<LoginContract.Model, LoginCont
     }
 
     public void gotoRegisterPassWord() {
-        Intent intent = new Intent(mApplication, RegisterActivity.class);
+        Intent intent = new Intent(mApplication, PersonalInforActivity.class);
         mRootView.launchActivity(intent);
     }
 }

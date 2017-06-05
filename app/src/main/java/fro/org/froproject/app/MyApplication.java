@@ -10,8 +10,8 @@ import fro.org.froproject.mvp.model.entity.UserInfoBean;
 
 public class MyApplication extends BaseApplication {
     private static MyApplication instance;
-    UserInfoBean userInfoBean;
-    String url;//用于拼接的Url
+    private UserInfoBean userInfoBean;
+    private String token;
     public UserInfoBean getUserInfoBean() {
         return userInfoBean;
     }
@@ -30,11 +30,11 @@ public class MyApplication extends BaseApplication {
         instance = this;
     }
 
-    public String getUrl() {
-        return url;
+    public String getToken() {
+        return token;
     }
 
-    public void setUrl(String url) {
-        this.url = url;
+    public void setToken(String token) {
+        this.token = token;
     }
 }

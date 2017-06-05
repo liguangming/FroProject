@@ -52,6 +52,10 @@ public class CommonOrgPresenter extends BasePresenter<CommonOrgContract.Model, C
         this.mApplication = null;
     }
 
+    /**
+     * 获取机构性质
+     */
+
     public void getNatureList() {
         mModel.getNatureList()
                 .subscribeOn(Schedulers.io())
@@ -63,13 +67,94 @@ public class CommonOrgPresenter extends BasePresenter<CommonOrgContract.Model, C
                 .subscribe(new ErrorHandleSubscriber<BaseJson>(mErrorHandler) {
                     @Override
                     public void onNext(@NonNull BaseJson baseJson) {
-                        if (baseJson.isSuccess()) {
-                            List<OrgBean> nature= (List<OrgBean>) baseJson.getD();
-                            mRootView.setAdapter(nature);
-                        } else {
-                            mRootView.showMessage(baseJson.getM());
-                        }
+                        setData(baseJson);
                     }
                 });
     }
+
+    /**
+     * 获取机构类型
+     */
+    public void getOrgTypeList(int natureId) {
+        mModel.getOrgTypeList(natureId)
+                .subscribeOn(Schedulers.io())
+                .doOnSubscribe(dispose -> mRootView.showLoading())
+                .observeOn(AndroidSchedulers.mainThread())
+                .doAfterTerminate(() -> mRootView.hideLoading())
+                .compose(RxUtils.bindToLifecycle(mRootView))
+                .subscribeOn(AndroidSchedulers.mainThread())
+                .subscribe(new ErrorHandleSubscriber<BaseJson>(mErrorHandler) {
+                    @Override
+                    public void onNext(@NonNull BaseJson baseJson) {
+                        setData(baseJson);
+                    }
+                });
+    }
+    /**
+     * 获取具体类型
+     */
+    public void getOrgDetailList(int orgTypeId) {
+        mModel.getOrgDetailList(orgTypeId)
+                .subscribeOn(Schedulers.io())
+                .doOnSubscribe(dispose -> mRootView.showLoading())
+                .observeOn(AndroidSchedulers.mainThread())
+                .doAfterTerminate(() -> mRootView.hideLoading())
+                .compose(RxUtils.bindToLifecycle(mRootView))
+                .subscribeOn(AndroidSchedulers.mainThread())
+                .subscribe(new ErrorHandleSubscriber<BaseJson>(mErrorHandler) {
+                    @Override
+                    public void onNext(@NonNull BaseJson baseJson) {
+                        setData(baseJson);
+                    }
+                });
+    }
+    /**
+     * 获取证件类型
+     */
+    public void getCredentials() {
+        mModel.getCredentials()
+                .subscribeOn(Schedulers.io())
+                .doOnSubscribe(dispose -> mRootView.showLoading())
+                .observeOn(AndroidSchedulers.mainThread())
+                .doAfterTerminate(() -> mRootView.hideLoading())
+                .compose(RxUtils.bindToLifecycle(mRootView))
+                .subscribeOn(AndroidSchedulers.mainThread())
+                .subscribe(new ErrorHandleSubscriber<BaseJson>(mErrorHandler) {
+                    @Override
+                    public void onNext(@NonNull BaseJson baseJson) {
+                        setData(baseJson);
+                    }
+                });
+    }
+
+    /**
+     * 获取工作年限
+     */
+    public void getWorkYearList() {
+        mModel.getWorkYearList()
+                .subscribeOn(Schedulers.io())
+                .doOnSubscribe(dispose -> mRootView.showLoading())
+                .observeOn(AndroidSchedulers.mainThread())
+                .doAfterTerminate(() -> mRootView.hideLoading())
+                .compose(RxUtils.bindToLifecycle(mRootView))
+                .subscribeOn(AndroidSchedulers.mainThread())
+                .subscribe(new ErrorHandleSubscriber<BaseJson>(mErrorHandler) {
+                    @Override
+                    public void onNext(@NonNull BaseJson baseJson) {
+                        setData(baseJson);
+                    }
+                });
+    }
+
+    public void setData(BaseJson baseJson) {
+        if (baseJson.isSuccess()) {
+            List<OrgBean> nature = (List<OrgBean>) baseJson.getD();
+            mRootView.setAdapter(nature);
+        } else {
+            mRootView.showMessage(baseJson.getM());
+        }
+    }
+
+
+
 }

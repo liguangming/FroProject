@@ -23,6 +23,15 @@ public interface CommonOrgContract {
 
     //Model层定义接口,外部只需关心model返回的数据,无需关心内部细节,及是否使用缓存
     interface Model extends IModel {
-        Observable<BaseJson> getNatureList();
+
+        Observable<BaseJson<List<OrgBean>>> getNatureList();
+
+        Observable<BaseJson<List<OrgBean>>> getWorkYearList();
+
+        Observable<BaseJson<List<OrgBean>>> getCredentials();
+
+        Observable<BaseJson<List<OrgBean>>> getOrgTypeList(int natureId);
+
+        Observable<BaseJson<List<OrgBean>>> getOrgDetailList(int orgTypeId);
     }
 }

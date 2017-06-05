@@ -31,9 +31,10 @@ public class Constants {
     public static final String ORG_TYPE = "type";
     public static final String ORG_DETAIL = "detail";
     public static final String REQUEST = "request";
-
+    public static final String NAME = "name";
+    public static final String ID = "ID";
+    public static final int DEFAULT_ID = -999;
     public static final String CREDENTIALS_TYPE = "credentialsType";
-
-
+    public static final String WORK_YEAR = "work_year";
 
 }

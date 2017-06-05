@@ -15,6 +15,7 @@ import butterknife.BindView;
 import butterknife.OnClick;
 import fro.org.froproject.R;
 import fro.org.froproject.app.utils.CheckUtils;
+import fro.org.froproject.app.utils.Utils;
 import fro.org.froproject.di.component.DaggerLoginComponent;
 import fro.org.froproject.di.module.LoginModule;
 import fro.org.froproject.mvp.contract.LoginContract;
@@ -54,6 +55,10 @@ public class LoginActivity extends BaseActivity<LoginPresenter> implements Login
 
     @OnClick(R.id.login)
     public void login() {
+        if (!check())
+            return;
+        Utils.hideKeyboard(this,password_edit);
+
         mPresenter.login(phone_edit.getText().toString(), password_edit.getText().toString());
     }
 
@@ -97,7 +102,6 @@ public class LoginActivity extends BaseActivity<LoginPresenter> implements Login
     /**
      * 输入检查
      */
-    @Override
     public boolean check() {
         if (!CheckUtils.isMobileNO(phone_edit.getText().toString())) {
             showMessage(getString(R.string.phone_num_tips));

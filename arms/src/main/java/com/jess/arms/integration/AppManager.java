@@ -7,7 +7,11 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Message;
 import android.support.design.widget.Snackbar;
+import android.text.method.HideReturnsTransformationMethod;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
+
+import com.jess.arms.utils.UiUtils;
 
 import org.simple.eventbus.EventBus;
 import org.simple.eventbus.Subscriber;
@@ -22,13 +26,6 @@ import javax.inject.Singleton;
 
 import timber.log.Timber;
 
-/**
- * 用于管理所有activity,和在前台的 activity
- * 可以通过直接持有AppManager对象执行对应方法
- * 也可以通过eventbus post事件,远程遥控执行对应方法
- * Created by jess on 14/12/2016 13:50
- * Contact with jess.yan.effort@gmail.com
- */
 @Singleton
 public class AppManager {
     protected final String TAG = this.getClass().getSimpleName();

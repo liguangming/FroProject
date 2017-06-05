@@ -4,6 +4,7 @@ import com.jess.arms.mvp.IView;
 import com.jess.arms.mvp.IModel;
 
 import fro.org.froproject.mvp.model.entity.BaseJson;
+import fro.org.froproject.mvp.model.entity.Token;
 import io.reactivex.Observable;
 
 
@@ -16,13 +17,13 @@ public interface RegisterContract {
     interface View extends IView {
         void showCountView();
 
-        boolean check();
     }
 
     //Model层定义接口,外部只需关心model返回的数据,无需关心内部细节,及是否使用缓存
     interface Model extends IModel {
+
         Observable<BaseJson> getAuthCode(String phone);
 
-        Observable<BaseJson> submit(String phoneNumber, String verificationCode, String password);
+        Observable<BaseJson<Token>> submit(String phoneNumber, String verificationCode, String password);
     }
 }

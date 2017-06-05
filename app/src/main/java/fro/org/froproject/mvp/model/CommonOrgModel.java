@@ -11,13 +11,16 @@ import static com.jess.arms.utils.Preconditions.checkNotNull;
 import com.jess.arms.di.scope.ActivityScope;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import javax.inject.Inject;
 
+import fro.org.froproject.app.MyApplication;
 import fro.org.froproject.mvp.contract.CommonOrgContract;
 import fro.org.froproject.mvp.model.api.service.CommonService;
 import fro.org.froproject.mvp.model.entity.BaseJson;
+import fro.org.froproject.mvp.model.entity.OrgBean;
 import fro.org.froproject.mvp.model.entity.UserInfoBean;
 import io.reactivex.Observable;
 import okhttp3.MediaType;
@@ -48,8 +51,35 @@ public class CommonOrgModel extends BaseModel implements CommonOrgContract.Model
     }
 
     @Override
-    public Observable<BaseJson> getNatureList() {
-        Observable<BaseJson> response = mRepositoryManager.obtainRetrofitService(CommonService.class).getNatureList();
+    public Observable<BaseJson<List<OrgBean>>> getNatureList() {
+        Observable<BaseJson<List<OrgBean>>> response = mRepositoryManager.obtainRetrofitService(CommonService.class).getNatureList();
         return response;
     }
+
+    @Override
+    public Observable<BaseJson<List<OrgBean>>> getOrgTypeList(int natureId) {
+        Observable<BaseJson<List<OrgBean>>> response = mRepositoryManager.obtainRetrofitService(CommonService.class).getOrgTypeList(natureId);
+        return response;
+    }
+
+    @Override
+    public Observable<BaseJson<List<OrgBean>>> getOrgDetailList(int orgTypeId) {
+        Observable<BaseJson<List<OrgBean>>> response = mRepositoryManager.obtainRetrofitService(CommonService.class).getOrgDetailList(orgTypeId);
+        return response;
+    }
+
+    @Override
+    public Observable<BaseJson<List<OrgBean>>> getWorkYearList() {
+        Observable<BaseJson<List<OrgBean>>> response = mRepositoryManager.obtainRetrofitService(CommonService.class).getWorkYearList();
+        return response;
+    }
+
+    @Override
+    public Observable<BaseJson<List<OrgBean>>> getCredentials() {
+        Observable<BaseJson<List<OrgBean>>> response = mRepositoryManager.obtainRetrofitService(CommonService.class).getCredentials(MyApplication.getInstance().getToken());
+        return response;
+    }
+
+
+
 }
