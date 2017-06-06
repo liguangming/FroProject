@@ -11,6 +11,7 @@ import com.jess.arms.widget.imageloader.ImageLoader;
 import java.util.HashMap;
 import java.util.Map;
 
+import fro.org.froproject.app.MyApplication;
 import fro.org.froproject.app.utils.RxUtils;
 import fro.org.froproject.app.utils.Utils;
 import fro.org.froproject.mvp.contract.RegisterContract;
@@ -84,8 +85,6 @@ public class RegisterPresenter extends BasePresenter<RegisterContract.Model, Reg
     /**
      * 注册提交
      */
-
-
     public void submit(String phoneNumber, String verificationCode, String password) {
         mModel.submit(phoneNumber, verificationCode, password)
                 .subscribeOn(Schedulers.io())
@@ -98,6 +97,8 @@ public class RegisterPresenter extends BasePresenter<RegisterContract.Model, Reg
                     @Override
                     public void onNext(@NonNull BaseJson baseJson) {
                         if (baseJson.isSuccess()) {
+                            Token token = (Token) baseJson.getD();
+                            MyApplication.getInstance().setToken(token.getToken());
                             mRootView.launchActivity(new Intent(mApplication, PersonalInforActivity.class));
                         } else {
                             mRootView.showMessage(baseJson.getM());

@@ -10,7 +10,10 @@ import static com.jess.arms.utils.Preconditions.checkNotNull;
 
 import com.jess.arms.di.scope.ActivityScope;
 
+import java.io.File;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.inject.Inject;
 
@@ -20,6 +23,9 @@ import fro.org.froproject.mvp.model.api.service.CommonService;
 import fro.org.froproject.mvp.model.entity.BaseJson;
 import fro.org.froproject.mvp.model.entity.OrgBean;
 import io.reactivex.Observable;
+import okhttp3.MediaType;
+import okhttp3.MultipartBody;
+import okhttp3.RequestBody;
 
 
 /**
@@ -50,4 +56,23 @@ public class PersonalInforModel extends BaseModel implements PersonalInforContra
         Observable<BaseJson<List<OrgBean>>> response = mRepositoryManager.obtainRetrofitService(CommonService.class).getOrgDetailList(orgTypeId);
         return response;
     }
+
+    @Override
+    public Observable<BaseJson> commit(Map<String, Object> data) {
+        RequestBody body = RequestBody.create(MediaType.parse("application/json; charset=utf-8"), mGson.toJson(data));
+        Observable<BaseJson> response = mRepositoryManager.obtainRetrofitService(CommonService.class).commit(body);
+        return response;
+    }
+
+    @Override
+    public Observable<BaseJson> uploadImg(File file) {
+        MultipartBody.Builder builder = new MultipartBody.Builder().setType(MultipartBody.FORM);
+        if (file != null) {
+            builder.addFormDataPart("upfile", file.getName(), RequestBody.create(MediaType.parse("multipart/form-data"), file));
+        }
+        MultipartBody requestBody = builder.build();
+        Observable<BaseJson> response = mRepositoryManager.obtainRetrofitService(CommonService.class).uploadImg(requestBody, MyApplication.getInstance().getToken());
+        return response;
+    }
+
 }

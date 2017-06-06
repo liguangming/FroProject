@@ -96,7 +96,7 @@
                     view:textViewVisible="true" />
 
                 <fro.org.froproject.mvp.ui.view.PersonalItemView
-                    android:id="@+id/age"
+                    android:id="@+id/birthday"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:clickable="false"

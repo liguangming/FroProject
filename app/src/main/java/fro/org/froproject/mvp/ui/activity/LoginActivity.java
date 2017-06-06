@@ -14,6 +14,7 @@ import org.fro.common.widgets.LoadingView;
 import butterknife.BindView;
 import butterknife.OnClick;
 import fro.org.froproject.R;
+import fro.org.froproject.app.MyApplication;
 import fro.org.froproject.app.utils.CheckUtils;
 import fro.org.froproject.app.utils.Utils;
 import fro.org.froproject.di.component.DaggerLoginComponent;
@@ -50,14 +51,14 @@ public class LoginActivity extends BaseActivity<LoginPresenter> implements Login
 
     @Override
     public void initData(Bundle savedInstanceState) {
-
+                MyApplication.getInstance().setProvinceDataList(Utils.getLoctionData(LoginActivity.this));
     }
 
     @OnClick(R.id.login)
     public void login() {
         if (!check())
             return;
-        Utils.hideKeyboard(this,password_edit);
+        Utils.hideKeyboard(this, password_edit);
 
         mPresenter.login(phone_edit.getText().toString(), password_edit.getText().toString());
     }
@@ -99,6 +100,7 @@ public class LoginActivity extends BaseActivity<LoginPresenter> implements Login
     public void killMyself() {
         finish();
     }
+
     /**
      * 输入检查
      */

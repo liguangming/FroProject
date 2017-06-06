@@ -18,7 +18,6 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.compat.BuildConfig;
 
-
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 

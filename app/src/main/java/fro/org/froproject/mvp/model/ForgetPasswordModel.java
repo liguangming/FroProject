@@ -74,6 +74,4 @@ public class ForgetPasswordModel extends BaseModel implements ForgetPasswordCont
         Observable<BaseJson> response = mRepositoryManager.obtainRetrofitService(CommonService.class).submit(body);
         return response;
     }
-
-
 }

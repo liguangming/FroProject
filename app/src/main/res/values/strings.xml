@@ -56,4 +56,17 @@
     <string name="check_org_nature_and_type">请选择机构性质和机构类别</string>
     <string name="password_not_null">密码不能为空</string>
     <string name="personal_center_tips">\'*\' 号项必填，提交后姓名、性别、证件号码不可修改</string>
+    <string name="nick_name_not_null_tips">昵称不能为空</string>
+    <string name="really_name_not_null_tips">真实姓名不能为空</string>
+    <string name="sex_not_null_tips">请选择性别</string>
+    <string name="birthday_not_null_tips">请选择生日</string>
+    <string name="credentials_number_not_null_tips">请填写证件号码</string>
+    <string name="message_err">数据上传失败</string>
+    <string name="org_branch_not_null_tips">请填写机构分支</string>
+    <string name="credentials_not_null_tips">请选择证件</string>
+    <string name="org_nature_not_null_tips">请选择机构性质</string>
+    <string name="org_type_not_null_tips">请选择机构类别</string>
+    <string name="get_from_box">从相册获取</string>
+    <string name="get_from_take_picture">拍照</string>
+    <string name="sa_home_edit_pic_crop_bg">#99000000</string>
 </resources>

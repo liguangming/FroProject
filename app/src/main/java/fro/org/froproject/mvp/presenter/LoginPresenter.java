@@ -108,7 +108,7 @@ public class LoginPresenter extends BasePresenter<LoginContract.Model, LoginCont
     }
 
     public void gotoRegisterPassWord() {
-        Intent intent = new Intent(mApplication, PersonalInforActivity.class);
+        Intent intent = new Intent(mApplication, RegisterActivity.class);
         mRootView.launchActivity(intent);
     }
 }

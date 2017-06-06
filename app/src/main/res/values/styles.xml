@@ -13,4 +13,8 @@
         <item name="android:layout_height">1px</item>
         <item name="android:background">#dbdbdb</item>
     </style>
+    <style name="FLCAnimDialog">
+        <item name="android:windowEnterAnimation">@anim/dlg_enter</item>
+        <item name="android:windowExitAnimation">@anim/dlg_exit</item>
+    </style>
 </resources>

@@ -1,22 +1,14 @@
 package fro.org.froproject.mvp.ui.activity;
 
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
-import android.support.v4.media.MediaBrowserServiceCompat;
-import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.widget.ListView;
 
 import com.jess.arms.base.BaseActivity;
-import com.jess.arms.base.DefaultAdapter;
 import com.jess.arms.di.component.AppComponent;
 import com.jess.arms.utils.UiUtils;
-
 
 import org.fro.common.widgets.LoadingView;
 
@@ -46,7 +38,6 @@ public class CommonActivity extends BaseActivity<CommonOrgPresenter> implements 
     HeadView headView;
     @BindView(R.id.list)
     RecyclerView mRecyclerView;
-    private String name;
 
     @Override
     public void setupActivityComponent(AppComponent appComponent) {
@@ -80,7 +71,7 @@ public class CommonActivity extends BaseActivity<CommonOrgPresenter> implements 
         } else if (intent.getStringExtra(Constants.REQUEST).equals(Constants.WORK_YEAR)) {
             headView.setTitleStr(R.string.work_life);
             mPresenter.getWorkYearList();
-        }else  if (intent.getStringExtra(Constants.REQUEST).equals(Constants.CREDENTIALS_TYPE)){
+        } else if (intent.getStringExtra(Constants.REQUEST).equals(Constants.CREDENTIALS_TYPE)) {
             headView.setTitleStr(R.string.credentials);
             mPresenter.getCredentials();
         }

@@ -23,6 +23,7 @@ public class Constants {
     public static final int RESULT_1004 = 1004;
     public static final int RESULT_1005 = 1005;
     public static final int RESULT_1006 = 1006;
+    public static final int RESULT_1007 = 1007;
 
     /**
      * 组织结构
@@ -36,5 +37,10 @@ public class Constants {
     public static final int DEFAULT_ID = -999;
     public static final String CREDENTIALS_TYPE = "credentialsType";
     public static final String WORK_YEAR = "work_year";
+    public static final String SEX ="sex" ;
+    /**
+     * 剪切图片路径
+     */
+    public static final String STORAGE_PATH_CROP = "/FroApp/crop/";
 
 }

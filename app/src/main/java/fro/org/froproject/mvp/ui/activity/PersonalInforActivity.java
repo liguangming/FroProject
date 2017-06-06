@@ -1,15 +1,15 @@
 package fro.org.froproject.mvp.ui.activity;
 
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.graphics.Color;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
 import android.text.SpannableString;
 import android.text.Spanned;
 import android.text.TextUtils;
 import android.text.style.ForegroundColorSpan;
-import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -21,10 +21,10 @@ import com.jess.arms.utils.UiUtils;
 
 import org.fro.common.util.TimeUtils;
 import org.fro.common.widgets.LoadingView;
+import org.fro.common.widgets.photoclop.UCrop;
 import org.fro.common.widgets.pickerview.TimePickerView;
 
 import java.util.Calendar;
-import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -32,15 +32,15 @@ import butterknife.BindView;
 import butterknife.OnClick;
 import fro.org.froproject.R;
 import fro.org.froproject.app.Constants;
-import fro.org.froproject.app.MyApplication;
 import fro.org.froproject.di.component.DaggerPersonalInforComponent;
 import fro.org.froproject.di.module.PersonalInforModule;
 import fro.org.froproject.mvp.contract.PersonalInforContract;
 import fro.org.froproject.mvp.model.entity.UserInfoBean;
-import fro.org.froproject.mvp.model.entity.WorkYear;
 import fro.org.froproject.mvp.presenter.PersonalInforPresenter;
 import fro.org.froproject.mvp.ui.view.HeadView;
 import fro.org.froproject.mvp.ui.view.PersonalItemView;
+import fro.org.froproject.mvp.ui.view.PopupListView;
+import fro.org.froproject.mvp.ui.view.photoclip.PhotoConfig;
 
 import static com.jess.arms.utils.Preconditions.checkNotNull;
 
@@ -50,13 +50,15 @@ import static com.jess.arms.utils.Preconditions.checkNotNull;
  */
 
 public class PersonalInforActivity extends BaseActivity<PersonalInforPresenter> implements PersonalInforContract.View {
+    @BindView(R.id.headView)
+    HeadView headView;
     @BindView(R.id.nick_name)
     PersonalItemView nickName;
     @BindView(R.id.really_name)
     PersonalItemView reallyName;
     @BindView(R.id.sex)
     PersonalItemView sex;
-    @BindView(R.id.age)
+    @BindView(R.id.birthday)
     PersonalItemView birthDay;
     @BindView(R.id.email)
     PersonalItemView email;
@@ -86,6 +88,7 @@ public class PersonalInforActivity extends BaseActivity<PersonalInforPresenter> 
     PersonalItemView location;
     @BindView(R.id.tips)
     TextView tips;
+    private Uri mDestinationUri;
 
     @Override
     public void setupActivityComponent(AppComponent appComponent) {
@@ -107,12 +110,15 @@ public class PersonalInforActivity extends BaseActivity<PersonalInforPresenter> 
         setTips();
     }
 
-    @OnClick(R.id.rightLayout)
+    @OnClick(R.id.rightText)
     public void complete() {
-        getData();
+        if (!checkNUll())
+            return;
+        mPresenter.commit(getData());
     }
 
-    @OnClick(R.id.age)
+
+    @OnClick(R.id.birthday)
     public void showDateDialog() {
         String textViewText = birthDay.getTextViewText();
         Calendar selectDate = Calendar.getInstance();
@@ -124,6 +130,7 @@ public class PersonalInforActivity extends BaseActivity<PersonalInforPresenter> 
         }
         TimePickerView pvTime = new TimePickerView.Builder(this, (date, v) -> {//选中事件回调
             birthDay.setTextViewText(TimeUtils.parseTimeToYM2(date.getTime()));
+            birthDay.setTextViewColor(R.color.cd_text_color6);
         })
                 .setType(new boolean[]{true, true, true, false, false, false})//默认全部显示
                 .setCancelText("取消")//取消按钮文字
@@ -151,9 +158,29 @@ public class PersonalInforActivity extends BaseActivity<PersonalInforPresenter> 
     }
 
 
-    @OnClick({R.id.org_nature, R.id.org_type, R.id.org_detail, R.id.credentials, R.id.work_life})
+    @OnClick({R.id.org_nature, R.id.org_type, R.id.org_detail, R.id.credentials, R.id.work_life, R.id.sex})
     public void gotoActivity(View view) {
         mPresenter.gotoActivity(view.getId());
+    }
+
+    @OnClick(R.id.image_title)
+    public void showPopWindow(){
+        mDestinationUri = Uri.fromFile(PhotoConfig.getCroppedFile(this));
+        PopupListView popupListView = new PopupListView(this);
+        popupListView.show(new String[]{getString(R.string.get_from_box)}, new PopupListView.ICallBack() {
+            @Override
+            public void performClick(int position) {
+                switch (position) {
+                    case 0:
+                           mPresenter.pickFromGallery(mDestinationUri);  //相册中获取
+                        break;
+                    case 1:
+//                        getString(R.string.get_from_take_picture)
+//                        takePhoto();
+                        break;
+                }
+            }
+        });
     }
 
     @Override
@@ -233,8 +260,32 @@ public class PersonalInforActivity extends BaseActivity<PersonalInforPresenter> 
         credentialsNum.setEditText(null);
     }
 
+    @Override
+    public void setLocation(String s) {
+        location.setTextViewText(s);
+        location.setTextViewColor(R.color.cd_text_color6);
+    }
 
-    public void getData() {
+    @Override
+    public void setSex(String sexString) {
+        sex.setTextViewText(sexString);
+    }
+
+    @Override
+    public void startCropActivity(Uri uri) {
+        UCrop.of(uri, mDestinationUri)
+                .withAspectRatio(1, 1)
+                .withMaxResultSize(UiUtils.getScreenWidth(this),getResources().getDimensionPixelOffset(R.dimen.sa_banner_height))
+                .withTargetActivity(PhotoCropActivity.class)
+                .start(this);
+    }
+
+    @Override
+    public void setAtvorImage(Bitmap roundBitmap) {
+        imageView.setImageBitmap(roundBitmap);
+    }
+
+    public Map<String, Object> getData() {
         Map<String, Object> params = new HashMap<>();
         params.put("nickName", nickName.getEditText());
         params.put("name", reallyName.getEditText());
@@ -243,17 +294,14 @@ public class PersonalInforActivity extends BaseActivity<PersonalInforPresenter> 
             params.put("birthDay", TimeUtils.getLongTime(birthDay.getTextViewText()));
         params.put("email", email.getEditText());
         params.put("idNumber", credentialsNum.getEditText());
-        params.put("workOrg", workBranch.getEditText());
-
-        //地区id
-        //        if (regionId != -99999)
-        //            params.put("regionId", regionId);
-
+        params.put("workOrg", workBranch.getEditText());//机构分支
         if (!birthDay.getTextViewText().equals(getString(R.string.not_setting))) {
             params.put("birthDay", TimeUtils.getLongTime(birthDay.getTextViewText()));
         }
         params.put("position", jobPosition.getEditText());
+        return params;
     }
+
 
     public void setTips() {
         SpannableString spannableString = new SpannableString(getString(R.string.personal_center_tips));
@@ -262,6 +310,35 @@ public class PersonalInforActivity extends BaseActivity<PersonalInforPresenter> 
         spannableString.setSpan(new ForegroundColorSpan(getResources().getColor(R.color.blue_bg)), 15, 17, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
         spannableString.setSpan(new ForegroundColorSpan(getResources().getColor(R.color.blue_bg)), 18, 22, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
         tips.setText(spannableString);
+    }
+
+    public boolean checkNUll() {
+        if (TextUtils.isEmpty(nickName.getEditText())) {
+            showMessage(getString(R.string.nick_name_not_null_tips));
+            return false;
+        }
+        if (TextUtils.isEmpty(reallyName.getEditText())) {
+            showMessage(getString(R.string.really_name_not_null_tips));
+            return false;
+        }
+        if (TextUtils.isEmpty(sex.getTextViewText()) || sex.getTextViewText().equals(getString(R.string.not_setting))) {
+            showMessage(getString(R.string.sex_not_null_tips));
+            return false;
+        }
+        if (TextUtils.isEmpty(birthDay.getTextViewText()) || birthDay.getTextViewText().equals(getString(R.string.not_setting))) {
+            showMessage(getString(R.string.birthday_not_null_tips));
+            return false;
+        }
+
+        if (TextUtils.isEmpty(credentialsNum.getEditText())) {
+            showMessage(getString(R.string.credentials_number_not_null_tips));
+            return false;
+        }
+        if (TextUtils.isEmpty(workBranch.getEditText())) {
+            showMessage(getString(R.string.org_branch_not_null_tips));
+            return false;
+        }
+        return true;
     }
 
 }

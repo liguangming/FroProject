@@ -7,4 +7,6 @@
     <color name="round_button_blue">#3a87d7</color>
     <color name="hint_color">#bcbcbc</color>
     <color name="blue_bg">#3981d2</color>
+    <color name="item_white_pressed">#f3f3f3</color>
+    <color name="line_color">#cacaca</color>
 </resources>

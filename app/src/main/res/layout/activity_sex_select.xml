@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:view="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/bg"
+    android:orientation="vertical">
+
+    <fro.org.froproject.mvp.ui.view.HeadView
+        android:id="@+id/headView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        view:cdTitle="@string/sex" />
+
+    <View style="@style/CommonLineStyle" />
+
+    <RelativeLayout
+        android:id="@+id/man_layout"
+        android:layout_width="wrap_content"
+        android:layout_height="128px"
+        android:background="@color/white"
+        android:paddingLeft="43px">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:text="@string/man"
+            android:textColor="@color/cd_black" />
+
+        <ImageView
+            android:id="@+id/image_man"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="5px"
+            android:src="@mipmap/ic_correct"
+            android:visibility="gone" />
+    </RelativeLayout>
+
+    <View style="@style/CommonLineStyle" />
+
+    <RelativeLayout
+        android:id="@+id/woman_layout"
+        android:layout_width="wrap_content"
+        android:layout_height="128px"
+        android:background="@color/white"
+        android:paddingLeft="43px">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:text="@string/woman"
+            android:textColor="@color/cd_black" />
+
+        <ImageView
+            android:id="@+id/image_woman"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="5px"
+            android:src="@mipmap/ic_correct"
+            android:visibility="gone" />
+    </RelativeLayout>
+
+    <View style="@style/CommonLineStyle" />
+
+</LinearLayout>

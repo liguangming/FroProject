@@ -1,11 +1,15 @@
 package fro.org.froproject.mvp.contract;
 
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.net.Uri;
 
 import com.jess.arms.mvp.IView;
 import com.jess.arms.mvp.IModel;
 
+import java.io.File;
 import java.util.List;
+import java.util.Map;
 
 import fro.org.froproject.mvp.model.entity.BaseJson;
 import fro.org.froproject.mvp.model.entity.OrgBean;
@@ -28,10 +32,22 @@ public interface PersonalInforContract {
 
         void clearCredentialNum();
 
+        void setLocation(String s);
+
+        void setSex(String sex);
+
+        void startCropActivity(Uri uri);
+
+        void setAtvorImage(Bitmap roundBitmap);
     }
 
     //Model层定义接口,外部只需关心model返回的数据,无需关心内部细节,及是否使用缓存
     interface Model extends IModel {
+
         Observable<BaseJson<List<OrgBean>>> getOrgDetailList(int orgTypeId);
+
+        Observable<BaseJson> commit(Map<String, Object> data);
+
+        Observable<BaseJson> uploadImg(File file);
     }
 }
