@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/listfoot"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <View
+        android:visibility="gone"
+        android:id="@+id/list_bottom_line_empty"
+        style="@style/CommonLineStyle" />
+
+    <RelativeLayout
+        android:layout_marginBottom="50px"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="50px"
+        android:gravity="center_horizontal">
+
+        <TextView
+            android:id="@+id/class_list_footer"
+            android:layout_width="284px"
+            android:layout_height="81px"
+            android:layout_centerHorizontal="true"
+            android:layout_gravity="center_horizontal"
+            android:background="@drawable/class_list_footer"
+            android:gravity="center"
+            android:text="@string/join_new_class"
+            android:textColor="@android:color/white"
+            android:textSize="36px" />
+    </RelativeLayout>
+</LinearLayout>

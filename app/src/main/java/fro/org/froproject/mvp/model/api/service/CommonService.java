@@ -1,18 +1,14 @@
 package fro.org.froproject.mvp.model.api.service;
 
-import android.support.annotation.Nullable;
-
-import java.io.File;
 import java.util.List;
-import java.util.Map;
 
-import fro.org.froproject.app.MyApplication;
 import fro.org.froproject.mvp.model.entity.BaseJson;
+import fro.org.froproject.mvp.model.entity.ClassBean;
+import fro.org.froproject.mvp.model.entity.ClassListBean;
 import fro.org.froproject.mvp.model.entity.OrgBean;
-import fro.org.froproject.mvp.model.entity.Token;
+import fro.org.froproject.mvp.model.entity.CommonBean;
 import fro.org.froproject.mvp.model.entity.UserInfoBean;
 import io.reactivex.Observable;
-import okhttp3.MultipartBody;
 import okhttp3.RequestBody;
 import retrofit2.http.Body;
 import retrofit2.http.GET;
@@ -21,8 +17,8 @@ import retrofit2.http.Headers;
 import retrofit2.http.Multipart;
 import retrofit2.http.POST;
 import retrofit2.http.Part;
-import retrofit2.http.PartMap;
 import retrofit2.http.Path;
+import retrofit2.http.Query;
 
 /**
  * 存放通用的api
@@ -68,7 +64,7 @@ public interface CommonService {
      */
     @Headers({HEADER_API_VERSION, HEADER_API_VERSION1})
     @POST("user/register")
-    Observable<BaseJson<Token>> register(@Body RequestBody body);
+    Observable<BaseJson<CommonBean>> register(@Body RequestBody body);
 
     /**
      * 获取组织机构性质
@@ -111,7 +107,7 @@ public interface CommonService {
      */
     @Headers({HEADER_API_VERSION, HEADER_API_VERSION1})
     @POST("user/updatedetail")
-    Observable<BaseJson> commit(@Body RequestBody body);
+    Observable<BaseJson> commit(@Body RequestBody body, @Header(HEADER_API_TOKEN) String token);
 
     /**
      * 上传头像
@@ -122,5 +118,9 @@ public interface CommonService {
      */
     @Multipart
     @POST("pic/imageup")
-    Observable<BaseJson> uploadImg(@Part("upfile\"; filename=\"test.jpg\"") RequestBody body, @Header(HEADER_API_TOKEN) String token);
+    Observable<BaseJson<CommonBean>> uploadImg(@Part("upfile\"; filename=\"test.jpg\"") RequestBody body, @Header(HEADER_API_TOKEN) String token);
+
+    @Headers({HEADER_API_VERSION, HEADER_API_VERSION1})
+    @GET("class/get/current")
+    Observable<BaseJson<ClassListBean<ClassBean>>> getMyClassList(@Header(HEADER_API_TOKEN) String token, @Query("page") int page, @Query("size") int pageSize);
 }

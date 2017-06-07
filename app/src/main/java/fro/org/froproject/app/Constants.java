@@ -12,7 +12,8 @@ public class Constants {
     /**
      * 倒计时
      */
-    public static final int AUTH_CODE_TIME = 60*1000;
+    public static final int AUTH_CODE_TIME = 60 * 1000;
+    public static final int PAGE_SIZE = 10;
 
     /**
      * onResultCode
@@ -24,6 +25,7 @@ public class Constants {
     public static final int RESULT_1005 = 1005;
     public static final int RESULT_1006 = 1006;
     public static final int RESULT_1007 = 1007;
+
 
     /**
      * 组织结构
@@ -37,10 +39,11 @@ public class Constants {
     public static final int DEFAULT_ID = -999;
     public static final String CREDENTIALS_TYPE = "credentialsType";
     public static final String WORK_YEAR = "work_year";
-    public static final String SEX ="sex" ;
+    public static final String SEX = "sex";
     /**
      * 剪切图片路径
      */
     public static final String STORAGE_PATH_CROP = "/FroApp/crop/";
 
+    public static final String CURRENT_PAGE = "current";
 }

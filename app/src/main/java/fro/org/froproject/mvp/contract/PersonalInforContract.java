@@ -4,14 +4,15 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.net.Uri;
 
-import com.jess.arms.mvp.IView;
 import com.jess.arms.mvp.IModel;
+import com.jess.arms.mvp.IView;
 
 import java.io.File;
 import java.util.List;
 import java.util.Map;
 
 import fro.org.froproject.mvp.model.entity.BaseJson;
+import fro.org.froproject.mvp.model.entity.CommonBean;
 import fro.org.froproject.mvp.model.entity.OrgBean;
 import io.reactivex.Observable;
 
@@ -46,8 +47,8 @@ public interface PersonalInforContract {
 
         Observable<BaseJson<List<OrgBean>>> getOrgDetailList(int orgTypeId);
 
-        Observable<BaseJson> commit(Map<String, Object> data);
+        Observable<BaseJson> commit(Map<String, String> data);
 
-        Observable<BaseJson> uploadImg(File file);
+        Observable<BaseJson<CommonBean>> uploadImg(File file);
     }
 }

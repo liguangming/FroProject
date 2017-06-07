@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:view="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/bg"
+    android:orientation="vertical">
+
+
+    <fro.org.froproject.mvp.ui.view.HeadView
+        android:id="@+id/headView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        view:cdTitle="@string/member_service" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="43px"
+        android:layout_marginRight="43px"
+        android:layout_marginTop="100px"
+        android:text="@string/service_help"
+        android:textColor="@color/cd_black"
+        android:textSize="46px"
+        android:textStyle="bold" />
+
+    <View
+        style="@style/CommonLineStyle"
+        android:layout_marginLeft="43px"
+        android:layout_marginRight="43px"
+        android:layout_marginTop="100px" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="43px"
+        android:layout_marginRight="43px"
+        android:layout_marginTop="50px"
+        android:text="@string/service_phone_num"
+        android:textColor="@color/cd_black" />
+</LinearLayout>

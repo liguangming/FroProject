@@ -8,15 +8,11 @@ import com.jess.arms.di.scope.ActivityScope;
 import com.jess.arms.mvp.BasePresenter;
 import com.jess.arms.widget.imageloader.ImageLoader;
 
-import java.util.HashMap;
-import java.util.Map;
-
 import fro.org.froproject.app.MyApplication;
 import fro.org.froproject.app.utils.RxUtils;
-import fro.org.froproject.app.utils.Utils;
 import fro.org.froproject.mvp.contract.RegisterContract;
 import fro.org.froproject.mvp.model.entity.BaseJson;
-import fro.org.froproject.mvp.model.entity.Token;
+import fro.org.froproject.mvp.model.entity.CommonBean;
 import fro.org.froproject.mvp.ui.activity.PersonalInforActivity;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.annotations.NonNull;
@@ -97,9 +93,9 @@ public class RegisterPresenter extends BasePresenter<RegisterContract.Model, Reg
                     @Override
                     public void onNext(@NonNull BaseJson baseJson) {
                         if (baseJson.isSuccess()) {
-                            Token token = (Token) baseJson.getD();
-                            MyApplication.getInstance().setToken(token.getToken());
-                            mRootView.launchActivity(new Intent(mApplication, PersonalInforActivity.class));
+                            CommonBean commonBean = (CommonBean) baseJson.getD();
+                            MyApplication.getInstance().setToken(commonBean.getToken());
+                            mRootView.launchActivity(new Intent(mApplication, PersonalInforActivity.class).putExtra("phone",phoneNumber));
                         } else {
                             mRootView.showMessage(baseJson.getM());
                         }

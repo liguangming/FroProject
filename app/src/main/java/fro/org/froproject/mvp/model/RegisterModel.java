@@ -18,7 +18,7 @@ import fro.org.froproject.app.utils.Utils;
 import fro.org.froproject.mvp.contract.RegisterContract;
 import fro.org.froproject.mvp.model.api.service.CommonService;
 import fro.org.froproject.mvp.model.entity.BaseJson;
-import fro.org.froproject.mvp.model.entity.Token;
+import fro.org.froproject.mvp.model.entity.CommonBean;
 import io.reactivex.Observable;
 import okhttp3.MediaType;
 import okhttp3.RequestBody;
@@ -57,13 +57,13 @@ public class RegisterModel extends BaseModel implements RegisterContract.Model {
     }
 
     @Override
-    public Observable<BaseJson<Token>> submit(String phoneNumber, String verificationCode, String password) {
+    public Observable<BaseJson<CommonBean>> submit(String phoneNumber, String verificationCode, String password) {
         Map<String, String> map = new HashMap<>();
         map.put("phoneNumber", phoneNumber);
         map.put("verificationCode", verificationCode);
         map.put("password", Utils.encodePassword(password));
         RequestBody body = RequestBody.create(MediaType.parse("application/json; charset=utf-8"), mGson.toJson(map));
-        Observable<BaseJson<Token>> response = mRepositoryManager.obtainRetrofitService(CommonService.class).register(body);
+        Observable<BaseJson<CommonBean>> response = mRepositoryManager.obtainRetrofitService(CommonService.class).register(body);
         return response;
     }
 }

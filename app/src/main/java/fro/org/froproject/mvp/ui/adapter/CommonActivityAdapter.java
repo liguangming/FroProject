@@ -22,6 +22,7 @@ public class CommonActivityAdapter extends DefaultAdapter<OrgBean> {
         super(infos);
     }
 
+
     @Override
     public BaseHolder<OrgBean> getHolder(View v, int viewType) {
         return new CommonActivityHolder(v);

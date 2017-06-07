@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="name_chinese">
+        <item>我的班级</item>
+        <item>我的课程</item>
+        <item>服务与支持</item>
+        <item>个人账户</item>
+    </string-array>
+    <string-array name="name_english">
+        <item>MY CLASS</item>
+        <item>MY COURSE</item>
+        <item>SERVICE AND SUPPORT</item>
+        <item>PERSONAL</item>
+    </string-array>
+</resources>

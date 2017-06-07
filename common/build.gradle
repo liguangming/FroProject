@@ -38,7 +38,7 @@ dependencies {
     compile 'com.squareup.okhttp3:okhttp:3.2.0'
     compile 'com.squareup.okio:okio:1.7.0'
     //图片处理
-    compile 'com.nostra13.universalimageloader:universal-image-loader:1.9.5'
+//    compile 'com.nostra13.universalimageloader:universal-image-loader:1.9.5'
     //
     compile 'com.huxq17.xrefreshview:xrefreshview:3.6.9'
 }

@@ -164,7 +164,7 @@ public class PersonalInforActivity extends BaseActivity<PersonalInforPresenter> 
     }
 
     @OnClick(R.id.image_title)
-    public void showPopWindow(){
+    public void showPopWindow() {
         mDestinationUri = Uri.fromFile(PhotoConfig.getCroppedFile(this));
         PopupListView popupListView = new PopupListView(this);
         popupListView.show(new String[]{getString(R.string.get_from_box)}, new PopupListView.ICallBack() {
@@ -172,7 +172,7 @@ public class PersonalInforActivity extends BaseActivity<PersonalInforPresenter> 
             public void performClick(int position) {
                 switch (position) {
                     case 0:
-                           mPresenter.pickFromGallery(mDestinationUri);  //相册中获取
+                        mPresenter.pickFromGallery(mDestinationUri);  //相册中获取
                         break;
                     case 1:
 //                        getString(R.string.get_from_take_picture)
@@ -269,13 +269,14 @@ public class PersonalInforActivity extends BaseActivity<PersonalInforPresenter> 
     @Override
     public void setSex(String sexString) {
         sex.setTextViewText(sexString);
+        sex.setTextViewColor(R.color.cd_text_color6);
     }
 
     @Override
     public void startCropActivity(Uri uri) {
         UCrop.of(uri, mDestinationUri)
                 .withAspectRatio(1, 1)
-                .withMaxResultSize(UiUtils.getScreenWidth(this),getResources().getDimensionPixelOffset(R.dimen.sa_banner_height))
+                .withMaxResultSize(UiUtils.getScreenWidth(this), getResources().getDimensionPixelOffset(R.dimen.sa_banner_height))
                 .withTargetActivity(PhotoCropActivity.class)
                 .start(this);
     }
@@ -285,20 +286,20 @@ public class PersonalInforActivity extends BaseActivity<PersonalInforPresenter> 
         imageView.setImageBitmap(roundBitmap);
     }
 
-    public Map<String, Object> getData() {
-        Map<String, Object> params = new HashMap<>();
+    public Map<String, String> getData() {
+        Map<String, String> params = new HashMap<>();
         params.put("nickName", nickName.getEditText());
         params.put("name", reallyName.getEditText());
         params.put("sex", sex.getTextViewText());
         if (!birthDay.getTextViewText().equals(getString(R.string.not_setting)))
             params.put("birthDay", TimeUtils.getLongTime(birthDay.getTextViewText()));
-        params.put("email", email.getEditText());
+        if (!TextUtils.isEmpty(email.getEditText()))
+            params.put("email", email.getEditText());
         params.put("idNumber", credentialsNum.getEditText());
         params.put("workOrg", workBranch.getEditText());//机构分支
-        if (!birthDay.getTextViewText().equals(getString(R.string.not_setting))) {
-            params.put("birthDay", TimeUtils.getLongTime(birthDay.getTextViewText()));
-        }
-        params.put("position", jobPosition.getEditText());
+        if (!TextUtils.isEmpty(jobPosition.getEditText()))
+            params.put("position", jobPosition.getEditText());
+        params.put("phoneNumber", getIntent().getStringExtra("phone"));
         return params;
     }
 

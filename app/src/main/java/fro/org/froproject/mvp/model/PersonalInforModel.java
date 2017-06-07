@@ -21,6 +21,7 @@ import fro.org.froproject.app.MyApplication;
 import fro.org.froproject.mvp.contract.PersonalInforContract;
 import fro.org.froproject.mvp.model.api.service.CommonService;
 import fro.org.froproject.mvp.model.entity.BaseJson;
+import fro.org.froproject.mvp.model.entity.CommonBean;
 import fro.org.froproject.mvp.model.entity.OrgBean;
 import io.reactivex.Observable;
 import okhttp3.MediaType;
@@ -57,21 +58,22 @@ public class PersonalInforModel extends BaseModel implements PersonalInforContra
         return response;
     }
 
+
     @Override
-    public Observable<BaseJson> commit(Map<String, Object> data) {
+    public Observable<BaseJson> commit(Map<String, String> data) {
         RequestBody body = RequestBody.create(MediaType.parse("application/json; charset=utf-8"), mGson.toJson(data));
-        Observable<BaseJson> response = mRepositoryManager.obtainRetrofitService(CommonService.class).commit(body);
+        Observable<BaseJson> response = mRepositoryManager.obtainRetrofitService(CommonService.class).commit(body,MyApplication.getInstance().getToken());
         return response;
     }
 
     @Override
-    public Observable<BaseJson> uploadImg(File file) {
+    public Observable<BaseJson<CommonBean>> uploadImg(File file) {
         MultipartBody.Builder builder = new MultipartBody.Builder().setType(MultipartBody.FORM);
         if (file != null) {
             builder.addFormDataPart("upfile", file.getName(), RequestBody.create(MediaType.parse("multipart/form-data"), file));
         }
         MultipartBody requestBody = builder.build();
-        Observable<BaseJson> response = mRepositoryManager.obtainRetrofitService(CommonService.class).uploadImg(requestBody, MyApplication.getInstance().getToken());
+        Observable<BaseJson<CommonBean>> response = mRepositoryManager.obtainRetrofitService(CommonService.class).uploadImg(requestBody, MyApplication.getInstance().getToken());
         return response;
     }
 

@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <org.fro.common.widgets.tab.tablayout.CommonTabLayout
+        android:id="@+id/tab_layout_main"
+        android:layout_width="match_parent"
+        android:layout_height="49dp"
+        android:layout_alignParentBottom="true"
+        android:background="@android:color/white" />
+
+    <View
+        android:id="@+id/view_bottom_ine"
+        style="@style/CommonLineStyle"
+        android:layout_above="@id/tab_layout_main"
+        android:background="#e2e2e2" />
+
+    <FrameLayout
+        android:id="@+id/tab_fragment_layout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@id/view_bottom_ine" />
+</RelativeLayout>

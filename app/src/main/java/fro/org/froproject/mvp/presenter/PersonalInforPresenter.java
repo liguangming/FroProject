@@ -6,22 +6,18 @@ import android.graphics.Bitmap;
 import android.net.Uri;
 import android.provider.MediaStore;
 import android.text.TextUtils;
-import android.util.Log;
 
 import com.jess.arms.di.scope.ActivityScope;
 import com.jess.arms.integration.AppManager;
 import com.jess.arms.mvp.BasePresenter;
-import com.jess.arms.utils.UiUtils;
 import com.jess.arms.widget.imageloader.ImageLoader;
 
 import org.fro.common.util.ImageUtils;
-import org.fro.common.util.TimeUtils;
 import org.fro.common.widgets.locationview.SSQPickerDialog;
 import org.fro.common.widgets.locationview.entity.CityData;
 import org.fro.common.widgets.locationview.entity.CountryData;
 import org.fro.common.widgets.locationview.entity.ProvinceData;
 import org.fro.common.widgets.photoclop.UCrop;
-import org.json.JSONObject;
 
 import java.io.File;
 import java.util.List;
@@ -32,17 +28,18 @@ import javax.inject.Inject;
 import fro.org.froproject.R;
 import fro.org.froproject.app.Constants;
 import fro.org.froproject.app.MyApplication;
-import fro.org.froproject.app.utils.CheckUtils;
 import fro.org.froproject.app.utils.FileUtils;
 import fro.org.froproject.app.utils.RxUtils;
-import fro.org.froproject.app.utils.Utils;
 import fro.org.froproject.mvp.contract.PersonalInforContract;
 import fro.org.froproject.mvp.model.entity.BaseJson;
+import fro.org.froproject.mvp.model.entity.CommonBean;
+import fro.org.froproject.mvp.model.entity.CredentialsBean;
 import fro.org.froproject.mvp.model.entity.OrgBean;
 import fro.org.froproject.mvp.model.entity.UserInfoBean;
+import fro.org.froproject.mvp.model.entity.WorkYear;
 import fro.org.froproject.mvp.ui.activity.CommonActivity;
-import fro.org.froproject.mvp.ui.activity.ForgetPasswordActivity;
-import fro.org.froproject.mvp.ui.activity.PhotoCropActivity;
+import fro.org.froproject.mvp.ui.activity.MainGridActivity;
+import fro.org.froproject.mvp.ui.activity.RegisterActivity;
 import fro.org.froproject.mvp.ui.activity.SexSelectActivity;
 import fro.org.froproject.mvp.ui.view.photoclip.PhotoConfig;
 import io.reactivex.android.schedulers.AndroidSchedulers;
@@ -75,6 +72,7 @@ public class PersonalInforPresenter extends BasePresenter<PersonalInforContract.
     public ProvinceData mProvice;
     private boolean isFromAlbum;//是否来自相册
     private Uri mDestinationUri;
+    public String path;
 
     @Inject
     public PersonalInforPresenter(PersonalInforContract.Model model, PersonalInforContract.View rootView
@@ -175,7 +173,6 @@ public class PersonalInforPresenter extends BasePresenter<PersonalInforContract.
             } else if (requestCode == Constants.RESULT_1006) {
                 mRootView.setSex(intent.getStringExtra(Constants.SEX));
 
-
             } else if (requestCode == REQUEST_CODE_CAMERA) {// 调用相机拍照
                 isFromAlbum = false;
                 startCropActivity(Uri.fromFile(PhotoConfig.getPhotoTempFile(mApplication)));
@@ -221,15 +218,13 @@ public class PersonalInforPresenter extends BasePresenter<PersonalInforContract.
     public void uploadImg(File file) {
         mModel.uploadImg(file)
                 .subscribeOn(Schedulers.io())
-                .doOnSubscribe(disposable -> mRootView.showLoading())
-                .subscribeOn(AndroidSchedulers.mainThread())
-                .observeOn(AndroidSchedulers.mainThread())
-                .doAfterTerminate(() -> mRootView.hideLoading())
                 .compose(RxUtils.bindToLifecycle(mRootView))//使用RXlifecycle,使subscription和activity一起销毁
                 .subscribe(new ErrorHandleSubscriber<BaseJson>(mErrorHandler) {
                     @Override
                     public void onNext(@NonNull BaseJson baseJson) {
                         if (baseJson.isSuccess()) {//
+                            CommonBean bean = (CommonBean) baseJson.getD();
+                            path = bean.getPath();
                         }
                     }
                 });
@@ -277,7 +272,7 @@ public class PersonalInforPresenter extends BasePresenter<PersonalInforContract.
      * 显示日历选择对话框
      */
     public void showLocationDialog() {
-        SSQPickerDialog mPickerDialog = new SSQPickerDialog(mApplication, mProvice, mCity, mCountry, MyApplication.getInstance().getProvinceDataList());
+        SSQPickerDialog mPickerDialog = new SSQPickerDialog(mAppManager.getCurrentActivity(), mProvice, mCity, mCountry, MyApplication.getInstance().getProvinceDataList());
         mPickerDialog.setDialogMode(SSQPickerDialog.DIALOG_MODE_BOTTOM);
         mPickerDialog.show();
         mPickerDialog.setDatePickListener((selectProvince, selectCity, selectCounty) -> {
@@ -294,17 +289,20 @@ public class PersonalInforPresenter extends BasePresenter<PersonalInforContract.
      *
      * @param data
      */
-    public void commit(Map<String, Object> data) {
+    public void commit(Map<String, String> data) {
         if (!checkNull())
             return;
+        if (!TextUtils.isEmpty(path))
+            data.put("avatar", path);
         if (regionId != -999)
-            data.put("regionId", regionId);
-        data.put("natureId", orgNatureID);
-        data.put("categoryId", orgTypeId);
+            data.put("regionId", String.valueOf(regionId));
+        data.put("natureId", String.valueOf(orgNatureID));
+        data.put("categoryId", String.valueOf(orgTypeId));
         if (orgDetailId != -999)
-            data.put("organizationId ", orgDetailId);
+            data.put("organizationId ", String.valueOf(orgDetailId));
         if (workYearId != -999)
-            data.put("workYearId", workYearId);
+            data.put("workYearId", String.valueOf(workYearId));
+        data.put("idTypeId", String.valueOf(credentialsId));
         mModel.commit(data)
                 .subscribeOn(Schedulers.io())
                 .doOnSubscribe(dispose -> mRootView.showLoading())
@@ -316,6 +314,10 @@ public class PersonalInforPresenter extends BasePresenter<PersonalInforContract.
                     @Override
                     public void onNext(@NonNull BaseJson baseJson) {
                         if (baseJson.isSuccess()) {
+                            mRootView.killMyself();
+                            mAppManager.killActivity(RegisterActivity.class);
+                            mRootView.launchActivity(new Intent(mApplication, MainGridActivity.class));
+                            setUserInfo(data);
                             // TODO: 2017/6/6 0006 完成注册之后关闭两个注册界面 跳转到主页
                         } else {
                             if (!TextUtils.isEmpty(baseJson.getM()))
@@ -343,5 +345,55 @@ public class PersonalInforPresenter extends BasePresenter<PersonalInforContract.
         return true;
     }
 
+    /**
+     * 更新用户信息
+     *
+     * @param params
+     */
+    public void setUserInfo(Map<String, String> params) {
+
+        UserInfoBean userInfo = new UserInfoBean();
+        if (!TextUtils.isEmpty(path))
+            userInfo.setAvatar(path);
+        userInfo.setNickName(params.get("nickName"));
+        userInfo.setName(params.get("name"));
+        userInfo.setSex(params.get("sex"));
+        userInfo.setEmail(params.get("email"));
+        CredentialsBean idTypeResponse = new CredentialsBean(); //证件
+        idTypeResponse.setId(credentialsId);
+        idTypeResponse.setName(credentialsName);//证件名称
+        userInfo.setIdTypeResponse(idTypeResponse);
+        userInfo.setBirthDay(Long.parseLong(params.get("birthDay")));
+        userInfo.setPhoneNumber(params.get("phoneNumber"));
+        userInfo.setIdNumber(params.get("idNumber"));//证件号码
+        userInfo.setPosition(params.get("position"));
+        userInfo.setWorkOrg(params.get("workOrg"));
+        OrgBean orgNatureTemp = new OrgBean();
+        orgNatureTemp.setName(orgNatureName);
+        orgNatureTemp.setId(orgNatureID);
+        OrgBean orgTypeTemp = new OrgBean();
+        orgTypeTemp.setName(orgTypeName);
+        orgTypeTemp.setId(orgTypeId);
+        OrgBean orgDetailTemp = new OrgBean();
+        orgDetailTemp.setName(orgDetailName);
+        orgDetailTemp.setId(orgDetailId);
+        userInfo.setNatureResponse(orgNatureTemp);
+        userInfo.setCategoryResponse(orgTypeTemp);
+        if (orgDetailTemp.getId() != -999)
+            userInfo.setOrganizationResponse(orgDetailTemp);
+        if (mProvice != null)
+            userInfo.setProvinceResponse(mProvice);
+        if (mCity != null)
+            userInfo.setCityResponse(mCity);
+        if (mCountry != null)
+            userInfo.setCountyResponse(mCountry);
+
+        WorkYear mWorkYear = new WorkYear();
+        mWorkYear.setId(workYearId);
+        mWorkYear.setName(workYearName);
+        if (workYearId != -999)
+            userInfo.setWorkYearResponse(mWorkYear);
+        MyApplication.getInstance().setUserInfoBean(userInfo);
+    }
 
 }

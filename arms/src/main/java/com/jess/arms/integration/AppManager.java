@@ -74,6 +74,10 @@ public class AppManager {
         }
     }
 
+    private void completeRegister() {
+
+    }
+
     private void dispatchStart(Message message) {
         if (message.obj instanceof Intent)
             startActivity((Intent) message.obj);

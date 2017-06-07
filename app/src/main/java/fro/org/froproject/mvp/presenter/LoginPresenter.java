@@ -25,6 +25,7 @@ import fro.org.froproject.mvp.contract.LoginContract;
 import fro.org.froproject.mvp.model.entity.BaseJson;
 import fro.org.froproject.mvp.model.entity.UserInfoBean;
 import fro.org.froproject.mvp.ui.activity.ForgetPasswordActivity;
+import fro.org.froproject.mvp.ui.activity.MainGridActivity;
 import fro.org.froproject.mvp.ui.activity.PersonalInforActivity;
 import fro.org.froproject.mvp.ui.activity.RegisterActivity;
 import io.reactivex.android.schedulers.AndroidSchedulers;
@@ -93,7 +94,7 @@ public class LoginPresenter extends BasePresenter<LoginContract.Model, LoginCont
                     public void onNext(@NonNull BaseJson baseJson) {
                         if (baseJson.isSuccess()) {//登录成功
                             UserInfoBean userInfoBean = (UserInfoBean) baseJson.getD();
-                            Intent intent = new Intent(mApplication, ForgetPasswordActivity.class);
+                            Intent intent = new Intent(mApplication, MainGridActivity.class);
                             MyApplication.getInstance().setUserInfoBean(userInfoBean);
                             mRootView.launchActivity(intent);
                             mRootView.killMyself();
