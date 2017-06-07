@@ -96,6 +96,7 @@ public class LoginPresenter extends BasePresenter<LoginContract.Model, LoginCont
                             UserInfoBean userInfoBean = (UserInfoBean) baseJson.getD();
                             Intent intent = new Intent(mApplication, MainGridActivity.class);
                             MyApplication.getInstance().setUserInfoBean(userInfoBean);
+                            MyApplication.getInstance().setToken(userInfoBean.getToken());
                             mRootView.launchActivity(intent);
                             mRootView.killMyself();
                         }
