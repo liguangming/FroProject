@@ -1,11 +1,9 @@
 package fro.org.froproject.mvp.ui.fragment;
 
 import android.content.Intent;
-import android.graphics.pdf.PdfDocument;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.widget.SwipeRefreshLayout;
-import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
@@ -14,9 +12,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.ListView;
 import android.widget.TextView;
 
+import com.andview.refreshview.XRefreshView;
 import com.bumptech.glide.Glide;
 import com.jess.arms.base.BaseFragment;
 import com.jess.arms.base.DefaultAdapter;
@@ -25,27 +23,34 @@ import com.jess.arms.utils.UiUtils;
 import com.paginate.Paginate;
 
 import org.fro.common.util.TimeUtils;
+import org.fro.common.widgets.LoadingView;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import butterknife.BindView;
 import fro.org.froproject.R;
+import fro.org.froproject.app.Constants;
 import fro.org.froproject.app.MyApplication;
+import fro.org.froproject.app.utils.Utils;
 import fro.org.froproject.di.component.DaggerClassComponent;
 import fro.org.froproject.di.module.ClassModule;
 import fro.org.froproject.mvp.contract.ClassContract;
 import fro.org.froproject.mvp.model.api.Api;
+import fro.org.froproject.mvp.model.entity.ClassBean;
 import fro.org.froproject.mvp.model.entity.UserInfoBean;
 import fro.org.froproject.mvp.presenter.ClassPresenter;
+import fro.org.froproject.mvp.ui.adapter.ClassListAdapter;
 import fro.org.froproject.mvp.ui.view.GlideRoundTransform;
 import fro.org.froproject.mvp.ui.view.HeadView;
 
 import static com.jess.arms.utils.Preconditions.checkNotNull;
 
-
 /**
  * Created by Lgm on 2017/6/7 0007.
  */
 
-public class ClassFragment extends BaseFragment<ClassPresenter> implements ClassContract.View, SwipeRefreshLayout.OnRefreshListener {
+public class ClassFragment extends BaseFragment<ClassPresenter> implements ClassContract.View {
     @BindView(android.R.id.list)
     RecyclerView mRecyclerView;
     @BindView(R.id.headView)
@@ -70,9 +75,10 @@ public class ClassFragment extends BaseFragment<ClassPresenter> implements Class
     LinearLayout emptyView;
     @BindView(R.id.listfoot)
     LinearLayout listFoot;
-    @BindView(R.id.SwipeRefreshLayout)
-    SwipeRefreshLayout swipeRefreshLayout;
-    private Paginate mPaginate;
+    @BindView(R.id.custom_view)
+    XRefreshView refreshView;
+    private int page;
+    private ClassListAdapter adapter;
 
     public static ClassFragment newInstance() {
         ClassFragment fragment = new ClassFragment();
@@ -96,12 +102,17 @@ public class ClassFragment extends BaseFragment<ClassPresenter> implements Class
 
     @Override
     public void initData(Bundle savedInstanceState) {
-        mPresenter.getMyClassList();
+        initRecycleView();
+        adapter = new ClassListAdapter(new ArrayList<>());
+        mRecyclerView.setAdapter(adapter);
+        mPresenter.getMyClassList(page);
+        setData(null);
     }
 
 
     @Override
     public void setData(Object data) {
+        page = 0;
         UserInfoBean userInfo = MyApplication.getInstance().getUserInfoBean();
         userName.setText(userInfo.getNickName());
         if (userInfo.getOrganizationResponse() != null && TextUtils.isEmpty(userInfo.getOrganizationResponse().getName())) {
@@ -117,17 +128,17 @@ public class ClassFragment extends BaseFragment<ClassPresenter> implements Class
                     .transform(new GlideRoundTransform(getActivity(), 360))
                     .into(userImage);
         }
-
+        mPresenter.getMyClassList(page);
     }
-
 
     @Override
     public void showLoading() {
-
+        LoadingView.showLoading(getActivity());
     }
 
     @Override
     public void hideLoading() {
+        LoadingView.dismissLoading();
     }
 
     @Override
@@ -147,61 +158,54 @@ public class ClassFragment extends BaseFragment<ClassPresenter> implements Class
 
     }
 
-
     @Override
-    public void setAdapter(DefaultAdapter adapter) {
-
+    public void stopLoadMore() {
+        page++;
+        refreshView.stopLoadMore();
     }
 
     @Override
-    public void startLoadMore() {
-
+    public void setList(List<ClassBean> list) {
+        adapter.setmInfos(list);
     }
 
     @Override
     public void endLoadMore() {
-
+        refreshView.setLoadComplete(true);
     }
 
-    @Override
-    public void onRefresh() {
 
-    }
-
-    /**
-     * 初始化Paginate,用于加载更多
-     */
-    private void initPaginate() {
-        if (mPaginate == null) {
-            Paginate.Callbacks callbacks = new Paginate.Callbacks() {
-                @Override
-                public void onLoadMore() {
-                    mPresenter.getMyClassList();
-                }
-
-                @Override
-                public boolean isLoading() {
-                    return true;
-                }
-
-                @Override
-                public boolean hasLoadedAllItems() {
-                    return false;
-                }
-            };
-
-            mPaginate = Paginate.with(mRecyclerView, callbacks)
-                    .setLoadingTriggerThreshold(0)
-                    .build();
-            mPaginate.setHasMoreDataToLoad(false);
-        }
-    }
     /**
      * 初始化RecycleView
      */
     private void initRecycleView() {
-        swipeRefreshLayout.setOnRefreshListener(this);
         UiUtils.configRecycleView(mRecyclerView, new LinearLayoutManager(getActivity()));
+        Utils.initFreshView(refreshView);
+        refreshView.setXRefreshViewListener(new XRefreshView.SimpleXRefreshListener() {
+            @Override
+            public void onRefresh(boolean isPullDown) {
+            }
+
+            @Override
+            public void onLoadMore(boolean isSilence) {
+                mPresenter.getMyClassList(page);
+            }
+
+            @Override
+            public void onRelease(float direction) {
+                super.onRelease(direction);
+            }
+        });
     }
 
+    @Override
+    public void setJoinClassCount(String classCount) {
+        joinClassCount.setText("已加入" + classCount + "个班级");
+    }
+
+    @Override
+    public void add(List<ClassBean> list) {
+        adapter.getInfos().addAll(list);
+        adapter.notifyDataSetChanged();
+    }
 }

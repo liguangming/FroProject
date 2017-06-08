@@ -4,6 +4,8 @@ import android.content.Context;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 
+import com.andview.refreshview.XRefreshView;
+
 import org.fro.common.widgets.locationview.entity.ProvinceData;
 
 import java.io.BufferedReader;
@@ -66,5 +68,16 @@ public class Utils {
         }
         ArrayList<ProvinceData> array_Province = (ArrayList<ProvinceData>) com.alibaba.fastjson.JSONObject.parseArray(sb.toString(), ProvinceData.class);
         return array_Province;
+    }
+
+    public static void initFreshView(XRefreshView refreshView){
+        refreshView.setPullLoadEnable(true);
+        refreshView.setPullRefreshEnable(false);
+        //当下拉刷新被禁用时，调用这个方法并传入false可以不让头部被下拉
+        refreshView.setMoveHeadWhenDisablePullRefresh(false);
+        refreshView.setMoveFootWhenDisablePullLoadMore(false);
+        refreshView.enablePullUpWhenLoadCompleted(false);
+        // 设置时候可以自动刷新
+        refreshView.setAutoRefresh(false);
     }
 }

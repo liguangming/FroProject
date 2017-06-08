@@ -16,6 +16,7 @@ import fro.org.froproject.mvp.contract.ClassContract;
 import fro.org.froproject.mvp.model.entity.BaseJson;
 import fro.org.froproject.mvp.model.entity.ClassBean;
 import fro.org.froproject.mvp.model.entity.ClassListBean;
+import fro.org.froproject.mvp.ui.adapter.ClassListAdapter;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.schedulers.Schedulers;
 import me.jessyan.rxerrorhandler.core.RxErrorHandler;
@@ -34,7 +35,7 @@ public class ClassPresenter extends BasePresenter<ClassContract.Model, ClassCont
     private Application mApplication;
     private ImageLoader mImageLoader;
     private AppManager mAppManager;
-    int page;
+    int mpage;
 
     @Inject
     public ClassPresenter(ClassContract.Model model, ClassContract.View rootView
@@ -56,40 +57,40 @@ public class ClassPresenter extends BasePresenter<ClassContract.Model, ClassCont
         this.mApplication = null;
     }
 
-    public void getMyClassList() {
+    public void getMyClassList(final int page) {
+        mpage=page;
         mModel.getMyClassList(page, Constants.PAGE_SIZE)
                 .subscribeOn(Schedulers.io())
                 .doOnSubscribe(disposable -> {
-                    if (true)
-                        mRootView.showLoading();//显示上拉刷新的进度条
-                    else
-                        mRootView.startLoadMore();//显示下拉加载更多的进度条
+                    if (0 == page) {
+                        mRootView.showLoading();
+                    }
                 }).subscribeOn(AndroidSchedulers.mainThread())
                 .observeOn(AndroidSchedulers.mainThread())
                 .doAfterTerminate(() -> {
-                    if (true)
-                        mRootView.hideLoading();//隐藏上拉刷新的进度条
-                    else
-                        mRootView.endLoadMore();//隐藏下拉加载更多的进度条
+                    mRootView.hideLoading();
                 })
-                .compose(RxUtils.bindToLifecycle(mRootView))//使用RXlifecycle,使subscription和activity一起销毁
+                .compose(RxUtils.bindToLifecycle(mRootView))
                 .subscribe(new ErrorHandleSubscriber<BaseJson>(mErrorHandler) {
                     @Override
                     public void onNext(BaseJson baseJson) {
                         if (baseJson.isSuccess()) {
-
+                            List<ClassBean> list = ((ClassListBean) baseJson.getD()).getPagedResult().getDataList();
+                            if(page==0){
+                                mRootView.setList(list);
+                            }else {
+                                mRootView.add(list);
+                            }
+                            if (page + 1 == ((ClassListBean) baseJson.getD()).getPagedResult().getPages()) {//加载完毕
+                                mRootView.endLoadMore();
+                            } else {
+                                mRootView.stopLoadMore();
+                            }
+                            mRootView.setJoinClassCount(((ClassListBean) baseJson.getD()).getJoinClassNumber());
                         } else {
                             if (!TextUtils.isEmpty(baseJson.getM()))
                                 mRootView.showMessage(baseJson.getM());
                         }
-//                        lastUserId = users.get(users.size() - 1).getId();//记录最后一个id,用于下一次请求
-//                        if (pullToRefresh) mUsers.clear();//如果是上拉刷新则清空列表
-//                        preEndIndex = mUsers.size();//更新之前列表总长度,用于确定加载更多的起始位置
-//                        mUsers.addAll(users);
-//                        if (pullToRefresh)
-//                            mAdapter.notifyDataSetChanged();
-//                        else
-//                            mAdapter.notifyItemRangeInserted(preEndIndex, users.size());
                     }
                 });
     }
