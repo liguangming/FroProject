@@ -6,6 +6,8 @@ import java.util.List;
 import fro.org.froproject.mvp.model.entity.BaseJson;
 import fro.org.froproject.mvp.model.entity.ClassBean;
 import fro.org.froproject.mvp.model.entity.ClassListBean;
+import fro.org.froproject.mvp.model.entity.HistoryClassBean;
+import fro.org.froproject.mvp.model.entity.HistoryClassListBean;
 import fro.org.froproject.mvp.model.entity.OrgBean;
 import fro.org.froproject.mvp.model.entity.CommonBean;
 import fro.org.froproject.mvp.model.entity.UserInfoBean;
@@ -121,7 +123,25 @@ public interface CommonService {
     @POST("pic/imageup")
     Observable<BaseJson<CommonBean>> uploadImg(@Part("upfile\"; filename=\"test.jpg\"") RequestBody body, @Header(HEADER_API_TOKEN) String token);
 
+    /**
+     * 获取我的班级
+     *
+     * @param token
+     * @param page
+     * @param pageSize
+     * @return
+     */
+
     @Headers({HEADER_API_VERSION, HEADER_API_VERSION1})
     @GET("class/get/current")
     Observable<BaseJson<ClassListBean<ClassBean>>> getMyClassList(@Header(HEADER_API_TOKEN) String token, @Query("page") int page, @Query("size") int pageSize);
+
+    /**
+     * 获取历史班级列表
+     *
+     * @return
+     */
+    @Headers({HEADER_API_VERSION, HEADER_API_VERSION1})
+    @GET("class/get/history")
+    Observable<BaseJson<HistoryClassListBean<HistoryClassBean>>> getHistoryClassList(@Header(HEADER_API_TOKEN) String token, @Query("page") int page, @Query("size") int pageSize);
 }

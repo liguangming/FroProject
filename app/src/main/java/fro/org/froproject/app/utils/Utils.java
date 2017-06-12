@@ -37,18 +37,19 @@ public class Utils {
         }
         return null;
     }
+
     /**
      * 隐藏输入法
-     * */
+     */
     public static void hideKeyboard(Context context, View view) {
         InputMethodManager imm = (InputMethodManager) context.getSystemService(Context.INPUT_METHOD_SERVICE);
         imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
     }
 
     /**
-     *  获取地区数据
+     * 获取地区数据
      */
-    public static ArrayList<ProvinceData> getLoctionData(Context context){
+    public static ArrayList<ProvinceData> getLoctionData(Context context) {
         StringBuffer sb = new StringBuffer();
         try {
             // 字节流
@@ -70,7 +71,7 @@ public class Utils {
         return array_Province;
     }
 
-    public static void initFreshView(XRefreshView refreshView){
+    public static void initFreshView(XRefreshView refreshView) {
         refreshView.setPullLoadEnable(true);
         refreshView.setPullRefreshEnable(false);
         //当下拉刷新被禁用时，调用这个方法并传入false可以不让头部被下拉
@@ -80,4 +81,5 @@ public class Utils {
         // 设置时候可以自动刷新
         refreshView.setAutoRefresh(false);
     }
+
 }

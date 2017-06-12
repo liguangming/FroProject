@@ -9,4 +9,8 @@
     <color name="blue_bg">#3981d2</color>
     <color name="item_white_pressed">#f3f3f3</color>
     <color name="line_color">#cacaca</color>
+    <color name="history_pass">#def3ff</color>
+    <color name="history_not_pass">#f7f7f9</color>
+    <color name="history_not_pass_text">#b4b4c2</color>
+    <color name="history_pass_text">#34adef</color>
 </resources>

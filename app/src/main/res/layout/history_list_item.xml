@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8"?>
+<org.fro.common.widgets.tab.roundtextview.RoundRelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="282px"
+    app:rv_backgroundColor="@color/white"
+    app:rv_cornerRadius="20px">
+
+    <ImageView
+        android:id="@+id/image"
+        android:layout_width="137px"
+        android:layout_height="137px"
+        android:layout_marginLeft="30px"
+        android:layout_marginTop="30px"
+        android:src="@mipmap/history"
+        app:layout_auto_baseheight="width" />
+
+    <RelativeLayout
+        android:id="@+id/course_layout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="28px"
+        android:layout_marginTop="38px"
+        android:layout_toLeftOf="@+id/round_text"
+        android:layout_toRightOf="@id/image">
+
+        <TextView
+            android:id="@+id/course_name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ellipsize="end"
+            android:singleLine="true"
+            android:textColor="#454545"
+            android:textSize="42px" />
+
+        <TextView
+            android:id="@+id/date"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/course_name"
+            android:layout_marginTop="35px"
+            android:layout_toRightOf="@id/layout"
+            android:drawableLeft="@mipmap/ico_calendar"
+            android:drawablePadding="10px"
+            android:gravity="center_vertical"
+            android:textColor="#666666"
+            android:textSize="34px" />
+    </RelativeLayout>
+
+    <org.fro.common.widgets.tab.roundtextview.RoundRelativeLayout
+        android:id="@+id/round_text"
+        android:layout_width="140px"
+        android:layout_height="58px"
+        android:layout_alignParentRight="true"
+        android:layout_marginRight="36px"
+        android:layout_marginTop="38px"
+        app:rv_backgroundColor="#def3ff"
+        app:rv_cornerRadius="8px">
+
+        <TextView
+            android:id="@+id/pass_status"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:maxLines="1"
+            android:textColor="#34adef"
+            android:textSize="30px" />
+    </org.fro.common.widgets.tab.roundtextview.RoundRelativeLayout>
+
+    <View
+        android:id="@+id/middle_line"
+        android:layout_width="match_parent"
+        android:layout_height="2px"
+        android:layout_below="@id/course_layout"
+        android:layout_marginLeft="28px"
+        android:layout_marginRight="36px"
+        android:layout_marginTop="35px"
+        android:layout_toRightOf="@id/image"
+        android:background="#e2ecf1" />
+
+    <TextView
+        android:id="@+id/course_total_num"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/middle_line"
+        android:layout_marginLeft="28px"
+        android:layout_marginTop="10px"
+        android:layout_toRightOf="@id/image"
+        android:textColor="#a2aaac"
+        android:textSize="32px" />
+</org.fro.common.widgets.tab.roundtextview.RoundRelativeLayout>

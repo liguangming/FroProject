@@ -79,4 +79,7 @@
     <string name="course_unit">节课</string>
     <string name="pass_course">已通过课程：</string>
     <string name="order_right">课</string>
+    <string name="history_class">历史班级</string>
+    <string name="passed">已通过</string>
+    <string name="not_passed_tips">未通过</string>
 </resources>

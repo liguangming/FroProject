@@ -40,6 +40,7 @@ import fro.org.froproject.mvp.model.api.Api;
 import fro.org.froproject.mvp.model.entity.ClassBean;
 import fro.org.froproject.mvp.model.entity.UserInfoBean;
 import fro.org.froproject.mvp.presenter.ClassPresenter;
+import fro.org.froproject.mvp.ui.activity.HistoryActivity;
 import fro.org.froproject.mvp.ui.adapter.ClassListAdapter;
 import fro.org.froproject.mvp.ui.view.GlideRoundTransform;
 import fro.org.froproject.mvp.ui.view.HeadView;
@@ -104,8 +105,16 @@ public class ClassFragment extends BaseFragment<ClassPresenter> implements Class
     public void initData(Bundle savedInstanceState) {
         initRecycleView();
         adapter = new ClassListAdapter(new ArrayList<>());
+        setEmptyView(true);
         mRecyclerView.setAdapter(adapter);
         mPresenter.getMyClassList(page);
+        headView.setRightText(R.string.history_class);
+        headView.setRightListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                UiUtils.startActivity(HistoryActivity.class);
+            }
+        });
         setData(null);
     }
 
@@ -167,6 +176,7 @@ public class ClassFragment extends BaseFragment<ClassPresenter> implements Class
     @Override
     public void setList(List<ClassBean> list) {
         adapter.setmInfos(list);
+
     }
 
     @Override
@@ -183,17 +193,8 @@ public class ClassFragment extends BaseFragment<ClassPresenter> implements Class
         Utils.initFreshView(refreshView);
         refreshView.setXRefreshViewListener(new XRefreshView.SimpleXRefreshListener() {
             @Override
-            public void onRefresh(boolean isPullDown) {
-            }
-
-            @Override
             public void onLoadMore(boolean isSilence) {
                 mPresenter.getMyClassList(page);
-            }
-
-            @Override
-            public void onRelease(float direction) {
-                super.onRelease(direction);
             }
         });
     }
@@ -207,5 +208,9 @@ public class ClassFragment extends BaseFragment<ClassPresenter> implements Class
     public void add(List<ClassBean> list) {
         adapter.getInfos().addAll(list);
         adapter.notifyDataSetChanged();
+    }
+    @Override
+    public void setEmptyView(boolean visible) {
+        emptyView.setVisibility(visible ? View.VISIBLE : View.GONE);
     }
 }

@@ -36,17 +36,17 @@
             android:listSelector="@android:color/transparent"
             android:scrollbars="none" />
 
+        <LinearLayout
+            android:id="@+id/empty_layout"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@id/tab_layout_main"
+            android:background="@color/white"
+            android:orientation="vertical">
+
+            <include layout="@layout/empty_view" />
+        </LinearLayout>
     </com.andview.refreshview.XRefreshView>
 
-    <LinearLayout
-        android:id="@+id/empty_layout"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_below="@id/tab_layout_main"
-        android:background="@color/white"
-        android:orientation="vertical"
-        android:visibility="gone">
 
-        <include layout="@layout/empty_view" />
-    </LinearLayout>
 </RelativeLayout>

@@ -77,9 +77,14 @@ public class ClassPresenter extends BasePresenter<ClassContract.Model, ClassCont
                         if (baseJson.isSuccess()) {
                             List<ClassBean> list = ((ClassListBean) baseJson.getD()).getPagedResult().getDataList();
                             if(page==0){
-                                mRootView.setList(list);
+                                if(list==null||list.size()==0){
+                                    mRootView.setEmptyView(true);
+                                }else {
+                                    mRootView.setList(list);
+                                }
                             }else {
                                 mRootView.add(list);
+                                mRootView.setEmptyView(false);
                             }
                             if (page + 1 == ((ClassListBean) baseJson.getD()).getPagedResult().getPages()) {//加载完毕
                                 mRootView.endLoadMore();
