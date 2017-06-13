@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="175px"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@color/white">
+
+    <TextView
+        android:singleLine="true"
+        android:ellipsize="end"
+        android:id="@+id/course_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:layout_marginLeft="72px"
+        android:layout_weight="1"
+        android:gravity="center_vertical"
+        android:text="第一课 金融风险概念解析"
+        android:textColor="#333333"
+        android:textSize="40px" />
+
+
+    <org.fro.common.widgets.tab.roundtextview.RoundRelativeLayout
+        android:id="@+id/status_layout"
+        android:layout_width="141px"
+        android:layout_height="58px"
+        android:layout_centerVertical="true"
+        android:layout_marginRight="28px"
+        android:layout_toLeftOf="@+id/right_arrow"
+        app:rv_backgroundColor="#def3ff"
+        app:rv_cornerRadius="8px">
+
+        <TextView
+            android:id="@+id/status_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:textColor="#34adef"
+            android:textSize="32px" />
+    </org.fro.common.widgets.tab.roundtextview.RoundRelativeLayout>
+
+
+
+    <ImageView
+        android:id="@+id/right_arrow"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_centerVertical="true"
+        android:paddingRight="43px"
+        android:src="@mipmap/icon_pass_arrow_right" />
+
+    <View
+        style="@style/CommonLineStyle"
+        android:layout_alignParentBottom="true"
+        android:background="#f1f1f1" />
+</RelativeLayout>

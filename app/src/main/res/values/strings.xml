@@ -82,4 +82,14 @@
     <string name="history_class">历史班级</string>
     <string name="passed">已通过</string>
     <string name="not_passed_tips">未通过</string>
+    <string name="not_passed">待通过</string>
+    <string name="search_course">搜索课程</string>
+    <string name="my_course">我的课程</string>
+    <string name="progress_score">进度与成绩</string>
+    <string name="order_left">第</string>
+    <string name="pass_time1">通过时间：</string>
+    <string name="passed_">已通过：</string>
+    <string name="not_passed_">未通过：</string>
+    <string name="not_study_">未学习</string>
+    <string name="no_info">暂无数据</string>
 </resources>

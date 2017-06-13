@@ -400,4 +400,5 @@ public class UiUtils {
         message.what = APP_EXIT;
         EventBus.getDefault().post(message, APPMANAGER_MESSAGE);
     }
+
 }

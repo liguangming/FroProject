@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/bg">
+
+    <fro.org.froproject.mvp.ui.view.HeadView
+        android:id="@+id/headView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <LinearLayout
+        android:id="@+id/select_layout"
+        android:layout_width="match_parent"
+        android:layout_height="125px"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/headView"
+        android:background="@color/white"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="115px"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/pass_btn"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_gravity="center_vertical"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:text="@string/passed"
+                android:textColor="#3a87d7"
+                android:textSize="40px" />
+
+            <View
+                style="@style/CommonLineStyle"
+                android:layout_width="2px"
+                android:layout_height="match_parent"
+                android:background="#ebebeb" />
+
+            <TextView
+                android:id="@+id/not_pass_btn"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_gravity="center_vertical"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:text="@string/not_passed"
+                android:textColor="#7a8691"
+                android:textSize="40px" />
+        </LinearLayout>
+
+        <View
+            android:id="@+id/line_view"
+            android:layout_width="540px"
+            android:layout_height="10px"
+            android:layout_below="@+id/select_layout"
+            android:background="#3a87d7" />
+    </LinearLayout>
+
+    <View
+        android:id="@+id/middle_line"
+        android:layout_width="match_parent"
+        android:layout_height="2px"
+        android:layout_below="@+id/select_layout"
+        android:background="#ebebeb" />
+
+
+    <org.fro.common.widgets.tab.roundtextview.RoundRelativeLayout
+        android:id="@+id/search_view_layout"
+        android:layout_width="1011px"
+        android:layout_height="91px"
+        android:layout_below="@id/middle_line"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="22px"
+        app:rv_backgroundColor="@color/white"
+        app:rv_cornerRadius="10px">
+
+        <fro.org.froproject.mvp.ui.view.SearchView
+            android:id="@+id/search_view"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_centerInParent="true" />
+    </org.fro.common.widgets.tab.roundtextview.RoundRelativeLayout>
+
+    <android.support.v4.view.ViewPager
+        android:id="@+id/viewpager"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:layout_below="@id/search_view_layout"
+        android:flipInterval="30"
+        android:persistentDrawingCache="animation" />
+
+</RelativeLayout>

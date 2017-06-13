@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/search_bar"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:focusable="true"
+    android:focusableInTouchMode="true">
+
+    <EditText
+        android:id="@+id/search_edit"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/layout"
+        android:layout_alignTop="@+id/layout"
+        android:layout_centerVertical="true"
+        android:layout_toLeftOf="@+id/search_img_right"
+        android:background="@color/cd_transparent"
+        android:imeOptions="actionSearch"
+        android:inputType="text"
+        android:maxLength="30"
+        android:singleLine="true"
+        android:textColor="@color/cd_black"
+        android:textSize="40px" />
+
+    <LinearLayout
+        android:id="@+id/layout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_centerInParent="true"
+        android:layout_centerVertical="true">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_gravity="center_vertical"
+            android:drawableLeft="@mipmap/ico_search_bar"
+            android:drawablePadding="16px"
+            android:drawableStart="@mipmap/ico_search_bar"
+            android:gravity="center"
+            android:text="@string/search_course"
+            android:textColor="#aeaebb"
+            android:textSize="40px" />
+    </LinearLayout>
+
+    <ImageView
+        android:id="@+id/search_img_right"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_centerVertical="true"
+        android:layout_marginRight="30px"
+        android:src="@mipmap/ico_search_bar"
+        android:visibility="gone" />
+</RelativeLayout>

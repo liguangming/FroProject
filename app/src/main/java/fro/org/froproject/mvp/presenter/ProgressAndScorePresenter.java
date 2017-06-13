@@ -10,35 +10,34 @@ import com.jess.arms.widget.imageloader.ImageLoader;
 
 import java.util.List;
 
-import fro.org.froproject.app.Constants;
 import fro.org.froproject.app.utils.RxUtils;
-import fro.org.froproject.mvp.contract.ClassContract;
+import fro.org.froproject.mvp.contract.ProgressAndScoreContract;
 import fro.org.froproject.mvp.model.entity.BaseJson;
 import fro.org.froproject.mvp.model.entity.ClassBean;
 import fro.org.froproject.mvp.model.entity.ClassListBean;
-import fro.org.froproject.mvp.ui.adapter.ClassListAdapter;
+import fro.org.froproject.mvp.model.entity.CourseResponseBean;
+import fro.org.froproject.mvp.model.entity.ScoreBean;
+import fro.org.froproject.mvp.model.entity.ScoreClassBean;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.schedulers.Schedulers;
 import me.jessyan.rxerrorhandler.core.RxErrorHandler;
 import me.jessyan.rxerrorhandler.handler.ErrorHandleSubscriber;
-import me.jessyan.rxerrorhandler.handler.RetryWithDelay;
 
 import javax.inject.Inject;
 
 /**
- * Created by Lgm on 2017/6/7 0007.
+ * Created by Lgm on 2017/6/13 0013.
  */
 
 @ActivityScope
-public class ClassPresenter extends BasePresenter<ClassContract.Model, ClassContract.View> {
+public class ProgressAndScorePresenter extends BasePresenter<ProgressAndScoreContract.Model, ProgressAndScoreContract.View> {
     private RxErrorHandler mErrorHandler;
     private Application mApplication;
     private ImageLoader mImageLoader;
     private AppManager mAppManager;
-    int mpage;
 
     @Inject
-    public ClassPresenter(ClassContract.Model model, ClassContract.View rootView
+    public ProgressAndScorePresenter(ProgressAndScoreContract.Model model, ProgressAndScoreContract.View rootView
             , RxErrorHandler handler, Application application
             , ImageLoader imageLoader, AppManager appManager) {
         super(model, rootView);
@@ -57,9 +56,8 @@ public class ClassPresenter extends BasePresenter<ClassContract.Model, ClassCont
         this.mApplication = null;
     }
 
-    public void getMyClassList(final int page) {
-        mpage = page;
-        mModel.getMyClassList(page, Constants.PAGE_SIZE)
+    public void getScoreClassList(int page) {
+        mModel.getScoreClassList(page)
                 .subscribeOn(Schedulers.io())
                 .doOnSubscribe(disposable -> mRootView.showLoading())
                 .subscribeOn(AndroidSchedulers.mainThread())
@@ -70,23 +68,21 @@ public class ClassPresenter extends BasePresenter<ClassContract.Model, ClassCont
                     @Override
                     public void onNext(BaseJson baseJson) {
                         if (baseJson.isSuccess()) {
-                            List<ClassBean> list = ((ClassListBean) baseJson.getD()).getPagedResult().getDataList();
-                            if (page == 0) {
-                                if (list == null || list.size() == 0) {
-                                    mRootView.setEmptyView(true);
+                            if (baseJson.isSuccess()) {
+                                ScoreBean<ScoreClassBean> data = (ScoreBean<ScoreClassBean>) baseJson.getD();
+                                if (page == 0) {
+                                    mRootView.setList(data.getPagedResult().getDataList());
                                 } else {
-                                    mRootView.setList(list);
+                                    mRootView.addList(data.getPagedResult().getDataList());
+                                }
+                                if (page + 1 == data.getPagedResult().getPages() || data.getPagedResult().getPages() == 0) {
+                                    mRootView.endLoadMore();
+                                } else {
+                                    mRootView.stopLoadMore();
                                 }
                             } else {
-                                mRootView.add(list);
-                                mRootView.setEmptyView(false);
+                                mRootView.showMessage(baseJson.getM());
                             }
-                            if (page + 1 == ((ClassListBean) baseJson.getD()).getPagedResult().getPages()) {//加载完毕
-                                mRootView.endLoadMore();
-                            } else {
-                                mRootView.stopLoadMore();
-                            }
-                            mRootView.setJoinClassCount(((ClassListBean) baseJson.getD()).getJoinClassNumber());
                         } else {
                             if (!TextUtils.isEmpty(baseJson.getM()))
                                 mRootView.showMessage(baseJson.getM());

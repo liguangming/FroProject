@@ -1,0 +1,168 @@
+<?xml version="1.0" encoding="utf-8"?>
+<org.fro.common.widgets.tab.roundtextview.RoundRelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    app:rv_backgroundColor="@color/white"
+    app:rv_cornerRadius="7px">
+
+    <ImageView
+        android:id="@+id/image"
+        android:layout_width="137px"
+        android:layout_height="137px"
+        android:layout_marginLeft="30px"
+        android:layout_marginTop="30px"
+        android:src="@mipmap/history"
+        app:layout_auto_baseheight="width" />
+
+    <fro.org.froproject.mvp.ui.view.RoundProgressBar
+        android:id="@+id/round_progress"
+        android:layout_width="100px"
+        android:layout_height="100px"
+        android:layout_alignParentRight="true"
+        android:layout_marginRight="35px"
+        android:layout_marginTop="38px"
+        app:defaultRoundProgressColor="#f2f2f2"
+        app:layout_auto_baseheight="width|height"
+        app:roundProgressColor="#639bd8"
+        app:roundWidth="6px"
+        app:style="STROKE"
+        app:textColor="#949494"
+        app:textIsDisplayable="true"
+        app:textSize="10sp" />
+    <RelativeLayout
+        android:id="@+id/course_layout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="28px"
+        android:layout_marginTop="38px"
+        android:layout_toLeftOf="@+id/round_text"
+        android:layout_toRightOf="@id/image">
+
+        <TextView
+            android:singleLine="true"
+            android:id="@+id/course_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:ellipsize="end"
+            android:maxLines="1"
+            android:textColor="#454545"
+            android:textSize="42px" />
+
+        <LinearLayout
+            android:id="@+id/course_count_layout"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignLeft="@id/course_name"
+            android:layout_below="@id/course_name"
+            android:layout_marginTop="35px">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:src="@mipmap/history_book_blue" />
+
+            <TextView
+                android:id="@+id/course_total_num"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="14px"
+                android:textColor="#666666"
+                android:textSize="34px" />
+        </LinearLayout>
+    </RelativeLayout>
+
+    <View
+        android:id="@+id/middle_line"
+        android:layout_width="match_parent"
+        android:layout_height="2px"
+        android:layout_below="@id/course_layout"
+        android:layout_marginLeft="28px"
+        android:layout_marginRight="36px"
+        android:layout_marginTop="36px"
+        android:layout_toRightOf="@id/image"
+        android:background="#e2ecf1" />
+
+    <LinearLayout
+        android:id="@+id/linear_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/middle_line"
+        android:layout_below="@id/middle_line"
+        android:layout_marginTop="35px"
+        android:orientation="horizontal">
+
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:id="@+id/pass_course_num"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_gravity="center_vertical"
+                android:gravity="center_vertical"
+                android:text="xxxxxxx"
+                android:textColor="#34adef"
+                android:textSize="32px" />
+
+            <View
+
+                android:id="@+id/line1"
+                android:layout_width="2px"
+                android:layout_height="35px"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="28px"
+                android:layout_toRightOf="@id/pass_course_num"
+                android:background="#e2ecf1" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="28px">
+
+            <TextView
+                android:id="@+id/not_pass_course_num"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_gravity="center_vertical"
+                android:gravity="left"
+                android:text="xxxxxxx"
+                android:textColor="#a2aaac"
+                android:textSize="32px" />
+
+            <View
+                android:id="@+id/line2"
+                android:layout_width="2px"
+                android:layout_height="35px"
+                android:layout_marginLeft="28px"
+                android:layout_toRightOf="@id/not_pass_course_num"
+                android:background="#e2ecf1" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="28px">
+
+            <TextView
+                android:id="@+id/not_study_course_num"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:text="xxxxxxx"
+                android:textColor="#a2aaac"
+                android:textSize="32px" />
+        </RelativeLayout>
+    </LinearLayout>
+
+    <View
+        android:layout_width="wrap_content"
+        android:layout_height="28px"
+        android:layout_below="@id/linear_layout"
+        android:visibility="invisible" />
+</org.fro.common.widgets.tab.roundtextview.RoundRelativeLayout>

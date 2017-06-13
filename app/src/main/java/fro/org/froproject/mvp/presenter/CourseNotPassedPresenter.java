@@ -1,23 +1,22 @@
 package fro.org.froproject.mvp.presenter;
 
 import android.app.Application;
-import android.content.Intent;
 
 import com.jess.arms.integration.AppManager;
 import com.jess.arms.di.scope.ActivityScope;
 import com.jess.arms.mvp.BasePresenter;
 import com.jess.arms.widget.imageloader.ImageLoader;
 
-import fro.org.froproject.app.MyApplication;
+import java.util.ArrayList;
+
 import fro.org.froproject.app.utils.RxUtils;
-import fro.org.froproject.mvp.contract.HistoryContract;
+import fro.org.froproject.mvp.contract.CourseNotPassedContract;
 import fro.org.froproject.mvp.model.entity.BaseJson;
+import fro.org.froproject.mvp.model.entity.CourseBean;
+import fro.org.froproject.mvp.model.entity.CourseResponseBean;
 import fro.org.froproject.mvp.model.entity.HistoryClassListBean;
-import fro.org.froproject.mvp.model.entity.UserInfoBean;
-import fro.org.froproject.mvp.ui.activity.MainGridActivity;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.annotations.NonNull;
-import io.reactivex.internal.schedulers.ScheduledRunnable;
 import io.reactivex.schedulers.Schedulers;
 import me.jessyan.rxerrorhandler.core.RxErrorHandler;
 import me.jessyan.rxerrorhandler.handler.ErrorHandleSubscriber;
@@ -25,19 +24,18 @@ import me.jessyan.rxerrorhandler.handler.ErrorHandleSubscriber;
 import javax.inject.Inject;
 
 /**
- * Created by Lgm on 2017/6/12 0012.
+ * Created by Lgm on 2017/6/13 0013.
  */
 
 @ActivityScope
-public class HistoryPresenter extends BasePresenter<HistoryContract.Model, HistoryContract.View> {
+public class CourseNotPassedPresenter extends BasePresenter<CourseNotPassedContract.Model, CourseNotPassedContract.View> {
     private RxErrorHandler mErrorHandler;
     private Application mApplication;
     private ImageLoader mImageLoader;
     private AppManager mAppManager;
-    int mPage;
 
     @Inject
-    protected HistoryPresenter(HistoryContract.Model model, HistoryContract.View rootView
+    public CourseNotPassedPresenter(CourseNotPassedContract.Model model, CourseNotPassedContract.View rootView
             , RxErrorHandler handler, Application application
             , ImageLoader imageLoader, AppManager appManager) {
         super(model, rootView);
@@ -56,25 +54,25 @@ public class HistoryPresenter extends BasePresenter<HistoryContract.Model, Histo
         this.mApplication = null;
     }
 
-    public void getHistoryClassList(int page, int size) {
-        mPage = page;
-        mModel.getHistoryClassList(page, size).subscribeOn(Schedulers.io())
+    public void getNotPassCourseList(int page, int pageSize) {
+        mModel.getNotPassCourseList(page, pageSize)
+                .subscribeOn(Schedulers.io())
                 .doOnSubscribe(disposable -> mRootView.showLoading())
                 .subscribeOn(AndroidSchedulers.mainThread())
                 .observeOn(AndroidSchedulers.mainThread())
                 .doAfterTerminate(() -> mRootView.hideLoading())
-                .compose(RxUtils.bindToLifecycle(mRootView))//使用RXlifecycle,使subscription和activity一起销毁
+                .compose(RxUtils.bindToLifecycle(mRootView))
                 .subscribe(new ErrorHandleSubscriber<BaseJson>(mErrorHandler) {
                     @Override
                     public void onNext(@NonNull BaseJson baseJson) {
                         if (baseJson.isSuccess()) {
-                            HistoryClassListBean history = (HistoryClassListBean) baseJson.getD();
+                            CourseResponseBean courseList = (CourseResponseBean) baseJson.getD();
                             if (page == 0) {
-                                mRootView.setList(history.getPagedResult().getDataList());
+                                mRootView.setList(courseList.getDataList());
                             } else {
-                                mRootView.addList(history.getPagedResult().getDataList());
+                                mRootView.addList(courseList.getDataList());
                             }
-                            if (page + 1 == history.getPagedResult().getPages() || history.getPagedResult().getPages() == 0) {
+                            if (page + 1 == courseList.getPages() || courseList.getPages() == 0) {
                                 mRootView.endLoadMore();
                             } else {
                                 mRootView.stopLoadMore();
@@ -85,4 +83,5 @@ public class HistoryPresenter extends BasePresenter<HistoryContract.Model, Histo
                     }
                 });
     }
+
 }

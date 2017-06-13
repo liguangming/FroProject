@@ -1,15 +1,17 @@
 package fro.org.froproject.mvp.model.api.service;
 
-import java.util.IdentityHashMap;
 import java.util.List;
 
 import fro.org.froproject.mvp.model.entity.BaseJson;
 import fro.org.froproject.mvp.model.entity.ClassBean;
 import fro.org.froproject.mvp.model.entity.ClassListBean;
+import fro.org.froproject.mvp.model.entity.CommonBean;
+import fro.org.froproject.mvp.model.entity.CourseResponseBean;
 import fro.org.froproject.mvp.model.entity.HistoryClassBean;
 import fro.org.froproject.mvp.model.entity.HistoryClassListBean;
 import fro.org.froproject.mvp.model.entity.OrgBean;
-import fro.org.froproject.mvp.model.entity.CommonBean;
+import fro.org.froproject.mvp.model.entity.ScoreBean;
+import fro.org.froproject.mvp.model.entity.ScoreClassBean;
 import fro.org.froproject.mvp.model.entity.UserInfoBean;
 import io.reactivex.Observable;
 import okhttp3.RequestBody;
@@ -31,7 +33,6 @@ import retrofit2.http.Query;
 public interface CommonService {
     String HEADER_API_VERSION = "Accept: application/json";
     String HEADER_API_VERSION1 = "Content-Type: application/json";
-    String HEADER_API_VERSION2 = "Content-Type: multipart/form-data";
     String HEADER_API_TOKEN = "Session-Token";
 
     /**
@@ -144,4 +145,27 @@ public interface CommonService {
     @Headers({HEADER_API_VERSION, HEADER_API_VERSION1})
     @GET("class/get/history")
     Observable<BaseJson<HistoryClassListBean<HistoryClassBean>>> getHistoryClassList(@Header(HEADER_API_TOKEN) String token, @Query("page") int page, @Query("size") int pageSize);
+
+    /**
+     *
+     * 获取课程列表
+     * @param body
+     * @param token
+     * @return
+     */
+    @Headers({HEADER_API_VERSION, HEADER_API_VERSION1})
+    @POST("course/process/list")
+    Observable<BaseJson<CourseResponseBean>> getNotPassCourseList(@Body RequestBody body, @Header(HEADER_API_TOKEN) String token);
+
+    /**
+     * 获取进度与成绩列表
+     * @param page
+     * @param pageSize
+     * @param token
+     * @return
+     */
+
+    @Headers({HEADER_API_VERSION, HEADER_API_VERSION1})
+    @GET("class/get/process")
+    Observable<BaseJson<ScoreBean<ScoreClassBean>>> getScoreClassList( @Query("page") int page, @Query("size")int pageSize,@Header(HEADER_API_TOKEN)  String token);
 }

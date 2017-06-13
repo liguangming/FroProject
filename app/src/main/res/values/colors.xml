@@ -13,4 +13,10 @@
     <color name="history_not_pass">#f7f7f9</color>
     <color name="history_not_pass_text">#b4b4c2</color>
     <color name="history_pass_text">#34adef</color>
+    <color name="pass">#3a87d7</color>
+    <color name="notpass">#7a8691</color>
+    <color name="not_pass_red">#ffecdb</color>
+    <color name="not_pass_red_text">#fc6c3f</color>
+    <color name="pass_green">#dff5f1</color>
+    <color name="pass_green_text">#55c8b6</color>
 </resources>

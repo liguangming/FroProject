@@ -58,6 +58,7 @@ public class HistoryActivity extends BaseActivity<HistoryPresenter> implements H
     @BindView(R.id.custom_view)
     XRefreshView refreshView;
     private HistoryClassAdapter adapter;
+    private int page;
 
     @Override
     public void setupActivityComponent(AppComponent appComponent) {
@@ -80,9 +81,11 @@ public class HistoryActivity extends BaseActivity<HistoryPresenter> implements H
         emptyText.setText("暂无历史班级");
         UiUtils.configRecycleView(mRecyclerView, new LinearLayoutManager(this));
         initFreshView();
-        mPresenter.getHistoryClassList(0, Constants.PAGE_SIZE);
         adapter = new HistoryClassAdapter(new ArrayList<>());
         mRecyclerView.setAdapter(adapter);
+        setEmptyView(true);
+        mPresenter.getHistoryClassList(page, Constants.PAGE_SIZE);
+
     }
 
     @Override
@@ -117,7 +120,7 @@ public class HistoryActivity extends BaseActivity<HistoryPresenter> implements H
         refreshView.setXRefreshViewListener(new XRefreshView.SimpleXRefreshListener() {
             @Override
             public void onLoadMore(boolean isSilence) {
-                super.onLoadMore(isSilence);
+                mPresenter.getHistoryClassList(page, Constants.PAGE_SIZE);
             }
         });
 
@@ -126,19 +129,30 @@ public class HistoryActivity extends BaseActivity<HistoryPresenter> implements H
     @Override
     public void setList(List<HistoryClassBean> pagedResult) {
         adapter.setmInfos(pagedResult);
+        if (adapter.getInfos() != null && adapter.getInfos().size() != 0) {
+            setEmptyView(false);
+        }
     }
 
     @Override
     public void addList(List<HistoryClassBean> pagedResult) {
         adapter.getInfos().addAll(pagedResult);
         adapter.notifyDataSetChanged();
+        setEmptyView(false);
     }
+
     @Override
-    public  void stopLoadMore(){
+    public void stopLoadMore() {
+        page++;
         refreshView.stopLoadMore();
     }
+
     @Override
     public void endLoadMore() {
         refreshView.setLoadComplete(true);
+    }
+
+    public void setEmptyView(boolean visble) {
+        emptyView.setVisibility(visble ? View.VISIBLE : View.GONE);
     }
 }
