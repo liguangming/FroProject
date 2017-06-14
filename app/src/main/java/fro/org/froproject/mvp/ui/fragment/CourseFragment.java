@@ -219,12 +219,12 @@ public class CourseFragment extends BaseFragment<CoursePresenter> implements Cou
 
         @Override
         public void onPageSelected(int newIndex) {
-            if (fragmentList.get(currIndex) instanceof IFragment) {
-                ((IFragment) fragmentList.get(currIndex)).setData(null);
-            }
-            if (fragmentList.get(newIndex) instanceof IFragment) {
-                ((IFragment) fragmentList.get(newIndex)).setData(null);
-            }
+//            if (fragmentList.get(currIndex) instanceof IFragment) {
+//                ((IFragment) fragmentList.get(currIndex)).setData(null);
+//            }
+//            if (fragmentList.get(newIndex) instanceof IFragment) {
+//                ((IFragment) fragmentList.get(newIndex)).setData(null);
+//            }
             changeView(newIndex);
         }
     }

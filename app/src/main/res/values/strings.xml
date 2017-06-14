@@ -92,4 +92,9 @@
     <string name="not_passed_">未通过：</string>
     <string name="not_study_">未学习</string>
     <string name="no_info">暂无数据</string>
+    <string name="order_course">第%1$d课  %2$s</string>
+    <string name="study">学习</string>
+    <string name="previous_question">上一题</string>
+    <string name="next_question">下一题</string>
+    <string name="passed_tips">通过</string>
 </resources>

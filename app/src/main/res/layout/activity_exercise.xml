@@ -1,0 +1,168 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#3982d1"
+    android:orientation="vertical">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@+id/headView">
+
+        <org.fro.common.widgets.tab.roundtextview.RoundRelativeLayout
+            android:id="@+id/middle_layout"
+            android:layout_width="1012px"
+            android:layout_height="1537px"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="40px"
+            android:layout_marginRight="40px"
+            app:rv_backgroundColor="#f8f8f8"
+            app:rv_cornerRadius="20px">
+
+            <RelativeLayout
+                android:id="@+id/question_title"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <ImageView
+                    android:id="@+id/image_title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="63px"
+                    android:layout_marginTop="43px"
+                    android:src="@mipmap/ic_question_title" />
+
+                <TextView
+                    android:id="@+id/title_number"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginRight="76px"
+                    android:background="@mipmap/ic_tag"
+                    android:gravity="center"
+                    android:text="01" />
+
+                <View
+                    android:id="@+id/top_line"
+                    android:layout_width="913px"
+                    android:layout_height="4px"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginTop="145px"
+                    android:background="#e0e0e0" />
+            </RelativeLayout>
+
+            <View
+                android:id="@+id/bottom_line"
+                android:layout_width="913px"
+                android:layout_height="4px"
+                android:layout_below="@id/question_title"
+                android:layout_centerHorizontal="true"
+                android:background="#e0e0e0" />
+
+
+            <ListView
+                android:id="@android:id/list"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_above="@+id/line_layout"
+                android:layout_below="@id/question_title"
+                android:layout_marginBottom="15px"
+                android:layout_marginLeft="40px"
+                android:layout_marginRight="40px"
+                android:background="#f8f8f8"
+                android:divider="#f8f8f8"
+                android:dividerHeight="30px"
+                android:listSelector="@android:color/transparent"
+                android:scrollbars="none" />
+
+            <LinearLayout
+                android:id="@+id/line_layout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:orientation="vertical">
+
+                <View
+                    android:id="@+id/list_bottom_line"
+                    android:layout_width="match_parent"
+                    android:layout_height="1px"
+                    android:layout_below="@android:id/list"
+                    android:background="#e3e3e3" />
+
+                <org.fro.common.widgets.tab.roundtextview.RoundLinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="140px"
+                    android:orientation="horizontal"
+                    app:rv_backgroundColor="@android:color/white"
+                    app:rv_cornerRadius_BL="20px"
+                    app:rv_cornerRadius_BR="20px"
+                    app:rv_strokeColor="#f8f8f8">
+
+                    <TextView
+                        android:id="@+id/exercise_up"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_below="@android:id/list"
+                        android:layout_gravity="center_vertical"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:text="@string/previous_question"
+                        android:textColor="#3a87d7"
+                        android:textSize="46px" />
+
+                    <View
+                        android:id="@+id/middle_line"
+                        android:layout_width="1px"
+                        android:layout_height="match_parent"
+                        android:background="#e3e3e3" />
+
+                    <TextView
+                        android:id="@+id/exercise_next"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_gravity="center_vertical"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:text="@string/next_question"
+                        android:textColor="#3a87d7"
+                        android:textSize="46px" />
+                </org.fro.common.widgets.tab.roundtextview.RoundLinearLayout>
+            </LinearLayout>
+        </org.fro.common.widgets.tab.roundtextview.RoundRelativeLayout>
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/headView"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/cd_head_height"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:background="#3982d1">
+
+        <ImageView
+            android:id="@+id/leftImage"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true"
+            android:layout_gravity="center_vertical"
+            android:paddingLeft="40px"
+            android:paddingRight="40px"
+            android:scaleType="center"
+            android:src="@drawable/icon_back" />
+
+        <TextView
+            android:id="@+id/title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:layout_gravity="center_horizontal"
+            android:gravity="center"
+            android:maxLines="1"
+            android:textColor="@color/cd_white"
+            android:textSize="50px" />
+    </RelativeLayout>
+</RelativeLayout>

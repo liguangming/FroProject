@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/common_bottom_view"
+    android:layout_width="match_parent"
+    android:layout_height="143px"
+    android:background="@mipmap/exercise_bottom_bg">
+
+    <ImageView
+        android:id="@+id/image_back"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_centerVertical="true"
+        android:paddingLeft="37px"
+        android:paddingRight="100px"
+        android:src="@mipmap/icon_back" />
+
+    <View
+        android:layout_marginTop="20px"
+        android:id="@+id/line"
+        android:layout_width="1px"
+        android:layout_height="match_parent"
+        android:layout_toRightOf="@id/image_back"
+        android:background="#7eade1" />
+
+    <TextView
+        android:id="@+id/go_answer"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_toRightOf="@id/line"
+        android:gravity="center_vertical"
+        android:paddingLeft="355px"
+        android:text="进入答题"
+        android:textColor="#ffffff"
+        android:textSize="48px" />
+</RelativeLayout>

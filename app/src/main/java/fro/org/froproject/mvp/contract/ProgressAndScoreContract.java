@@ -1,13 +1,11 @@
 package fro.org.froproject.mvp.contract;
 
-import com.jess.arms.mvp.IView;
 import com.jess.arms.mvp.IModel;
-
+import com.jess.arms.mvp.IView;
 
 import java.util.List;
 
 import fro.org.froproject.mvp.model.entity.BaseJson;
-import fro.org.froproject.mvp.model.entity.PagedResult;
 import fro.org.froproject.mvp.model.entity.ScoreBean;
 import fro.org.froproject.mvp.model.entity.ScoreClassBean;
 import io.reactivex.Observable;

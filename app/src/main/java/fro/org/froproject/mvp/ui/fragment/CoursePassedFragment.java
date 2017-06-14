@@ -22,6 +22,7 @@ import org.fro.common.widgets.LoadingView;
 import java.util.List;
 
 import butterknife.BindView;
+import butterknife.OnItemClick;
 import fro.org.froproject.R;
 import fro.org.froproject.app.Constants;
 import fro.org.froproject.app.utils.Utils;
@@ -30,6 +31,7 @@ import fro.org.froproject.di.module.CoursePassedModule;
 import fro.org.froproject.mvp.contract.CoursePassedContract;
 import fro.org.froproject.mvp.model.entity.CourseBean;
 import fro.org.froproject.mvp.presenter.CoursePassedPresenter;
+import fro.org.froproject.mvp.ui.activity.CourseStudyActivity;
 import fro.org.froproject.mvp.ui.adapter.CoursePassAdapter;
 
 import static com.jess.arms.utils.Preconditions.checkNotNull;
@@ -157,4 +159,13 @@ public class CoursePassedFragment extends BaseFragment<CoursePassedPresenter> im
         refreshView.stopLoadMore();
         page++;
     }
+    @OnItemClick(android.R.id.list)
+    public void gotoActivity(int position) {
+        Intent intent = new Intent();
+        intent.putExtra(Constants.COURSE, coursePassAdapter.getItem(position));
+        intent.setClass(getActivity(), CourseStudyActivity.class);
+        startActivity(intent);
+    }
+
+
 }

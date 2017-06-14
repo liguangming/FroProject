@@ -19,4 +19,7 @@
     <color name="not_pass_red_text">#fc6c3f</color>
     <color name="pass_green">#dff5f1</color>
     <color name="pass_green_text">#55c8b6</color>
+    <color name="title_bg">#343a48</color>
+    <color name="text_normal_color">#4f4f4f</color>
+    <color name="text_select_color">#3a87d7</color>
 </resources>

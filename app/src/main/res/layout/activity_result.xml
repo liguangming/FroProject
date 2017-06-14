@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    android:orientation="vertical">
+
+    <ImageView
+        android:id="@+id/image"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="390px"
+        android:src="@mipmap/not_pass_red" />
+
+    <TextView
+        android:id="@+id/result_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/image"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="70px"
+        android:text="通过"
+        android:textColor="#0acd38"
+        android:textSize="68px" />
+
+
+    <TextView
+        android:id="@+id/correct_rate"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/result_text"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="47px"
+        android:textColor="#0acd38"
+        android:textSize="44px" />
+
+    <org.fro.common.widgets.tab.roundtextview.RoundRelativeLayout
+        android:id="@+id/complete"
+        android:layout_width="763px"
+        android:layout_height="137px"
+        android:layout_below="@id/correct_rate"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="325px"
+        app:rv_backgroundColor="#3a87d7"
+        app:rv_cornerRadius="70px">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:text="完成"
+            android:textColor="#ffffff"
+            android:textSize="52px" />
+    </org.fro.common.widgets.tab.roundtextview.RoundRelativeLayout>
+
+    <org.fro.common.widgets.tab.roundtextview.RoundLinearLayout
+        android:id="@+id/retry_linear_layout"
+        android:layout_width="763px"
+        android:layout_height="137px"
+        android:layout_below="@id/complete"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="79px"
+        app:rv_backgroundColor="#ffffff"
+        app:rv_cornerRadius="70px"
+        app:rv_strokeColor="#3a87d7"
+        app:rv_strokeWidth="1dp">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:text="再来一遍"
+            android:textColor="#3a87d7"
+            android:textSize="52px" />
+    </org.fro.common.widgets.tab.roundtextview.RoundLinearLayout>
+</RelativeLayout>

@@ -46,4 +46,6 @@ public class Constants {
     public static final String STORAGE_PATH_CROP = "/FroApp/crop/";
 
     public static final String CURRENT_PAGE = "current";
+    public static final String COURSE = "course";
+    public static final String RESULT = "result";
 }

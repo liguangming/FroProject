@@ -6,7 +6,10 @@ import fro.org.froproject.mvp.model.entity.BaseJson;
 import fro.org.froproject.mvp.model.entity.ClassBean;
 import fro.org.froproject.mvp.model.entity.ClassListBean;
 import fro.org.froproject.mvp.model.entity.CommonBean;
+import fro.org.froproject.mvp.model.entity.CourseBean;
 import fro.org.froproject.mvp.model.entity.CourseResponseBean;
+import fro.org.froproject.mvp.model.entity.ExerciseBean;
+import fro.org.froproject.mvp.model.entity.ExerciseResponseBean;
 import fro.org.froproject.mvp.model.entity.HistoryClassBean;
 import fro.org.froproject.mvp.model.entity.HistoryClassListBean;
 import fro.org.froproject.mvp.model.entity.OrgBean;
@@ -147,8 +150,8 @@ public interface CommonService {
     Observable<BaseJson<HistoryClassListBean<HistoryClassBean>>> getHistoryClassList(@Header(HEADER_API_TOKEN) String token, @Query("page") int page, @Query("size") int pageSize);
 
     /**
-     *
      * 获取课程列表
+     *
      * @param body
      * @param token
      * @return
@@ -159,6 +162,7 @@ public interface CommonService {
 
     /**
      * 获取进度与成绩列表
+     *
      * @param page
      * @param pageSize
      * @param token
@@ -167,5 +171,34 @@ public interface CommonService {
 
     @Headers({HEADER_API_VERSION, HEADER_API_VERSION1})
     @GET("class/get/process")
-    Observable<BaseJson<ScoreBean<ScoreClassBean>>> getScoreClassList( @Query("page") int page, @Query("size")int pageSize,@Header(HEADER_API_TOKEN)  String token);
+    Observable<BaseJson<ScoreBean<ScoreClassBean>>> getScoreClassList(@Query("page") int page, @Query("size") int pageSize, @Header(HEADER_API_TOKEN) String token);
+
+    /**
+     * 获取课程详情
+     *
+     * @param classId
+     * @param courseId
+     * @param token
+     * @return
+     */
+    @Headers({HEADER_API_VERSION, HEADER_API_VERSION1})
+    @GET("course/get/{classId}/{courseId}")
+    Observable<BaseJson<CourseBean>> getCourseContent(@Path("classId") int classId, @Path("courseId") int courseId, @Header(HEADER_API_TOKEN) String token);
+
+    /**
+     * 获取问题列表
+     *
+     * @param classId
+     * @param courseId
+     * @param token
+     * @return
+     */
+    @Headers({HEADER_API_VERSION, HEADER_API_VERSION1})
+    @GET("courseexercise/courseexercise/{classId}/{courseId}/list")
+    Observable<BaseJson<List<ExerciseBean>>> getQuestionList(@Path("classId") int classId, @Path("courseId") int courseId, @Header(HEADER_API_TOKEN) String token);
+
+
+    @Headers({HEADER_API_VERSION, HEADER_API_VERSION1})
+    @POST("courseexercise/commit")
+    Observable<BaseJson<ExerciseResponseBean>> commitExercise(@Body RequestBody body, @Header(HEADER_API_TOKEN) String token);
 }

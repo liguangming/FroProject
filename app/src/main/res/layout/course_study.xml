@@ -1,0 +1,215 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tab="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#343a48">
+
+    <TextView
+        android:singleLine="true"
+        android:ellipsize="end"
+        android:id="@+id/title_course_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="58px"
+        android:layout_marginTop="20px"
+        android:drawableLeft="@mipmap/ic_course_study_book"
+        android:drawablePadding="34px"
+        android:text="金融风险概念分析"
+        android:textColor="@color/white"
+        android:textSize="50px" />
+
+    <org.fro.common.widgets.tab.roundtextview.RoundRelativeLayout
+        android:id="@+id/layout"
+        android:layout_width="914px"
+        android:layout_height="1443px"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
+        android:background="@color/white"
+        tab:rv_backgroundColor="@android:color/white"
+        tab:rv_cornerRadius="15px"
+        tab:rv_strokeColor="#D9D9D9"
+        tab:rv_strokeWidth="1dp">
+
+        <org.fro.common.widgets.tab.roundtextview.RoundFrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="556px"
+            tab:rv_cornerRadius="40px">
+
+            <ImageView
+                android:id="@+id/image_title"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:scaleType="fitXY"
+                android:src="@mipmap/class_info_des" />
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignBottom="@id/image_title"
+                android:layout_gravity="bottom"
+                android:background="@mipmap/ic_huxian" />
+        </org.fro.common.widgets.tab.roundtextview.RoundFrameLayout>
+
+        <Button
+            android:id="@+id/study_button"
+            android:layout_width="226px"
+            android:layout_height="226px"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="380px"
+            android:background="@mipmap/ic_yuan"
+            android:textColor="@android:color/white"
+            android:textSize="48px"
+            tab:layout_auto_baseheight="width" />
+
+        <TextView
+            android:id="@+id/course_order"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/study_button"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="27px"
+            android:text="第3课"
+            android:textColor="#5b5b5b"
+            android:textSize="34.7px" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/study_button"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="90px"
+            android:background="@color/white"
+            android:orientation="vertical">
+
+            <TextView
+                android:singleLine="true"
+                android:ellipsize="end"
+                android:id="@+id/course_name"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:text="第三课  金融风险概念解析"
+                android:textColor="@android:color/black"
+                android:textSize="56px" />
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:layout_gravity="center"
+                android:layout_marginLeft="52px"
+                android:layout_marginRight="52px"
+                android:layout_marginTop="132px">
+
+                <TextView
+                    android:id="@+id/test"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerHorizontal="true"
+                    android:layout_gravity="center_horizontal"
+                    android:gravity="center_horizontal"
+                    android:text="做练习"
+                    android:textColor="#bbbbbb"
+                    android:textSize="34px" />
+
+                <View
+                    style="@style/CommonLineStyle"
+                    android:layout_width="match_parent"
+                    android:layout_height="2px"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="52px"
+                    android:layout_marginRight="44px"
+                    android:layout_toRightOf="@id/test" />
+
+                <View
+                    style="@style/CommonLineStyle"
+                    android:layout_width="match_parent"
+                    android:layout_height="2px"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="44px"
+                    android:layout_marginRight="52px"
+                    android:layout_toLeftOf="@id/test" />
+            </RelativeLayout>
+
+
+            <ImageView
+                android:id="@+id/test_image"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/test"
+                android:layout_centerHorizontal="true"
+                android:layout_gravity="center"
+                android:layout_marginTop="101px"
+                android:src="@mipmap/ic_tm" />
+
+            <TextView
+                android:id="@+id/test_text"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/test_image"
+                android:layout_centerHorizontal="true"
+                android:layout_gravity="center"
+                android:layout_marginTop="31px"
+                android:gravity="center_horizontal"
+                android:text="做题"
+                android:textColor="#868686"
+                android:textSize="38px" />
+
+            <TextView
+                android:id="@+id/status_text"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="31px"
+                android:gravity="center_horizontal"
+                android:text="通过"
+                android:textColor="@color/blue_bg"
+                android:textSize="38px" />
+        </LinearLayout>
+    </org.fro.common.widgets.tab.roundtextview.RoundRelativeLayout>
+
+    <TextView
+        android:id="@+id/order"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/layout"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="43px"
+        android:text="3/10"
+        android:textColor="@color/white"
+        android:textSize="40px" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="144px"
+        android:layout_alignParentBottom="true"
+        android:layout_below="@id/order"
+        android:background="#2c313d">
+
+        <ImageView
+            android:id="@+id/back_image"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:paddingLeft="37px"
+            android:paddingRight="53px"
+            android:src="@mipmap/icon_back" />
+
+        <TextView
+            android:singleLine="true"
+            android:ellipsize="end"
+            android:id="@+id/classname"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_toRightOf="@id/back_image"
+            android:drawableLeft="@mipmap/ic_class"
+            android:drawablePadding="29px"
+            android:text="xxxxx"
+            android:textColor="@color/white"
+            android:textSize="42px" />
+    </RelativeLayout>
+</RelativeLayout>

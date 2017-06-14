@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#3981d2">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@+id/bottom_view">
+
+        <org.fro.common.widgets.tab.roundtextview.RoundRelativeLayout
+            android:layout_width="1012px"
+            android:layout_height="1538px"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"
+            app:rv_backgroundColor="@color/white"
+            app:rv_cornerRadius="40px">
+
+            <WebView
+                android:id="@+id/webView"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_below="@id/course_name"
+                android:layout_marginBottom="34px"
+                android:layout_marginLeft="42px"
+                android:layout_marginRight="42px"
+                android:layout_marginTop="56px"
+                android:layerType="hardware"
+                android:scrollbars="none" />
+        </org.fro.common.widgets.tab.roundtextview.RoundRelativeLayout>
+    </RelativeLayout>
+
+    <include
+        android:id="@+id/bottom_view"
+        layout="@layout/common_bottom_view"
+        android:layout_width="match_parent"
+        android:layout_height="143px"
+        android:layout_alignParentBottom="true" />
+</RelativeLayout>
