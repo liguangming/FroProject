@@ -38,7 +38,9 @@ import fro.org.froproject.mvp.model.entity.OrgBean;
 import fro.org.froproject.mvp.model.entity.UserInfoBean;
 import fro.org.froproject.mvp.model.entity.WorkYear;
 import fro.org.froproject.mvp.ui.activity.CommonActivity;
+import fro.org.froproject.mvp.ui.activity.MainActivity;
 import fro.org.froproject.mvp.ui.activity.MainGridActivity;
+import fro.org.froproject.mvp.ui.activity.PersonalInforActivity;
 import fro.org.froproject.mvp.ui.activity.RegisterActivity;
 import fro.org.froproject.mvp.ui.activity.SexSelectActivity;
 import fro.org.froproject.mvp.ui.view.photoclip.PhotoConfig;
@@ -318,7 +320,9 @@ public class PersonalInforPresenter extends BasePresenter<PersonalInforContract.
                             mAppManager.killActivity(RegisterActivity.class);
                             mRootView.launchActivity(new Intent(mApplication, MainGridActivity.class));
                             setUserInfo(data);
-                            // TODO: 2017/6/6 0006 完成注册之后关闭两个注册界面 跳转到主页
+                            mAppManager.killActivity(PersonalInforActivity.class);
+                            mAppManager.killActivity(RegisterActivity.class);
+                            mRootView.launchActivity(new Intent(mApplication, MainGridActivity.class));
                         } else {
                             if (!TextUtils.isEmpty(baseJson.getM()))
                                 mRootView.showMessage(baseJson.getM());

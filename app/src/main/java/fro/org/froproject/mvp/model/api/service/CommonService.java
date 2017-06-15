@@ -242,4 +242,11 @@ public interface CommonService {
     @POST("course/course/list")
     Observable<BaseJson<CourseResponseBean>> getClassCourseList(@Body RequestBody body,@Header(HEADER_API_TOKEN)  String token);
 
+    /**
+     * 修改密码
+     * @param body
+     * @return
+     */
+    @POST("user/chagePassword")
+    Observable<BaseJson> modifyPassword(@Body RequestBody body,@Header(HEADER_API_TOKEN)  String token);
 }

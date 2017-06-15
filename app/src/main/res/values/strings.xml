@@ -98,4 +98,7 @@
     <string name="next_question">下一题</string>
     <string name="passed_tips">通过</string>
     <string name="class_directory">课程目录</string>
+    <string name="login_out">退出登录</string>
+    <string name="modify_phone_num">修改手机号</string>
+    <string name="modify_password">修改密码</string>
 </resources>

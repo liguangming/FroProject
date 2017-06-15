@@ -5,6 +5,7 @@ import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 
 import com.andview.refreshview.XRefreshView;
+import com.jess.arms.integration.AppManager;
 
 import org.fro.common.widgets.locationview.entity.ProvinceData;
 
