@@ -98,11 +98,8 @@ public class CoursePassedFragment extends BaseFragment<CoursePassedPresenter> im
                 mPresenter.getCourseList(page, Constants.PAGE_SIZE);
             }
 
-            @Override
-            public void onRelease(float direction) {
-                super.onRelease(direction);
-            }
         });
+        mPresenter.getCourseList(page, Constants.PAGE_SIZE);
     }
 
     @Override

@@ -1,7 +1,7 @@
 package fro.org.froproject.mvp.presenter;
 
 import android.app.Application;
-import android.content.Intent;
+import android.text.TextUtils;
 
 import com.jess.arms.integration.AppManager;
 import com.jess.arms.di.scope.ActivityScope;
@@ -9,17 +9,13 @@ import com.jess.arms.mvp.BasePresenter;
 import com.jess.arms.widget.imageloader.ImageLoader;
 
 import java.util.List;
-import java.util.Map;
 
-import fro.org.froproject.app.Constants;
 import fro.org.froproject.app.utils.RxUtils;
-import fro.org.froproject.mvp.contract.ExerciseContract;
+import fro.org.froproject.mvp.contract.SearchResultContract;
 import fro.org.froproject.mvp.model.entity.BaseJson;
+import fro.org.froproject.mvp.model.entity.ClassInfoBean;
 import fro.org.froproject.mvp.model.entity.CourseBean;
-import fro.org.froproject.mvp.model.entity.ExerciseBean;
-import fro.org.froproject.mvp.model.entity.ExerciseResponseBean;
-import fro.org.froproject.mvp.ui.activity.ResultActivity;
-import io.reactivex.Scheduler;
+import fro.org.froproject.mvp.model.entity.CourseResponseBean;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.annotations.NonNull;
 import io.reactivex.schedulers.Schedulers;
@@ -29,18 +25,18 @@ import me.jessyan.rxerrorhandler.handler.ErrorHandleSubscriber;
 import javax.inject.Inject;
 
 /**
- * Created by Lgm on 2017/6/14 0014.
+ * Created by Lgm on 2017/6/15 0015.
  */
 
 @ActivityScope
-public class ExercisePresenter extends BasePresenter<ExerciseContract.Model, ExerciseContract.View> {
+public class SearchResultPresenter extends BasePresenter<SearchResultContract.Model, SearchResultContract.View> {
     private RxErrorHandler mErrorHandler;
     private Application mApplication;
     private ImageLoader mImageLoader;
     private AppManager mAppManager;
 
     @Inject
-    public ExercisePresenter(ExerciseContract.Model model, ExerciseContract.View rootView
+    public SearchResultPresenter(SearchResultContract.Model model, SearchResultContract.View rootView
             , RxErrorHandler handler, Application application
             , ImageLoader imageLoader, AppManager appManager) {
         super(model, rootView);
@@ -59,10 +55,10 @@ public class ExercisePresenter extends BasePresenter<ExerciseContract.Model, Exe
         this.mApplication = null;
     }
 
-    public void getQuestionList(int classId, int courseId) {
-        mModel.getQuestionList(classId, courseId)
+    public void getCourseList(final int page, String searchContetn,String type) {
+        mModel.getCourseList(page,searchContetn,type)
                 .subscribeOn(Schedulers.io())
-                .doOnSubscribe(pose -> mRootView.showLoading())
+                .doOnSubscribe(dispose -> mRootView.showLoading())
                 .observeOn(AndroidSchedulers.mainThread())
                 .doAfterTerminate(() -> mRootView.hideLoading())
                 .compose(RxUtils.bindToLifecycle(mRootView))
@@ -71,20 +67,30 @@ public class ExercisePresenter extends BasePresenter<ExerciseContract.Model, Exe
                     @Override
                     public void onNext(@NonNull BaseJson baseJson) {
                         if (baseJson.isSuccess()) {
-                            List<ExerciseBean> exerciseBean = (List<ExerciseBean>) baseJson.getD();
-                            if (exerciseBean.get(0).getCourseExerCises() != null && exerciseBean.get(0).getCourseExerCises().size() != 0)
-                                mRootView.setList(exerciseBean);
+                            CourseResponseBean mCourseResponseBean = (CourseResponseBean) baseJson.getD();
+                            List<CourseBean> courseList = mCourseResponseBean.getDataList();
+                            if (page + 1 == mCourseResponseBean.getPages()||mCourseResponseBean.getPages()==0) {
+                                mRootView.setLoadComplete(true);
+                            } else {
+                                mRootView.stopLoadMore(true);
+                            }
+                            if (page == 0) {
+                                mRootView.setList(courseList);
+                            } else {
+                                mRootView.addList(courseList);
+                            }
                         } else {
-                            mRootView.showMessage(baseJson.getM());
+                            if (!TextUtils.isEmpty(baseJson.getM()))
+                                mRootView.showMessage(baseJson.getM());
                         }
                     }
                 });
     }
 
-    public void commit(CourseBean course, Map<String, Object> resultMap) {
-        mModel.commit(course.getClassId(), course.getId(), resultMap)
+    public void getClassCourseList(String classID, int page, String searchContetn) {
+        mModel.getClassCourseList(page,searchContetn,classID)
                 .subscribeOn(Schedulers.io())
-                .doOnSubscribe(pose -> mRootView.showLoading())
+                .doOnSubscribe(dispose -> mRootView.showLoading())
                 .observeOn(AndroidSchedulers.mainThread())
                 .doAfterTerminate(() -> mRootView.hideLoading())
                 .compose(RxUtils.bindToLifecycle(mRootView))
@@ -93,14 +99,21 @@ public class ExercisePresenter extends BasePresenter<ExerciseContract.Model, Exe
                     @Override
                     public void onNext(@NonNull BaseJson baseJson) {
                         if (baseJson.isSuccess()) {
-                            ExerciseResponseBean mExerciseResponseBean = (ExerciseResponseBean) baseJson.getD();
-                            Intent intent = new Intent(mApplication, ResultActivity.class);
-                            intent.putExtra(Constants.RESULT, mExerciseResponseBean);
-                            intent.putExtra(Constants.COURSE, course);
-                            mRootView.launchActivity(intent);
-                            mRootView.killMyself();
+                            CourseResponseBean mCourseResponseBean = (CourseResponseBean) baseJson.getD();
+                            List<CourseBean> courseList = mCourseResponseBean.getDataList();
+                            if (page + 1 == mCourseResponseBean.getPages()||mCourseResponseBean.getPages()==0) {
+                                mRootView.setLoadComplete(true);
+                            } else {
+                                mRootView.stopLoadMore(true);
+                            }
+                            if (page == 0) {
+                                mRootView.setList(courseList);
+                            } else {
+                                mRootView.addList(courseList);
+                            }
                         } else {
-                            mRootView.showMessage(baseJson.getM());
+                            if (!TextUtils.isEmpty(baseJson.getM()))
+                                mRootView.showMessage(baseJson.getM());
                         }
                     }
                 });

@@ -15,6 +15,7 @@ import android.widget.TextView;
 
 import com.andview.refreshview.XRefreshView;
 import com.jess.arms.base.BaseActivity;
+import com.jess.arms.base.DefaultAdapter;
 import com.jess.arms.di.component.AppComponent;
 import com.jess.arms.utils.UiUtils;
 
@@ -85,6 +86,12 @@ public class HistoryActivity extends BaseActivity<HistoryPresenter> implements H
         mRecyclerView.setAdapter(adapter);
         setEmptyView(true);
         mPresenter.getHistoryClassList(page, Constants.PAGE_SIZE);
+        adapter.setOnItemClickListener((view, viewType, data, position) -> {
+            Intent intent = new Intent();
+            intent.putExtra(Constants.CLASS, adapter.getItem(position));
+            intent.setClass(HistoryActivity.this, HistoryClassInfoActivity.class);
+            launchActivity(intent);
+        });
 
     }
 
@@ -131,6 +138,8 @@ public class HistoryActivity extends BaseActivity<HistoryPresenter> implements H
         adapter.setmInfos(pagedResult);
         if (adapter.getInfos() != null && adapter.getInfos().size() != 0) {
             setEmptyView(false);
+        }else{
+            setEmptyView(true);
         }
     }
 

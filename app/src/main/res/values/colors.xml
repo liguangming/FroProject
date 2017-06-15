@@ -22,4 +22,6 @@
     <color name="title_bg">#343a48</color>
     <color name="text_normal_color">#4f4f4f</color>
     <color name="text_select_color">#3a87d7</color>
+    <color name="history_class_status_pass">#3b80c8</color>
+    <color name="history_class_status_not_pass">#595e69</color>
 </resources>

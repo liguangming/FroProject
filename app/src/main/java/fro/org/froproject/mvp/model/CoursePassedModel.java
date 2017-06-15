@@ -55,7 +55,7 @@ public class CoursePassedModel extends BaseModel implements CoursePassedContract
         map.put("page", page);
         map.put("size", pageSize);
         RequestBody body = RequestBody.create(MediaType.parse("application/json; charset=utf-8"), mGson.toJson(map));
-        Observable<BaseJson<CourseResponseBean>> response = mRepositoryManager.obtainRetrofitService(CommonService.class).getNotPassCourseList(body, MyApplication.getInstance().getToken());
+        Observable<BaseJson<CourseResponseBean>> response = mRepositoryManager.obtainRetrofitService(CommonService.class).getCourseList(body, MyApplication.getInstance().getToken());
         return response;
     }
 }

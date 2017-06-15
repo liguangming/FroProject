@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:view="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/bg">
+
+    <LinearLayout
+        android:id="@+id/title_layout"
+        android:layout_width="match_parent"
+        android:layout_height="116px"
+        android:background="@color/title_bg"
+        android:orientation="horizontal">
+
+        <ImageView
+            android:id="@+id/leftImage"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_gravity="center_vertical"
+            android:background="@color/title_bg"
+            android:paddingLeft="40px"
+            android:paddingRight="42px"
+            android:paddingStart="37px"
+            android:scaleType="center"
+            android:src="@drawable/icon_back" />
+
+        <org.fro.common.widgets.tab.roundtextview.RoundRelativeLayout
+            android:layout_width="910px"
+            android:layout_height="90px"
+            android:layout_gravity="center_vertical"
+            view:rv_backgroundColor="#282b38"
+            view:rv_cornerRadius="40px">
+
+            <fro.org.froproject.mvp.ui.view.SearchView
+                android:id="@+id/search_view"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:paddingLeft="47px" />
+        </org.fro.common.widgets.tab.roundtextview.RoundRelativeLayout>
+    </LinearLayout>
+
+    <com.andview.refreshview.XRefreshView
+        android:id="@+id/custom_view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/title_layout">
+
+        <ListView
+            android:id="@android:id/list"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@color/white" />
+    </com.andview.refreshview.XRefreshView>
+
+
+</RelativeLayout>

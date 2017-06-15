@@ -4,6 +4,7 @@ import java.util.List;
 
 import fro.org.froproject.mvp.model.entity.BaseJson;
 import fro.org.froproject.mvp.model.entity.ClassBean;
+import fro.org.froproject.mvp.model.entity.ClassInfoBean;
 import fro.org.froproject.mvp.model.entity.ClassListBean;
 import fro.org.froproject.mvp.model.entity.CommonBean;
 import fro.org.froproject.mvp.model.entity.CourseBean;
@@ -149,16 +150,16 @@ public interface CommonService {
     @GET("class/get/history")
     Observable<BaseJson<HistoryClassListBean<HistoryClassBean>>> getHistoryClassList(@Header(HEADER_API_TOKEN) String token, @Query("page") int page, @Query("size") int pageSize);
 
-    /**
-     * 获取课程列表
-     *
-     * @param body
-     * @param token
-     * @return
-     */
-    @Headers({HEADER_API_VERSION, HEADER_API_VERSION1})
-    @POST("course/process/list")
-    Observable<BaseJson<CourseResponseBean>> getNotPassCourseList(@Body RequestBody body, @Header(HEADER_API_TOKEN) String token);
+//    /**
+//     * 获取课程列表
+//     *
+//     * @param body
+//     * @param token
+//     * @return
+//     */
+//    @Headers({HEADER_API_VERSION, HEADER_API_VERSION1})
+//    @POST("course/process/list")
+//    Observable<BaseJson<CourseResponseBean>> getNotPassCourseList(@Body RequestBody body, @Header(HEADER_API_TOKEN) String token);
 
     /**
      * 获取进度与成绩列表
@@ -197,8 +198,48 @@ public interface CommonService {
     @GET("courseexercise/courseexercise/{classId}/{courseId}/list")
     Observable<BaseJson<List<ExerciseBean>>> getQuestionList(@Path("classId") int classId, @Path("courseId") int courseId, @Header(HEADER_API_TOKEN) String token);
 
-
+    /**
+     * 提交答题结果
+     *
+     * @param body
+     * @param token
+     * @return
+     */
     @Headers({HEADER_API_VERSION, HEADER_API_VERSION1})
     @POST("courseexercise/commit")
     Observable<BaseJson<ExerciseResponseBean>> commitExercise(@Body RequestBody body, @Header(HEADER_API_TOKEN) String token);
+
+    /**
+     * 获取班级信息
+     *
+     * @param page
+     * @param classId
+     * @param pageSize
+     * @return
+     */
+    @Headers({HEADER_API_VERSION, HEADER_API_VERSION1})
+    @GET("class/get/current/{classId}")
+    Observable<BaseJson<ClassInfoBean<CourseBean>>> getClassInfo(@Path("classId") int classId, @Query("page") int page, @Query("size") int pageSize, @Header(HEADER_API_TOKEN) String token);
+
+    /**
+     * 查询课程
+     *
+     * @param body
+     * @param token
+     * @return
+     */
+    @POST("course/process/list")
+    Observable<BaseJson<CourseResponseBean>> getCourseList(@Body RequestBody body, @Header(HEADER_API_TOKEN) String token);
+
+
+
+    /**
+     * 查询班级课程
+     * @param body
+     * @param token
+     * @return
+     */
+    @POST("course/course/list")
+    Observable<BaseJson<CourseResponseBean>> getClassCourseList(@Body RequestBody body,@Header(HEADER_API_TOKEN)  String token);
+
 }

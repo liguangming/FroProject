@@ -29,6 +29,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
+import butterknife.OnItemClick;
 import fro.org.froproject.R;
 import fro.org.froproject.app.Constants;
 import fro.org.froproject.app.MyApplication;
@@ -40,6 +41,7 @@ import fro.org.froproject.mvp.model.api.Api;
 import fro.org.froproject.mvp.model.entity.ClassBean;
 import fro.org.froproject.mvp.model.entity.UserInfoBean;
 import fro.org.froproject.mvp.presenter.ClassPresenter;
+import fro.org.froproject.mvp.ui.activity.ClassInfoActivity;
 import fro.org.froproject.mvp.ui.activity.HistoryActivity;
 import fro.org.froproject.mvp.ui.adapter.ClassListAdapter;
 import fro.org.froproject.mvp.ui.view.GlideRoundTransform;
@@ -109,15 +111,16 @@ public class ClassFragment extends BaseFragment<ClassPresenter> implements Class
         mRecyclerView.setAdapter(adapter);
         mPresenter.getMyClassList(page);
         headView.setRightText(R.string.history_class);
-        headView.setRightListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                UiUtils.startActivity(HistoryActivity.class);
-            }
-        });
+        headView.setRightListener(v -> UiUtils.startActivity(HistoryActivity.class));
         setData(null);
-    }
+        adapter.setOnItemClickListener((view, viewType, data, position) -> {
+            Intent intent = new Intent();
+            intent.putExtra(Constants.CLASS_ID, adapter.getItem(position).getId());
+            intent.setClass(getActivity(), ClassInfoActivity.class);
+            launchActivity(intent);
+        });
 
+    }
 
     @Override
     public void setData(Object data) {
@@ -176,6 +179,9 @@ public class ClassFragment extends BaseFragment<ClassPresenter> implements Class
     @Override
     public void setList(List<ClassBean> list) {
         adapter.setmInfos(list);
+        if (list != null && list.size() > 0)
+            setEmptyView(false);
+        else setEmptyView(true);
 
     }
 
@@ -209,6 +215,7 @@ public class ClassFragment extends BaseFragment<ClassPresenter> implements Class
         adapter.getInfos().addAll(list);
         adapter.notifyDataSetChanged();
     }
+
     @Override
     public void setEmptyView(boolean visible) {
         emptyView.setVisibility(visible ? View.VISIBLE : View.GONE);

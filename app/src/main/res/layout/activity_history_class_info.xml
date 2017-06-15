@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/bg">
+
+    <RelativeLayout
+        android:id="@+id/title_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#343a48">
+
+        <LinearLayout
+            android:id="@+id/back_image"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="35px"
+            android:paddingLeft="37px"
+            android:paddingRight="45px">
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:scaleType="fitXY"
+                android:src="@drawable/icon_back" />
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/course_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="35px"
+            android:layout_toRightOf="@id/back_image"
+            android:ellipsize="end"
+            android:singleLine="true"
+            android:textColor="#ffffff"
+            android:textSize="44px" />
+
+
+        <TextView
+            android:id="@+id/date"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignLeft="@id/course_name"
+            android:layout_below="@id/course_name"
+            android:layout_marginBottom="65px"
+            android:layout_marginTop="42px"
+            android:drawableLeft="@mipmap/ico_history_calend"
+            android:drawablePadding="18px"
+            android:textColor="#ffffff"
+            android:textSize="34px" />
+
+        <org.fro.common.widgets.tab.roundtextview.RoundRelativeLayout
+            android:id="@+id/round_layout"
+            android:layout_width="140px"
+            android:layout_height="58px"
+            android:layout_alignParentRight="true"
+            android:layout_alignTop="@id/course_name"
+            android:layout_marginRight="97px"
+            app:rv_cornerRadius="10px">
+
+            <TextView
+                android:id="@+id/status_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:textColor="#ffffff"
+                android:textSize="32px" />
+        </org.fro.common.widgets.tab.roundtextview.RoundRelativeLayout>
+    </RelativeLayout>
+
+
+    <org.fro.common.widgets.tab.roundtextview.RoundRelativeLayout
+        android:id="@+id/search_view_layout"
+        android:layout_width="1011px"
+        android:layout_height="91px"
+        android:layout_below="@id/title_layout"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="40px"
+        app:rv_backgroundColor="@color/white"
+        app:rv_cornerRadius="10px">
+
+        <fro.org.froproject.mvp.ui.view.SearchView
+            android:id="@+id/search_view"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_centerInParent="true" />
+    </org.fro.common.widgets.tab.roundtextview.RoundRelativeLayout>
+
+
+    <com.andview.refreshview.XRefreshView
+        android:id="@+id/custom_view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/search_view_layout"
+        android:layout_marginTop="40px">
+
+        <ListView
+            android:id="@android:id/list"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+    </com.andview.refreshview.XRefreshView>
+
+    <include
+        layout="@layout/empty_view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/search_view_layout"
+        android:visibility="gone" />
+</RelativeLayout>

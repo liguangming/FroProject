@@ -27,11 +27,13 @@ import java.util.ArrayList;
 import butterknife.BindView;
 import butterknife.OnClick;
 import fro.org.froproject.R;
+import fro.org.froproject.app.Constants;
 import fro.org.froproject.di.component.DaggerCourseComponent;
 import fro.org.froproject.di.module.CourseModule;
 import fro.org.froproject.mvp.contract.CourseContract;
 import fro.org.froproject.mvp.presenter.CoursePresenter;
 import fro.org.froproject.mvp.ui.activity.ProgressAndScoreActivity;
+import fro.org.froproject.mvp.ui.activity.SearchResultActivity;
 import fro.org.froproject.mvp.ui.view.HeadView;
 import fro.org.froproject.mvp.ui.view.SearchView;
 
@@ -219,12 +221,12 @@ public class CourseFragment extends BaseFragment<CoursePresenter> implements Cou
 
         @Override
         public void onPageSelected(int newIndex) {
-//            if (fragmentList.get(currIndex) instanceof IFragment) {
-//                ((IFragment) fragmentList.get(currIndex)).setData(null);
-//            }
-//            if (fragmentList.get(newIndex) instanceof IFragment) {
-//                ((IFragment) fragmentList.get(newIndex)).setData(null);
-//            }
+            if (fragmentList.get(currIndex) instanceof IFragment) {
+                ((IFragment) fragmentList.get(currIndex)).setData(null);
+            }
+            if (fragmentList.get(newIndex) instanceof IFragment) {
+                ((IFragment) fragmentList.get(newIndex)).setData(null);
+            }
             changeView(newIndex);
         }
     }
@@ -233,11 +235,10 @@ public class CourseFragment extends BaseFragment<CoursePresenter> implements Cou
         public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
             if (actionId == EditorInfo.IME_ACTION_SEARCH) {
                 Intent intent = new Intent();
-                //TODO 跳转到搜索结果界面
-//                intent.setClass(getActivity(), SearchResultActivity.class);
-//                intent.putExtra(Constants.SEARCH_STRING, searchView.getEditTextStr());
-//                intent.putExtra(Constants.SEARCH_TYPE, currIndex == 0 ? "1" : "0");
-//                startActivity(intent);
+                intent.setClass(getActivity(), SearchResultActivity.class);
+                intent.putExtra(Constants.SEARCH_CONTENT, searchView.getEditTextStr());
+                intent.putExtra(Constants.SEARCH_TYPE, currIndex == 0 ? "1" : "0");
+                startActivity(intent);
             }
             return false;
         }

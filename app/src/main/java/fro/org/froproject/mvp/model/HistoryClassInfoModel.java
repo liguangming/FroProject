@@ -11,17 +11,15 @@ import static com.jess.arms.utils.Preconditions.checkNotNull;
 import com.jess.arms.di.scope.ActivityScope;
 
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 import javax.inject.Inject;
 
+import fro.org.froproject.app.Constants;
 import fro.org.froproject.app.MyApplication;
-import fro.org.froproject.app.utils.Utils;
-import fro.org.froproject.mvp.contract.CourseNotPassedContract;
+import fro.org.froproject.mvp.contract.HistoryClassInfoContract;
 import fro.org.froproject.mvp.model.api.service.CommonService;
 import fro.org.froproject.mvp.model.entity.BaseJson;
-import fro.org.froproject.mvp.model.entity.CourseBean;
 import fro.org.froproject.mvp.model.entity.CourseResponseBean;
 import io.reactivex.Observable;
 import okhttp3.MediaType;
@@ -29,16 +27,16 @@ import okhttp3.RequestBody;
 
 
 /**
- * Created by Lgm on 2017/6/13 0013.
+ * Created by Lgm on 2017/6/15 0015.
  */
 
 @ActivityScope
-public class CourseNotPassedModel extends BaseModel implements CourseNotPassedContract.Model {
+public class HistoryClassInfoModel extends BaseModel implements HistoryClassInfoContract.Model {
     private Gson mGson;
     private Application mApplication;
 
     @Inject
-    public CourseNotPassedModel(IRepositoryManager repositoryManager, Gson gson, Application application) {
+    public HistoryClassInfoModel(IRepositoryManager repositoryManager, Gson gson, Application application) {
         super(repositoryManager);
         this.mGson = gson;
         this.mApplication = application;
@@ -52,13 +50,13 @@ public class CourseNotPassedModel extends BaseModel implements CourseNotPassedCo
     }
 
     @Override
-    public Observable<BaseJson<CourseResponseBean>> getNotPassCourseList(int page, int pageSize) {
-        Map<String, Object> map = new HashMap<>();
-        map.put("type", "0");
-        map.put("page", page);
-        map.put("size", pageSize);
-        RequestBody body = RequestBody.create(MediaType.parse("application/json; charset=utf-8"), mGson.toJson(map));
-        Observable<BaseJson<CourseResponseBean>> response = mRepositoryManager.obtainRetrofitService(CommonService.class).getCourseList(body, MyApplication.getInstance().getToken());
+    public Observable<BaseJson<CourseResponseBean>> getCourseList(int page, int classId) {
+        Map<String, Object> params = new HashMap<>();
+        params.put("classId", classId);
+        params.put("page", page);
+        params.put("size", Constants.PAGE_SIZE);
+        RequestBody body = RequestBody.create(MediaType.parse("application/json; charset=utf-8"), mGson.toJson(params));
+        Observable<BaseJson<CourseResponseBean>> response = mRepositoryManager.obtainRetrofitService(CommonService.class).getClassCourseList(body, MyApplication.getInstance().getToken());
         return response;
     }
 }

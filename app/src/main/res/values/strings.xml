@@ -97,4 +97,5 @@
     <string name="previous_question">上一题</string>
     <string name="next_question">下一题</string>
     <string name="passed_tips">通过</string>
+    <string name="class_directory">课程目录</string>
 </resources>

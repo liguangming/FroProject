@@ -48,4 +48,8 @@ public class Constants {
     public static final String CURRENT_PAGE = "current";
     public static final String COURSE = "course";
     public static final String RESULT = "result";
+    public static final String CLASS_ID = "class_id";
+    public static final String SEARCH_CONTENT = "search_content";
+    public static final String SEARCH_TYPE = "search_type";
+    public static final String CLASS = "class";
 }
