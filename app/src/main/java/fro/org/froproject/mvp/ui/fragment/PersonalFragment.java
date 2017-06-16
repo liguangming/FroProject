@@ -29,6 +29,7 @@ import fro.org.froproject.mvp.model.api.Api;
 import fro.org.froproject.mvp.model.entity.UserInfoBean;
 import fro.org.froproject.mvp.presenter.PersonalPresenter;
 import fro.org.froproject.mvp.ui.activity.ModifyPasswordActivity;
+import fro.org.froproject.mvp.ui.activity.ModifyPhoneNum1Activity;
 import fro.org.froproject.mvp.ui.view.GlideRoundTransform;
 
 import static com.jess.arms.utils.Preconditions.checkNotNull;
@@ -94,7 +95,7 @@ public class PersonalFragment extends BaseFragment<PersonalPresenter> implements
         } else if (id == R.id.modify_password_layout) {
             intent = new Intent(getContext(), ModifyPasswordActivity.class);
         } else if (id == R.id.modify_phone_layout) {
-//            intent = new Intent(getContext(), ModifyPhoneNum1Activity.class);
+            intent = new Intent(getContext(), ModifyPhoneNum1Activity.class);
         }
         startActivity(intent);
     }

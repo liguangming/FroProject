@@ -232,21 +232,40 @@ public interface CommonService {
     Observable<BaseJson<CourseResponseBean>> getCourseList(@Body RequestBody body, @Header(HEADER_API_TOKEN) String token);
 
 
-
     /**
      * 查询班级课程
+     *
      * @param body
      * @param token
      * @return
      */
     @POST("course/course/list")
-    Observable<BaseJson<CourseResponseBean>> getClassCourseList(@Body RequestBody body,@Header(HEADER_API_TOKEN)  String token);
+    Observable<BaseJson<CourseResponseBean>> getClassCourseList(@Body RequestBody body, @Header(HEADER_API_TOKEN) String token);
 
     /**
      * 修改密码
+     *
      * @param body
      * @return
      */
     @POST("user/chagePassword")
-    Observable<BaseJson> modifyPassword(@Body RequestBody body,@Header(HEADER_API_TOKEN)  String token);
+    Observable<BaseJson> modifyPassword(@Body RequestBody body, @Header(HEADER_API_TOKEN) String token);
+
+    /**
+     * 修改密码第一步
+     * @param body
+     * @param token
+     * @return
+     */
+    @POST("user/changePhoneStep1")
+    Observable<BaseJson<CommonBean>> commitModifyPhone1(@Body RequestBody body, @Header(HEADER_API_TOKEN) String token);
+    /**
+     * 修改密码第二步
+     * @param body
+     * @param token
+     * @return
+     */
+    @POST("user/changePhoneStep2")
+    Observable<BaseJson> commitModifyPhone2(@Body RequestBody body,  @Header(HEADER_API_TOKEN)String token);
+
 }

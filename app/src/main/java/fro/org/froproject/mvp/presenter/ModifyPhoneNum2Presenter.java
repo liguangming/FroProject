@@ -3,40 +3,41 @@ package fro.org.froproject.mvp.presenter;
 import android.app.Activity;
 import android.app.Application;
 import android.content.Intent;
-import android.text.TextUtils;
 
-import com.jess.arms.di.scope.ActivityScope;
 import com.jess.arms.integration.AppManager;
+import com.jess.arms.di.scope.ActivityScope;
 import com.jess.arms.mvp.BasePresenter;
 import com.jess.arms.widget.imageloader.ImageLoader;
 
 import org.fro.common.util.SharedUtils;
 
-import javax.inject.Inject;
-
 import fro.org.froproject.app.MyApplication;
 import fro.org.froproject.app.utils.RxUtils;
-import fro.org.froproject.mvp.contract.ModifyPasswordContract;
+import fro.org.froproject.mvp.contract.ModifyPhoneNum2Contract;
 import fro.org.froproject.mvp.model.entity.BaseJson;
 import fro.org.froproject.mvp.ui.activity.LoginActivity;
+import fro.org.froproject.mvp.ui.activity.ModifyPhoneNum2Activity;
 import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.annotations.NonNull;
 import io.reactivex.schedulers.Schedulers;
 import me.jessyan.rxerrorhandler.core.RxErrorHandler;
 import me.jessyan.rxerrorhandler.handler.ErrorHandleSubscriber;
 
+import javax.inject.Inject;
+
 /**
- * Created by Lgm on 2017/6/15 0015.
+ * Created by Lgm on 2017/6/16 0016.
  */
 
 @ActivityScope
-public class ModifyPasswordPresenter extends BasePresenter<ModifyPasswordContract.Model, ModifyPasswordContract.View> {
+public class ModifyPhoneNum2Presenter extends BasePresenter<ModifyPhoneNum2Contract.Model, ModifyPhoneNum2Contract.View> {
     private RxErrorHandler mErrorHandler;
     private Application mApplication;
     private ImageLoader mImageLoader;
     private AppManager mAppManager;
 
     @Inject
-    public ModifyPasswordPresenter(ModifyPasswordContract.Model model, ModifyPasswordContract.View rootView
+    public ModifyPhoneNum2Presenter(ModifyPhoneNum2Contract.Model model, ModifyPhoneNum2Contract.View rootView
             , RxErrorHandler handler, Application application
             , ImageLoader imageLoader, AppManager appManager) {
         super(model, rootView);
@@ -55,25 +56,46 @@ public class ModifyPasswordPresenter extends BasePresenter<ModifyPasswordContrac
         this.mApplication = null;
     }
 
-    public void modifyPassword(String oldPasswordStr, String newPasswordStr) {
-        mModel.modifyPassword(oldPasswordStr, newPasswordStr)
+    public void getAuthCode(String phone) {
+        mModel.getAuthCode(phone)
                 .subscribeOn(Schedulers.io())
-                .doOnSubscribe(disposable -> mRootView.showLoading())
-                .subscribeOn(AndroidSchedulers.mainThread())
+                .doOnSubscribe(dispose -> mRootView.showLoading())
                 .observeOn(AndroidSchedulers.mainThread())
                 .doAfterTerminate(() -> mRootView.hideLoading())
                 .compose(RxUtils.bindToLifecycle(mRootView))
+                .subscribeOn(AndroidSchedulers.mainThread())
                 .subscribe(new ErrorHandleSubscriber<BaseJson>(mErrorHandler) {
                     @Override
-                    public void onNext(BaseJson baseJson) {
+                    public void onNext(@NonNull BaseJson baseJson) {
                         if (baseJson.isSuccess()) {
-                            mRootView.showMessage("修改密码成功");
-                            SharedUtils.getInstance().remove(mApplication, "password");
-                            mRootView.launchActivity(new Intent(MyApplication.getInstance(), LoginActivity.class));
-                            mAppManager.getActivityList().stream().filter(activity -> !(activity instanceof LoginActivity)).forEach(Activity::finish);
+                            mRootView.showCountView();
                         } else {
-                            if (!TextUtils.isEmpty(baseJson.getM()))
-                                mRootView.showMessage(baseJson.getM());
+                            mRootView.showMessage(baseJson.getM());
+                        }
+                    }
+                });
+    }
+
+    public void commitModifyPhone2(String phone, String code, String token) {
+        mModel.commitModifyPhone2(phone, code, token)
+                .subscribeOn(Schedulers.io())
+                .doOnSubscribe(dispose -> mRootView.showLoading())
+                .observeOn(AndroidSchedulers.mainThread())
+                .doAfterTerminate(() -> mRootView.hideLoading())
+                .compose(RxUtils.bindToLifecycle(mRootView))
+                .subscribeOn(AndroidSchedulers.mainThread())
+                .subscribe(new ErrorHandleSubscriber<BaseJson>(mErrorHandler) {
+                    @Override
+                    public void onNext(@NonNull BaseJson baseJson) {
+                        if (baseJson.isSuccess()) {
+                            mRootView.showMessage("操作成功");
+                            MyApplication.getInstance().getUserInfoBean().setPhoneNumber(phone);
+                            SharedUtils.getInstance().remove(mApplication, "password");
+                            SharedUtils.getInstance().put(mApplication, "phoneNumber", phone);
+                            mAppManager.getActivityList().stream().filter(activity -> !(activity instanceof LoginActivity)).forEach(Activity::finish);
+                            mRootView.launchActivity(new Intent(mApplication, LoginActivity.class));
+                        } else {
+                            mRootView.showMessage(baseJson.getM());
                         }
                     }
                 });
