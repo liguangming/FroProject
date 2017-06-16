@@ -26,7 +26,7 @@ public class UserInfoBean {
     OrgBean natureResponse;//机构性质
     OrgBean categoryResponse;//机构类别
     OrgBean organizationResponse;//具体机构
-    WorkYear WorkYearResponse;//工作年限
+    WorkYear workYearResponse;//工作年限
     ProvinceData provinceResponse;//省
     CityData cityResponse;//市
     CountryData countyResponse;//县
@@ -161,11 +161,11 @@ public class UserInfoBean {
     }
 
     public WorkYear getWorkYearResponse() {
-        return WorkYearResponse;
+        return workYearResponse;
     }
 
     public void setWorkYearResponse(WorkYear workYearResponse) {
-        WorkYearResponse = workYearResponse;
+        this.workYearResponse = workYearResponse;
     }
 
     public ProvinceData getProvinceResponse() {

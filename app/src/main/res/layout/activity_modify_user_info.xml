@@ -1,0 +1,251 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:view="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#efeff4"
+    android:orientation="vertical">
+
+    <fro.org.froproject.mvp.ui.view.HeadView
+        android:id="@+id/headView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:focusableInTouchMode="true" />
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <ImageView
+                    android:id="@+id/image_title"
+                    android:layout_width="223px"
+                    android:layout_height="223px"
+                    android:layout_centerInParent="true"
+                    android:layout_marginTop="65px"
+                    android:scaleType="fitXY"
+                    android:src="@mipmap/head_image"
+                    view:layout_auto_baseheight="width" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/image_title"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginTop="29px"
+                    android:text="更换头像"
+                    android:textColor="#3c99f0"
+                    android:textSize="40px" />
+            </RelativeLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@android:color/white"
+                android:orientation="vertical">
+
+                <fro.org.froproject.mvp.ui.view.PersonalItemView
+                    android:id="@+id/nick_name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@color/white"
+                    view:EditTextVisible="true"
+                    view:ImageIco="true"
+                    view:ImageSrc="@mipmap/nick_name"
+                    view:TopLine="true"
+                    view:TypeContent="@string/nick_name"
+                    view:hint="@string/nick_name"
+                    view:maxLength="20"
+                    view:middleLine="true"
+                    view:rightArrow="false" />
+
+                <fro.org.froproject.mvp.ui.view.PersonalItemView
+                    android:id="@+id/really_name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@color/white"
+                    view:EditTextVisible="false"
+                    view:ImageIco="true"
+                    view:ImageSrc="@mipmap/really_name"
+                    view:TypeContent="@string/really_name"
+                    view:middleLine="true"
+                    view:rightArrow="false"
+                    view:rightText="Linda"
+                    view:textViewVisible="true" />
+
+                <fro.org.froproject.mvp.ui.view.PersonalItemView
+                    android:id="@+id/sex"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    view:EditTextVisible="false"
+                    view:ImageIco="true"
+                    view:ImageSrc="@mipmap/sex"
+                    view:TopLine="false"
+                    view:TypeContent="@string/sex"
+                    view:middleLine="true"
+                    view:rightArrow="false"
+                    view:rightText="女"
+                    view:textViewVisible="true" />
+
+                <fro.org.froproject.mvp.ui.view.PersonalItemView
+                    android:id="@+id/birthday"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    view:EditTextVisible="false"
+                    view:ImageIco="true"
+                    view:ImageSrc="@mipmap/age"
+                    view:TopLine="false"
+                    view:TypeContent="@string/birthday"
+                    view:hint="@string/birthday"
+                    view:middleLine="true"
+                    view:textViewVisible="true" />
+
+                <fro.org.froproject.mvp.ui.view.PersonalItemView
+                    android:id="@+id/email"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    view:ImageSrc="@mipmap/email"
+                    view:TopLine="false"
+                    view:TypeContent="@string/email"
+                    view:hint="@string/email"
+                    view:maxLength="30"
+                    view:middleLine="true" />
+                <!--所在地-->
+                <fro.org.froproject.mvp.ui.view.PersonalItemView
+                    android:id="@+id/location"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    view:BottomLine="true"
+                    view:EditTextVisible="false"
+                    view:ImageSrc="@mipmap/location"
+                    view:TopLine="false"
+                    view:TypeContent="@string/location"
+                    view:middleLine="true"
+                    view:rightArrow="true"
+                    view:rightText="未设置"
+                    view:textViewVisible="true" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="36px"
+                android:orientation="vertical">
+
+                <fro.org.froproject.mvp.ui.view.PersonalItemView
+                    android:id="@+id/credentials"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    view:EditTextVisible="false"
+                    view:ImageIco="true"
+                    view:ImageSrc="@mipmap/credentials"
+                    view:TopLine="true"
+                    view:TypeContent="@string/credentials"
+                    view:middleLine="true"
+                    view:rightArrow="false"
+                    view:rightText="身份证"
+                    view:textViewVisible="true" />
+
+                <fro.org.froproject.mvp.ui.view.PersonalItemView
+                    android:id="@+id/credentials_number"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    view:EditTextVisible="false"
+                    view:ImageIco="true"
+                    view:TypeContent="@string/credentials_number"
+                    view:leftImageVisible="false"
+                    view:middleLine="true"
+                    view:rightArrow="false"
+                    view:textViewVisible="true" />
+
+
+                <!--机构性质-->
+                <fro.org.froproject.mvp.ui.view.PersonalItemView
+                    android:id="@+id/org_nature"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    view:EditTextVisible="false"
+                    view:ImageIco="true"
+                    view:ImageSrc="@mipmap/job_unit"
+                    view:TypeContent="@string/org_nature"
+                    view:middleLine="true"
+                    view:rightArrow="true"
+                    view:rightText="未设置"
+                    view:textViewVisible="true" />
+                <!--机构类别-->
+                <fro.org.froproject.mvp.ui.view.PersonalItemView
+                    android:id="@+id/org_type"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    view:EditTextVisible="false"
+                    view:ImageIco="true"
+                    view:TypeContent="@string/org_type"
+                    view:leftImageVisible="false"
+                    view:middleLine="true"
+                    view:rightArrow="true"
+                    view:rightText="未设置"
+                    view:textViewVisible="true" />
+                <!--具体机构-->
+                <fro.org.froproject.mvp.ui.view.PersonalItemView
+                    android:id="@+id/org_detail"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    view:EditTextVisible="false"
+                    view:ImageIco="false"
+                    view:TypeContent="@string/org_detail"
+                    view:leftImageVisible="false"
+                    view:middleLine="true"
+                    view:rightArrow="true"
+                    view:rightText="未设置"
+                    view:textViewVisible="true" />
+
+                <!--分支机构-->
+                <fro.org.froproject.mvp.ui.view.PersonalItemView
+                    android:id="@+id/work_branch"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    view:ImageIco="true"
+                    view:TypeContent="@string/org_branch"
+                    view:hint="@string/work_unit_hint"
+                    view:leftImageVisible="false"
+                    view:maxLength="20"
+                    view:middleLine="true"
+                    view:rightArrow="false" />
+
+                <fro.org.froproject.mvp.ui.view.PersonalItemView
+                    android:id="@+id/job_position"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    view:BottomLine="false"
+                    view:middleLine="true"
+                    view:ImageSrc="@mipmap/job_positon"
+                    view:TypeContent="@string/job_position"
+                    view:hint="@string/job_position"
+                    view:maxLength="20" />
+
+                <fro.org.froproject.mvp.ui.view.PersonalItemView
+                    android:id="@+id/work_life"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="50px"
+                    view:BottomLine="true"
+                    view:EditTextVisible="false"
+                    view:ImageSrc="@mipmap/job_positon"
+                    view:TypeContent="@string/work_life"
+                    view:hint="@string/not_setting"
+                    view:middleLine="true"
+                    view:rightArrow="true"
+                    view:textViewVisible="true" />
+            </LinearLayout>
+        </LinearLayout>
+    </ScrollView>
+</LinearLayout>

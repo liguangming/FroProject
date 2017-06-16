@@ -107,4 +107,5 @@
     <string name="service_phone">400-</string>
     <string name="new_phone_num">新手机号</string>
     <string name="new_phone_use_tips">重新绑定后，原手机将不能作为登录账号</string>
+    <string name="personal_info">个人资料</string>
 </resources>
