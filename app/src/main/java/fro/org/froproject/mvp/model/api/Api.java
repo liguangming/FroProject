@@ -6,5 +6,6 @@ package fro.org.froproject.mvp.model.api;
 
 public interface Api {
     String APP_URL = "http://118.190.173.83:8080/fro-api/";
+    String APP_URL1 = "http://118.190.173.83:8080/fro-api";
     int RequestSuccess = 0;
 }

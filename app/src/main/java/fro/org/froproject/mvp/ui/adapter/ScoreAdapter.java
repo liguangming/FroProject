@@ -9,6 +9,10 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
+import com.jess.arms.base.App;
+import com.jess.arms.di.component.AppComponent;
+import com.jess.arms.widget.imageloader.ImageLoader;
+import com.jess.arms.widget.imageloader.glide.GlideImageConfig;
 import com.zhy.autolayout.utils.AutoUtils;
 
 import java.util.ArrayList;
@@ -27,6 +31,8 @@ import fro.org.froproject.mvp.ui.view.RoundProgressBar;
  */
 
 public class ScoreAdapter extends BaseAdapter {
+    private ImageLoader mImageLoader;
+    private AppComponent mAppComponent;
     private Context context;
     private LayoutInflater inflate;
     private List<ScoreClassBean> classes = new ArrayList<>();
@@ -34,6 +40,8 @@ public class ScoreAdapter extends BaseAdapter {
     public ScoreAdapter(Context context) {
         inflate = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         this.context = context;
+        mAppComponent = ((App) context.getApplicationContext()).getAppComponent();
+        mImageLoader = mAppComponent.imageLoader();
     }
 
     @Override
@@ -65,8 +73,13 @@ public class ScoreAdapter extends BaseAdapter {
         viewHolder.courseName.setText(classes.get(position).getClassName());
         viewHolder.couserTotalNum.setText(context.getString(R.string.total) + classes.get(position).getTotalCourseNum() + context.getString(R.string.order_right));
         viewHolder.passCourseNum.setText(context.getString(R.string.passed_) + classes.get(position).getPassedCourseNum() + context.getString(R.string.order_right));
-        // TODO: 2017/6/13 0013 设置圆角图片
-        Glide.with(context).load(Api.APP_URL + classes.get(position).getClassPic()).transform(new GlideRoundTransform(context, 360)).into(viewHolder.image);
+
+        mImageLoader.loadImage(context, GlideImageConfig
+                .builder()
+                .url(Api.APP_URL + Api.APP_URL + classes.get(position).getClassPic())
+                .transformation(new GlideRoundTransform(context, 360))
+                .imageView(viewHolder.image)
+                .build());
         //ImageLoader.getInstance().displayImage(UrlConfig.URL + classes.get(position).getClassPic(), viewHolder.image, myDisplayImageOptions);
         viewHolder.round_progress.setProgress(getItem(position).getProcess());
         viewHolder.notPassCourseNum.setText(context.getString(R.string.not_passed_) + getItem(position).getFailedCourseNum() + context.getString(R.string.order_right));

@@ -13,10 +13,11 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.andview.refreshview.XRefreshView;
-import com.bumptech.glide.Glide;
 import com.jess.arms.base.BaseActivity;
 import com.jess.arms.di.component.AppComponent;
 import com.jess.arms.utils.UiUtils;
+import com.jess.arms.widget.imageloader.ImageLoader;
+import com.jess.arms.widget.imageloader.glide.GlideImageConfig;
 
 import org.fro.common.util.TimeUtils;
 import org.fro.common.widgets.LoadingView;
@@ -64,6 +65,7 @@ public class ClassInfoActivity extends BaseActivity<ClassInfoPresenter> implemen
     private static final String TAG = "ClassInfoActivity";
     private RelativeLayout hearderViewLayout;
     int page = 0;
+    private ImageLoader mImageLoader;//用于加载图片的管理类,默认使用glide,使用策略模式,可替换框架
 
     @Override
     public void setupActivityComponent(AppComponent appComponent) {
@@ -72,6 +74,8 @@ public class ClassInfoActivity extends BaseActivity<ClassInfoPresenter> implemen
                 .classInfoModule(new ClassInfoModule(this))
                 .build()
                 .inject(this);
+
+        mImageLoader = appComponent.imageLoader();
     }
 
     @Override
@@ -168,7 +172,12 @@ public class ClassInfoActivity extends BaseActivity<ClassInfoPresenter> implemen
         className.setText(classInfo.getClassName());
         courseTotalNum.setText("共" + classInfo.getTotalCourseNum() + "节课");
         classDescriptionText.setText(classInfo.getSampleDescription());
-        Glide.with(this).load(Api.APP_URL + classInfo.getClassPic()).into(titleImage);
+
+        mImageLoader.loadImage(this,GlideImageConfig
+                        .builder()
+                        .url(Api.APP_URL + classInfo.getClassPic())
+                        .imageView(titleImage)
+                        .build());
     }
 
     @Override

@@ -20,6 +20,8 @@ import com.jess.arms.base.BaseFragment;
 import com.jess.arms.base.DefaultAdapter;
 import com.jess.arms.di.component.AppComponent;
 import com.jess.arms.utils.UiUtils;
+import com.jess.arms.widget.imageloader.ImageLoader;
+import com.jess.arms.widget.imageloader.glide.GlideImageConfig;
 import com.paginate.Paginate;
 
 import org.fro.common.util.TimeUtils;
@@ -82,6 +84,7 @@ public class ClassFragment extends BaseFragment<ClassPresenter> implements Class
     XRefreshView refreshView;
     private int page;
     private ClassListAdapter adapter;
+    private AppComponent mAppComponent;
 
     public static ClassFragment newInstance() {
         ClassFragment fragment = new ClassFragment();
@@ -90,6 +93,7 @@ public class ClassFragment extends BaseFragment<ClassPresenter> implements Class
 
     @Override
     public void setupFragmentComponent(AppComponent appComponent) {
+        this.mAppComponent = appComponent;
         DaggerClassComponent
                 .builder()
                 .appComponent(appComponent)
@@ -127,7 +131,7 @@ public class ClassFragment extends BaseFragment<ClassPresenter> implements Class
         page = 0;
         UserInfoBean userInfo = MyApplication.getInstance().getUserInfoBean();
         userName.setText(userInfo.getNickName());
-        if (userInfo.getOrganizationResponse() != null && TextUtils.isEmpty(userInfo.getOrganizationResponse().getName())) {
+        if (userInfo.getOrganizationResponse() != null && !TextUtils.isEmpty(userInfo.getOrganizationResponse().getName())) {
             bankName.setText(userInfo.getOrganizationResponse().getName());
         } else {
             bankName.setText(userInfo.getCategoryResponse().getName());
@@ -135,10 +139,14 @@ public class ClassFragment extends BaseFragment<ClassPresenter> implements Class
         yearMonth.setText(TimeUtils.getcurrentYear() + "/" + TimeUtils.getCurrentMonth());
         date.setText(TimeUtils.getCurrentDay());
         if (!TextUtils.isEmpty(userInfo.getAvatar())) {
-            Glide.with(this)
-                    .load(Api.APP_URL + userInfo.getAvatar())
-                    .transform(new GlideRoundTransform(getActivity(), 360))
-                    .into(userImage);
+            mAppComponent.imageLoader().loadImage(mAppComponent.appManager().getCurrentActivity() == null
+                    ? mAppComponent.Application() : mAppComponent.appManager().getCurrentActivity(), GlideImageConfig
+                    .builder()
+                    .url(Api.APP_URL1 + userInfo.getAvatar())
+                    .errorPic(R.mipmap.head_image)
+//                    .transformation(new GlideRoundTransform(getActivity()))
+                    .imageView(userImage)
+                    .build());
         }
         mPresenter.getMyClassList(page);
     }
